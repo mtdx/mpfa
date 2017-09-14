@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity CsgoItem.
+    -->
+    <changeSet id="20170914185039-1" author="jhipster">
+        <createTable tableName="csgo_item">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="sp" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="opm" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="vol" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="mp_7" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="avg_7" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="lp_7" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="hp_7" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="mad_7" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="trend_7" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="vol_7" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="mp_30" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="avg_30" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="lp_30" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="hp_30" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="mad_30" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="trend_30" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="vol_30" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="mp_all" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="avg_all" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="lp_all" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="hp_all" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="mad_all" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="trend_all" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="vol_all" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="first_seen" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="csgo_item" columnName="first_seen" columnDataType="datetime"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

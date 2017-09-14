@@ -1,0 +1,119 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "sp",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "opm",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "vol",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "mp7",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "avg7",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "lp7",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "hp7",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "mad7",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "trend7",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "vol7",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "mp30",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "avg30",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "lp30",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "hp30",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "mad30",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "trend30",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "vol30",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "mpAll",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "avgAll",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "lpAll",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "hpAll",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "madAll",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "trendAll",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "volAll",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "first_seen",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20170914185039",
+    "dto": "mapstruct",
+    "service": "serviceClass",
+    "entityTableName": "csgo_item",
+    "jpaMetamodelFiltering": true,
+    "pagination": "infinite-scroll"
+}

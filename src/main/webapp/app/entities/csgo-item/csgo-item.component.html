@@ -1,0 +1,119 @@
+<div>
+    <h2>
+        <span>Csgo Items</span>
+        <button class="btn btn-primary float-right jh-create-entity create-csgo-item" [routerLink]="['/', { outlets: { popup: ['csgo-item-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Csgo Item
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="csgoItems">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="sp"><span>Sp</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="opm"><span>Opm</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="vol"><span>Vol</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="mp7"><span>Mp 7</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="avg7"><span>Avg 7</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lp7"><span>Lp 7</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="hp7"><span>Hp 7</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="mad7"><span>Mad 7</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="trend7"><span>Trend 7</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="vol7"><span>Vol 7</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="mp30"><span>Mp 30</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="avg30"><span>Avg 30</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lp30"><span>Lp 30</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="hp30"><span>Hp 30</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="mad30"><span>Mad 30</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="trend30"><span>Trend 30</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="vol30"><span>Vol 30</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="mpAll"><span>Mp All</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="avgAll"><span>Avg All</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lpAll"><span>Lp All</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="hpAll"><span>Hp All</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="madAll"><span>Mad All</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="trendAll"><span>Trend All</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="volAll"><span>Vol All</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="first_seen"><span>First Seen</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let csgoItem of csgoItems ;trackBy: trackId">
+                <td><a [routerLink]="['../csgo-item', csgoItem.id ]">{{csgoItem.id}}</a></td>
+                <td>{{csgoItem.name}}</td>
+                <td>{{csgoItem.sp}}</td>
+                <td>{{csgoItem.opm}}</td>
+                <td>{{csgoItem.vol}}</td>
+                <td>{{csgoItem.mp7}}</td>
+                <td>{{csgoItem.avg7}}</td>
+                <td>{{csgoItem.lp7}}</td>
+                <td>{{csgoItem.hp7}}</td>
+                <td>{{csgoItem.mad7}}</td>
+                <td>{{csgoItem.trend7}}</td>
+                <td>{{csgoItem.vol7}}</td>
+                <td>{{csgoItem.mp30}}</td>
+                <td>{{csgoItem.avg30}}</td>
+                <td>{{csgoItem.lp30}}</td>
+                <td>{{csgoItem.hp30}}</td>
+                <td>{{csgoItem.mad30}}</td>
+                <td>{{csgoItem.trend30}}</td>
+                <td>{{csgoItem.vol30}}</td>
+                <td>{{csgoItem.mpAll}}</td>
+                <td>{{csgoItem.avgAll}}</td>
+                <td>{{csgoItem.lpAll}}</td>
+                <td>{{csgoItem.hpAll}}</td>
+                <td>{{csgoItem.madAll}}</td>
+                <td>{{csgoItem.trendAll}}</td>
+                <td>{{csgoItem.volAll}}</td>
+                <td>{{csgoItem.first_seen | date:'medium'}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../csgo-item', csgoItem.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'csgo-item/'+ csgoItem.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'csgo-item/'+ csgoItem.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

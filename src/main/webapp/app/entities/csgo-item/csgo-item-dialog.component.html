@@ -1,0 +1,163 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCsgoItemLabel">Create or edit a Csgo Item</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!csgoItem.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="csgoItem.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="csgoItem.name" required />
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_sp">Sp</label>
+            <input type="number" class="form-control" name="sp" id="field_sp"
+                [(ngModel)]="csgoItem.sp"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_opm">Opm</label>
+            <input type="checkbox" class="form-control" name="opm" id="field_opm"
+                [(ngModel)]="csgoItem.opm"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_vol">Vol</label>
+            <input type="number" class="form-control" name="vol" id="field_vol"
+                [(ngModel)]="csgoItem.vol"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_mp7">Mp 7</label>
+            <input type="number" class="form-control" name="mp7" id="field_mp7"
+                [(ngModel)]="csgoItem.mp7"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_avg7">Avg 7</label>
+            <input type="number" class="form-control" name="avg7" id="field_avg7"
+                [(ngModel)]="csgoItem.avg7"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_lp7">Lp 7</label>
+            <input type="number" class="form-control" name="lp7" id="field_lp7"
+                [(ngModel)]="csgoItem.lp7"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_hp7">Hp 7</label>
+            <input type="number" class="form-control" name="hp7" id="field_hp7"
+                [(ngModel)]="csgoItem.hp7"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_mad7">Mad 7</label>
+            <input type="number" class="form-control" name="mad7" id="field_mad7"
+                [(ngModel)]="csgoItem.mad7"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_trend7">Trend 7</label>
+            <input type="number" class="form-control" name="trend7" id="field_trend7"
+                [(ngModel)]="csgoItem.trend7"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_vol7">Vol 7</label>
+            <input type="number" class="form-control" name="vol7" id="field_vol7"
+                [(ngModel)]="csgoItem.vol7"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_mp30">Mp 30</label>
+            <input type="number" class="form-control" name="mp30" id="field_mp30"
+                [(ngModel)]="csgoItem.mp30"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_avg30">Avg 30</label>
+            <input type="number" class="form-control" name="avg30" id="field_avg30"
+                [(ngModel)]="csgoItem.avg30"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_lp30">Lp 30</label>
+            <input type="number" class="form-control" name="lp30" id="field_lp30"
+                [(ngModel)]="csgoItem.lp30"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_hp30">Hp 30</label>
+            <input type="number" class="form-control" name="hp30" id="field_hp30"
+                [(ngModel)]="csgoItem.hp30"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_mad30">Mad 30</label>
+            <input type="number" class="form-control" name="mad30" id="field_mad30"
+                [(ngModel)]="csgoItem.mad30"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_trend30">Trend 30</label>
+            <input type="number" class="form-control" name="trend30" id="field_trend30"
+                [(ngModel)]="csgoItem.trend30"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_vol30">Vol 30</label>
+            <input type="number" class="form-control" name="vol30" id="field_vol30"
+                [(ngModel)]="csgoItem.vol30"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_mpAll">Mp All</label>
+            <input type="number" class="form-control" name="mpAll" id="field_mpAll"
+                [(ngModel)]="csgoItem.mpAll"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_avgAll">Avg All</label>
+            <input type="number" class="form-control" name="avgAll" id="field_avgAll"
+                [(ngModel)]="csgoItem.avgAll"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_lpAll">Lp All</label>
+            <input type="number" class="form-control" name="lpAll" id="field_lpAll"
+                [(ngModel)]="csgoItem.lpAll"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_hpAll">Hp All</label>
+            <input type="number" class="form-control" name="hpAll" id="field_hpAll"
+                [(ngModel)]="csgoItem.hpAll"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_madAll">Mad All</label>
+            <input type="number" class="form-control" name="madAll" id="field_madAll"
+                [(ngModel)]="csgoItem.madAll"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_trendAll">Trend All</label>
+            <input type="number" class="form-control" name="trendAll" id="field_trendAll"
+                [(ngModel)]="csgoItem.trendAll"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_volAll">Vol All</label>
+            <input type="number" class="form-control" name="volAll" id="field_volAll"
+                [(ngModel)]="csgoItem.volAll"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_first_seen">First Seen</label>
+            <div class="d-flex">
+                <input id="field_first_seen" type="datetime-local" class="form-control" name="first_seen" [(ngModel)]="csgoItem.first_seen"
+                  />
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
