@@ -42,6 +42,10 @@
             "fieldType": "BigDecimal"
         },
         {
+            "fieldName": "dp7",
+            "fieldType": "BigDecimal"
+        },
+        {
             "fieldName": "trend7",
             "fieldType": "BigDecimal"
         },
@@ -67,6 +71,10 @@
         },
         {
             "fieldName": "mad30",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "dp30",
             "fieldType": "BigDecimal"
         },
         {
@@ -98,6 +106,10 @@
             "fieldType": "BigDecimal"
         },
         {
+            "fieldName": "dpAll",
+            "fieldType": "BigDecimal"
+        },
+        {
             "fieldName": "trendAll",
             "fieldType": "BigDecimal"
         },
@@ -106,7 +118,7 @@
             "fieldType": "Integer"
         },
         {
-            "fieldName": "first_seen",
+            "fieldName": "added",
             "fieldType": "Instant"
         }
     ],
