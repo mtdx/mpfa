@@ -12,6 +12,7 @@ export class CsgoItem implements BaseEntity {
         public lp7?: number,
         public hp7?: number,
         public mad7?: number,
+        public dp7?: number,
         public trend7?: number,
         public vol7?: number,
         public mp30?: number,
@@ -19,6 +20,7 @@ export class CsgoItem implements BaseEntity {
         public lp30?: number,
         public hp30?: number,
         public mad30?: number,
+        public dp30?: number,
         public trend30?: number,
         public vol30?: number,
         public mpAll?: number,
@@ -26,9 +28,10 @@ export class CsgoItem implements BaseEntity {
         public lpAll?: number,
         public hpAll?: number,
         public madAll?: number,
+        public dpAll?: number,
         public trendAll?: number,
         public volAll?: number,
-        public first_seen?: any,
+        public added?: any,
     ) {
         this.opm = false;
     }

@@ -46,6 +46,8 @@ public class CsgoItemCriteria implements Serializable {
 
     private BigDecimalFilter mad7;
 
+    private BigDecimalFilter dp7;
+
     private BigDecimalFilter trend7;
 
     private IntegerFilter vol7;
@@ -59,6 +61,8 @@ public class CsgoItemCriteria implements Serializable {
     private BigDecimalFilter hp30;
 
     private BigDecimalFilter mad30;
+
+    private BigDecimalFilter dp30;
 
     private BigDecimalFilter trend30;
 
@@ -74,11 +78,13 @@ public class CsgoItemCriteria implements Serializable {
 
     private BigDecimalFilter madAll;
 
+    private BigDecimalFilter dpAll;
+
     private BigDecimalFilter trendAll;
 
     private IntegerFilter volAll;
 
-    private InstantFilter first_seen;
+    private InstantFilter added;
 
     public CsgoItemCriteria() {
     }
@@ -163,6 +169,14 @@ public class CsgoItemCriteria implements Serializable {
         this.mad7 = mad7;
     }
 
+    public BigDecimalFilter getDp7() {
+        return dp7;
+    }
+
+    public void setDp7(BigDecimalFilter dp7) {
+        this.dp7 = dp7;
+    }
+
     public BigDecimalFilter getTrend7() {
         return trend7;
     }
@@ -217,6 +231,14 @@ public class CsgoItemCriteria implements Serializable {
 
     public void setMad30(BigDecimalFilter mad30) {
         this.mad30 = mad30;
+    }
+
+    public BigDecimalFilter getDp30() {
+        return dp30;
+    }
+
+    public void setDp30(BigDecimalFilter dp30) {
+        this.dp30 = dp30;
     }
 
     public BigDecimalFilter getTrend30() {
@@ -275,6 +297,14 @@ public class CsgoItemCriteria implements Serializable {
         this.madAll = madAll;
     }
 
+    public BigDecimalFilter getDpAll() {
+        return dpAll;
+    }
+
+    public void setDpAll(BigDecimalFilter dpAll) {
+        this.dpAll = dpAll;
+    }
+
     public BigDecimalFilter getTrendAll() {
         return trendAll;
     }
@@ -291,12 +321,12 @@ public class CsgoItemCriteria implements Serializable {
         this.volAll = volAll;
     }
 
-    public InstantFilter getFirst_seen() {
-        return first_seen;
+    public InstantFilter getAdded() {
+        return added;
     }
 
-    public void setFirst_seen(InstantFilter first_seen) {
-        this.first_seen = first_seen;
+    public void setAdded(InstantFilter added) {
+        this.added = added;
     }
 
     @Override
@@ -312,6 +342,7 @@ public class CsgoItemCriteria implements Serializable {
                 (lp7 != null ? "lp7=" + lp7 + ", " : "") +
                 (hp7 != null ? "hp7=" + hp7 + ", " : "") +
                 (mad7 != null ? "mad7=" + mad7 + ", " : "") +
+                (dp7 != null ? "dp7=" + dp7 + ", " : "") +
                 (trend7 != null ? "trend7=" + trend7 + ", " : "") +
                 (vol7 != null ? "vol7=" + vol7 + ", " : "") +
                 (mp30 != null ? "mp30=" + mp30 + ", " : "") +
@@ -319,6 +350,7 @@ public class CsgoItemCriteria implements Serializable {
                 (lp30 != null ? "lp30=" + lp30 + ", " : "") +
                 (hp30 != null ? "hp30=" + hp30 + ", " : "") +
                 (mad30 != null ? "mad30=" + mad30 + ", " : "") +
+                (dp30 != null ? "dp30=" + dp30 + ", " : "") +
                 (trend30 != null ? "trend30=" + trend30 + ", " : "") +
                 (vol30 != null ? "vol30=" + vol30 + ", " : "") +
                 (mpAll != null ? "mpAll=" + mpAll + ", " : "") +
@@ -326,9 +358,10 @@ public class CsgoItemCriteria implements Serializable {
                 (lpAll != null ? "lpAll=" + lpAll + ", " : "") +
                 (hpAll != null ? "hpAll=" + hpAll + ", " : "") +
                 (madAll != null ? "madAll=" + madAll + ", " : "") +
+                (dpAll != null ? "dpAll=" + dpAll + ", " : "") +
                 (trendAll != null ? "trendAll=" + trendAll + ", " : "") +
                 (volAll != null ? "volAll=" + volAll + ", " : "") +
-                (first_seen != null ? "first_seen=" + first_seen + ", " : "") +
+                (added != null ? "added=" + added + ", " : "") +
             "}";
     }
 

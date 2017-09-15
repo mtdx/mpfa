@@ -33,6 +33,8 @@ public class CsgoItemDTO implements Serializable {
 
     private BigDecimal mad7;
 
+    private BigDecimal dp7;
+
     private BigDecimal trend7;
 
     private Integer vol7;
@@ -46,6 +48,8 @@ public class CsgoItemDTO implements Serializable {
     private BigDecimal hp30;
 
     private BigDecimal mad30;
+
+    private BigDecimal dp30;
 
     private BigDecimal trend30;
 
@@ -61,11 +65,13 @@ public class CsgoItemDTO implements Serializable {
 
     private BigDecimal madAll;
 
+    private BigDecimal dpAll;
+
     private BigDecimal trendAll;
 
     private Integer volAll;
 
-    private Instant first_seen;
+    private Instant added;
 
     public Long getId() {
         return id;
@@ -147,6 +153,14 @@ public class CsgoItemDTO implements Serializable {
         this.mad7 = mad7;
     }
 
+    public BigDecimal getDp7() {
+        return dp7;
+    }
+
+    public void setDp7(BigDecimal dp7) {
+        this.dp7 = dp7;
+    }
+
     public BigDecimal getTrend7() {
         return trend7;
     }
@@ -201,6 +215,14 @@ public class CsgoItemDTO implements Serializable {
 
     public void setMad30(BigDecimal mad30) {
         this.mad30 = mad30;
+    }
+
+    public BigDecimal getDp30() {
+        return dp30;
+    }
+
+    public void setDp30(BigDecimal dp30) {
+        this.dp30 = dp30;
     }
 
     public BigDecimal getTrend30() {
@@ -259,6 +281,14 @@ public class CsgoItemDTO implements Serializable {
         this.madAll = madAll;
     }
 
+    public BigDecimal getDpAll() {
+        return dpAll;
+    }
+
+    public void setDpAll(BigDecimal dpAll) {
+        this.dpAll = dpAll;
+    }
+
     public BigDecimal getTrendAll() {
         return trendAll;
     }
@@ -275,12 +305,12 @@ public class CsgoItemDTO implements Serializable {
         this.volAll = volAll;
     }
 
-    public Instant getFirst_seen() {
-        return first_seen;
+    public Instant getAdded() {
+        return added;
     }
 
-    public void setFirst_seen(Instant first_seen) {
-        this.first_seen = first_seen;
+    public void setAdded(Instant added) {
+        this.added = added;
     }
 
     @Override
@@ -317,6 +347,7 @@ public class CsgoItemDTO implements Serializable {
             ", lp7='" + getLp7() + "'" +
             ", hp7='" + getHp7() + "'" +
             ", mad7='" + getMad7() + "'" +
+            ", dp7='" + getDp7() + "'" +
             ", trend7='" + getTrend7() + "'" +
             ", vol7='" + getVol7() + "'" +
             ", mp30='" + getMp30() + "'" +
@@ -324,6 +355,7 @@ public class CsgoItemDTO implements Serializable {
             ", lp30='" + getLp30() + "'" +
             ", hp30='" + getHp30() + "'" +
             ", mad30='" + getMad30() + "'" +
+            ", dp30='" + getDp30() + "'" +
             ", trend30='" + getTrend30() + "'" +
             ", vol30='" + getVol30() + "'" +
             ", mpAll='" + getMpAll() + "'" +
@@ -331,9 +363,10 @@ public class CsgoItemDTO implements Serializable {
             ", lpAll='" + getLpAll() + "'" +
             ", hpAll='" + getHpAll() + "'" +
             ", madAll='" + getMadAll() + "'" +
+            ", dpAll='" + getDpAll() + "'" +
             ", trendAll='" + getTrendAll() + "'" +
             ", volAll='" + getVolAll() + "'" +
-            ", first_seen='" + getFirst_seen() + "'" +
+            ", added='" + getAdded() + "'" +
             "}";
     }
 }

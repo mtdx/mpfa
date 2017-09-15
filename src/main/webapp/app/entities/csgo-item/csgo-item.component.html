@@ -39,6 +39,7 @@
             <th jhiSortBy="lp7"><span>Lp 7</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="hp7"><span>Hp 7</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="mad7"><span>Mad 7</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dp7"><span>Dp 7</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="trend7"><span>Trend 7</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="vol7"><span>Vol 7</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="mp30"><span>Mp 30</span> <span class="fa fa-sort"></span></th>
@@ -46,6 +47,7 @@
             <th jhiSortBy="lp30"><span>Lp 30</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="hp30"><span>Hp 30</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="mad30"><span>Mad 30</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dp30"><span>Dp 30</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="trend30"><span>Trend 30</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="vol30"><span>Vol 30</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="mpAll"><span>Mp All</span> <span class="fa fa-sort"></span></th>
@@ -53,9 +55,10 @@
             <th jhiSortBy="lpAll"><span>Lp All</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="hpAll"><span>Hp All</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="madAll"><span>Mad All</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dpAll"><span>Dp All</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="trendAll"><span>Trend All</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="volAll"><span>Vol All</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="first_seen"><span>First Seen</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="added"><span>Added</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -71,6 +74,7 @@
                 <td>{{csgoItem.lp7}}</td>
                 <td>{{csgoItem.hp7}}</td>
                 <td>{{csgoItem.mad7}}</td>
+                <td>{{csgoItem.dp7}}</td>
                 <td>{{csgoItem.trend7}}</td>
                 <td>{{csgoItem.vol7}}</td>
                 <td>{{csgoItem.mp30}}</td>
@@ -78,6 +82,7 @@
                 <td>{{csgoItem.lp30}}</td>
                 <td>{{csgoItem.hp30}}</td>
                 <td>{{csgoItem.mad30}}</td>
+                <td>{{csgoItem.dp30}}</td>
                 <td>{{csgoItem.trend30}}</td>
                 <td>{{csgoItem.vol30}}</td>
                 <td>{{csgoItem.mpAll}}</td>
@@ -85,9 +90,10 @@
                 <td>{{csgoItem.lpAll}}</td>
                 <td>{{csgoItem.hpAll}}</td>
                 <td>{{csgoItem.madAll}}</td>
+                <td>{{csgoItem.dpAll}}</td>
                 <td>{{csgoItem.trendAll}}</td>
                 <td>{{csgoItem.volAll}}</td>
-                <td>{{csgoItem.first_seen | date:'medium'}}</td>
+                <td>{{csgoItem.added | date:'medium'}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

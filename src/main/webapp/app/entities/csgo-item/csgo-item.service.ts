@@ -67,14 +67,14 @@ export class CsgoItemService {
     }
 
     private convertItemFromServer(entity: any) {
-        entity.first_seen = this.dateUtils
-            .convertDateTimeFromServer(entity.first_seen);
+        entity.added = this.dateUtils
+            .convertDateTimeFromServer(entity.added);
     }
 
     private convert(csgoItem: CsgoItem): CsgoItem {
         const copy: CsgoItem = Object.assign({}, csgoItem);
 
-        copy.first_seen = this.dateUtils.toDate(csgoItem.first_seen);
+        copy.added = this.dateUtils.toDate(csgoItem.added);
         return copy;
     }
 }

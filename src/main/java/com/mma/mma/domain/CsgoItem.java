@@ -55,6 +55,9 @@ public class CsgoItem implements Serializable {
     @Column(name = "mad_7", precision=10, scale=2)
     private BigDecimal mad7;
 
+    @Column(name = "dp_7", precision=10, scale=2)
+    private BigDecimal dp7;
+
     @Column(name = "trend_7", precision=10, scale=2)
     private BigDecimal trend7;
 
@@ -75,6 +78,9 @@ public class CsgoItem implements Serializable {
 
     @Column(name = "mad_30", precision=10, scale=2)
     private BigDecimal mad30;
+
+    @Column(name = "dp_30", precision=10, scale=2)
+    private BigDecimal dp30;
 
     @Column(name = "trend_30", precision=10, scale=2)
     private BigDecimal trend30;
@@ -97,14 +103,17 @@ public class CsgoItem implements Serializable {
     @Column(name = "mad_all", precision=10, scale=2)
     private BigDecimal madAll;
 
+    @Column(name = "dp_all", precision=10, scale=2)
+    private BigDecimal dpAll;
+
     @Column(name = "trend_all", precision=10, scale=2)
     private BigDecimal trendAll;
 
     @Column(name = "vol_all")
     private Integer volAll;
 
-    @Column(name = "first_seen")
-    private Instant first_seen;
+    @Column(name = "added")
+    private Instant added;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -232,6 +241,19 @@ public class CsgoItem implements Serializable {
         this.mad7 = mad7;
     }
 
+    public BigDecimal getDp7() {
+        return dp7;
+    }
+
+    public CsgoItem dp7(BigDecimal dp7) {
+        this.dp7 = dp7;
+        return this;
+    }
+
+    public void setDp7(BigDecimal dp7) {
+        this.dp7 = dp7;
+    }
+
     public BigDecimal getTrend7() {
         return trend7;
     }
@@ -321,6 +343,19 @@ public class CsgoItem implements Serializable {
 
     public void setMad30(BigDecimal mad30) {
         this.mad30 = mad30;
+    }
+
+    public BigDecimal getDp30() {
+        return dp30;
+    }
+
+    public CsgoItem dp30(BigDecimal dp30) {
+        this.dp30 = dp30;
+        return this;
+    }
+
+    public void setDp30(BigDecimal dp30) {
+        this.dp30 = dp30;
     }
 
     public BigDecimal getTrend30() {
@@ -414,6 +449,19 @@ public class CsgoItem implements Serializable {
         this.madAll = madAll;
     }
 
+    public BigDecimal getDpAll() {
+        return dpAll;
+    }
+
+    public CsgoItem dpAll(BigDecimal dpAll) {
+        this.dpAll = dpAll;
+        return this;
+    }
+
+    public void setDpAll(BigDecimal dpAll) {
+        this.dpAll = dpAll;
+    }
+
     public BigDecimal getTrendAll() {
         return trendAll;
     }
@@ -440,17 +488,17 @@ public class CsgoItem implements Serializable {
         this.volAll = volAll;
     }
 
-    public Instant getFirst_seen() {
-        return first_seen;
+    public Instant getAdded() {
+        return added;
     }
 
-    public CsgoItem first_seen(Instant first_seen) {
-        this.first_seen = first_seen;
+    public CsgoItem added(Instant added) {
+        this.added = added;
         return this;
     }
 
-    public void setFirst_seen(Instant first_seen) {
-        this.first_seen = first_seen;
+    public void setAdded(Instant added) {
+        this.added = added;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
@@ -487,6 +535,7 @@ public class CsgoItem implements Serializable {
             ", lp7='" + getLp7() + "'" +
             ", hp7='" + getHp7() + "'" +
             ", mad7='" + getMad7() + "'" +
+            ", dp7='" + getDp7() + "'" +
             ", trend7='" + getTrend7() + "'" +
             ", vol7='" + getVol7() + "'" +
             ", mp30='" + getMp30() + "'" +
@@ -494,6 +543,7 @@ public class CsgoItem implements Serializable {
             ", lp30='" + getLp30() + "'" +
             ", hp30='" + getHp30() + "'" +
             ", mad30='" + getMad30() + "'" +
+            ", dp30='" + getDp30() + "'" +
             ", trend30='" + getTrend30() + "'" +
             ", vol30='" + getVol30() + "'" +
             ", mpAll='" + getMpAll() + "'" +
@@ -501,9 +551,10 @@ public class CsgoItem implements Serializable {
             ", lpAll='" + getLpAll() + "'" +
             ", hpAll='" + getHpAll() + "'" +
             ", madAll='" + getMadAll() + "'" +
+            ", dpAll='" + getDpAll() + "'" +
             ", trendAll='" + getTrendAll() + "'" +
             ", volAll='" + getVolAll() + "'" +
-            ", first_seen='" + getFirst_seen() + "'" +
+            ", added='" + getAdded() + "'" +
             "}";
     }
 }

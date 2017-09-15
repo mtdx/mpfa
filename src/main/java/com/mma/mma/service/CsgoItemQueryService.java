@@ -109,6 +109,9 @@ public class CsgoItemQueryService extends QueryService<CsgoItem> {
             if (criteria.getMad7() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getMad7(), CsgoItem_.mad7));
             }
+            if (criteria.getDp7() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDp7(), CsgoItem_.dp7));
+            }
             if (criteria.getTrend7() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getTrend7(), CsgoItem_.trend7));
             }
@@ -129,6 +132,9 @@ public class CsgoItemQueryService extends QueryService<CsgoItem> {
             }
             if (criteria.getMad30() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getMad30(), CsgoItem_.mad30));
+            }
+            if (criteria.getDp30() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDp30(), CsgoItem_.dp30));
             }
             if (criteria.getTrend30() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getTrend30(), CsgoItem_.trend30));
@@ -151,14 +157,17 @@ public class CsgoItemQueryService extends QueryService<CsgoItem> {
             if (criteria.getMadAll() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getMadAll(), CsgoItem_.madAll));
             }
+            if (criteria.getDpAll() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDpAll(), CsgoItem_.dpAll));
+            }
             if (criteria.getTrendAll() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getTrendAll(), CsgoItem_.trendAll));
             }
             if (criteria.getVolAll() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getVolAll(), CsgoItem_.volAll));
             }
-            if (criteria.getFirst_seen() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getFirst_seen(), CsgoItem_.first_seen));
+            if (criteria.getAdded() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getAdded(), CsgoItem_.added));
             }
         }
         return specification;

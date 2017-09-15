@@ -73,6 +73,9 @@ public class CsgoItemResourceIntTest {
     private static final BigDecimal DEFAULT_MAD_7 = new BigDecimal(1);
     private static final BigDecimal UPDATED_MAD_7 = new BigDecimal(2);
 
+    private static final BigDecimal DEFAULT_DP_7 = new BigDecimal(1);
+    private static final BigDecimal UPDATED_DP_7 = new BigDecimal(2);
+
     private static final BigDecimal DEFAULT_TREND_7 = new BigDecimal(1);
     private static final BigDecimal UPDATED_TREND_7 = new BigDecimal(2);
 
@@ -93,6 +96,9 @@ public class CsgoItemResourceIntTest {
 
     private static final BigDecimal DEFAULT_MAD_30 = new BigDecimal(1);
     private static final BigDecimal UPDATED_MAD_30 = new BigDecimal(2);
+
+    private static final BigDecimal DEFAULT_DP_30 = new BigDecimal(1);
+    private static final BigDecimal UPDATED_DP_30 = new BigDecimal(2);
 
     private static final BigDecimal DEFAULT_TREND_30 = new BigDecimal(1);
     private static final BigDecimal UPDATED_TREND_30 = new BigDecimal(2);
@@ -115,14 +121,17 @@ public class CsgoItemResourceIntTest {
     private static final BigDecimal DEFAULT_MAD_ALL = new BigDecimal(1);
     private static final BigDecimal UPDATED_MAD_ALL = new BigDecimal(2);
 
+    private static final BigDecimal DEFAULT_DP_ALL = new BigDecimal(1);
+    private static final BigDecimal UPDATED_DP_ALL = new BigDecimal(2);
+
     private static final BigDecimal DEFAULT_TREND_ALL = new BigDecimal(1);
     private static final BigDecimal UPDATED_TREND_ALL = new BigDecimal(2);
 
     private static final Integer DEFAULT_VOL_ALL = 1;
     private static final Integer UPDATED_VOL_ALL = 2;
 
-    private static final Instant DEFAULT_FIRST_SEEN = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_FIRST_SEEN = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_ADDED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_ADDED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     @Autowired
     private CsgoItemRepository csgoItemRepository;
@@ -182,6 +191,7 @@ public class CsgoItemResourceIntTest {
             .lp7(DEFAULT_LP_7)
             .hp7(DEFAULT_HP_7)
             .mad7(DEFAULT_MAD_7)
+            .dp7(DEFAULT_DP_7)
             .trend7(DEFAULT_TREND_7)
             .vol7(DEFAULT_VOL_7)
             .mp30(DEFAULT_MP_30)
@@ -189,6 +199,7 @@ public class CsgoItemResourceIntTest {
             .lp30(DEFAULT_LP_30)
             .hp30(DEFAULT_HP_30)
             .mad30(DEFAULT_MAD_30)
+            .dp30(DEFAULT_DP_30)
             .trend30(DEFAULT_TREND_30)
             .vol30(DEFAULT_VOL_30)
             .mpAll(DEFAULT_MP_ALL)
@@ -196,9 +207,10 @@ public class CsgoItemResourceIntTest {
             .lpAll(DEFAULT_LP_ALL)
             .hpAll(DEFAULT_HP_ALL)
             .madAll(DEFAULT_MAD_ALL)
+            .dpAll(DEFAULT_DP_ALL)
             .trendAll(DEFAULT_TREND_ALL)
             .volAll(DEFAULT_VOL_ALL)
-            .first_seen(DEFAULT_FIRST_SEEN);
+            .added(DEFAULT_ADDED);
         return csgoItem;
     }
 
@@ -233,6 +245,7 @@ public class CsgoItemResourceIntTest {
         assertThat(testCsgoItem.getLp7()).isEqualTo(DEFAULT_LP_7);
         assertThat(testCsgoItem.getHp7()).isEqualTo(DEFAULT_HP_7);
         assertThat(testCsgoItem.getMad7()).isEqualTo(DEFAULT_MAD_7);
+        assertThat(testCsgoItem.getDp7()).isEqualTo(DEFAULT_DP_7);
         assertThat(testCsgoItem.getTrend7()).isEqualTo(DEFAULT_TREND_7);
         assertThat(testCsgoItem.getVol7()).isEqualTo(DEFAULT_VOL_7);
         assertThat(testCsgoItem.getMp30()).isEqualTo(DEFAULT_MP_30);
@@ -240,6 +253,7 @@ public class CsgoItemResourceIntTest {
         assertThat(testCsgoItem.getLp30()).isEqualTo(DEFAULT_LP_30);
         assertThat(testCsgoItem.getHp30()).isEqualTo(DEFAULT_HP_30);
         assertThat(testCsgoItem.getMad30()).isEqualTo(DEFAULT_MAD_30);
+        assertThat(testCsgoItem.getDp30()).isEqualTo(DEFAULT_DP_30);
         assertThat(testCsgoItem.getTrend30()).isEqualTo(DEFAULT_TREND_30);
         assertThat(testCsgoItem.getVol30()).isEqualTo(DEFAULT_VOL_30);
         assertThat(testCsgoItem.getMpAll()).isEqualTo(DEFAULT_MP_ALL);
@@ -247,9 +261,10 @@ public class CsgoItemResourceIntTest {
         assertThat(testCsgoItem.getLpAll()).isEqualTo(DEFAULT_LP_ALL);
         assertThat(testCsgoItem.getHpAll()).isEqualTo(DEFAULT_HP_ALL);
         assertThat(testCsgoItem.getMadAll()).isEqualTo(DEFAULT_MAD_ALL);
+        assertThat(testCsgoItem.getDpAll()).isEqualTo(DEFAULT_DP_ALL);
         assertThat(testCsgoItem.getTrendAll()).isEqualTo(DEFAULT_TREND_ALL);
         assertThat(testCsgoItem.getVolAll()).isEqualTo(DEFAULT_VOL_ALL);
-        assertThat(testCsgoItem.getFirst_seen()).isEqualTo(DEFAULT_FIRST_SEEN);
+        assertThat(testCsgoItem.getAdded()).isEqualTo(DEFAULT_ADDED);
 
         // Validate the CsgoItem in Elasticsearch
         CsgoItem csgoItemEs = csgoItemSearchRepository.findOne(testCsgoItem.getId());
@@ -315,6 +330,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].lp7").value(hasItem(DEFAULT_LP_7.intValue())))
             .andExpect(jsonPath("$.[*].hp7").value(hasItem(DEFAULT_HP_7.intValue())))
             .andExpect(jsonPath("$.[*].mad7").value(hasItem(DEFAULT_MAD_7.intValue())))
+            .andExpect(jsonPath("$.[*].dp7").value(hasItem(DEFAULT_DP_7.intValue())))
             .andExpect(jsonPath("$.[*].trend7").value(hasItem(DEFAULT_TREND_7.intValue())))
             .andExpect(jsonPath("$.[*].vol7").value(hasItem(DEFAULT_VOL_7)))
             .andExpect(jsonPath("$.[*].mp30").value(hasItem(DEFAULT_MP_30.intValue())))
@@ -322,6 +338,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].lp30").value(hasItem(DEFAULT_LP_30.intValue())))
             .andExpect(jsonPath("$.[*].hp30").value(hasItem(DEFAULT_HP_30.intValue())))
             .andExpect(jsonPath("$.[*].mad30").value(hasItem(DEFAULT_MAD_30.intValue())))
+            .andExpect(jsonPath("$.[*].dp30").value(hasItem(DEFAULT_DP_30.intValue())))
             .andExpect(jsonPath("$.[*].trend30").value(hasItem(DEFAULT_TREND_30.intValue())))
             .andExpect(jsonPath("$.[*].vol30").value(hasItem(DEFAULT_VOL_30)))
             .andExpect(jsonPath("$.[*].mpAll").value(hasItem(DEFAULT_MP_ALL.intValue())))
@@ -329,9 +346,10 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].lpAll").value(hasItem(DEFAULT_LP_ALL.intValue())))
             .andExpect(jsonPath("$.[*].hpAll").value(hasItem(DEFAULT_HP_ALL.intValue())))
             .andExpect(jsonPath("$.[*].madAll").value(hasItem(DEFAULT_MAD_ALL.intValue())))
+            .andExpect(jsonPath("$.[*].dpAll").value(hasItem(DEFAULT_DP_ALL.intValue())))
             .andExpect(jsonPath("$.[*].trendAll").value(hasItem(DEFAULT_TREND_ALL.intValue())))
             .andExpect(jsonPath("$.[*].volAll").value(hasItem(DEFAULT_VOL_ALL)))
-            .andExpect(jsonPath("$.[*].first_seen").value(hasItem(DEFAULT_FIRST_SEEN.toString())));
+            .andExpect(jsonPath("$.[*].added").value(hasItem(DEFAULT_ADDED.toString())));
     }
 
     @Test
@@ -354,6 +372,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.lp7").value(DEFAULT_LP_7.intValue()))
             .andExpect(jsonPath("$.hp7").value(DEFAULT_HP_7.intValue()))
             .andExpect(jsonPath("$.mad7").value(DEFAULT_MAD_7.intValue()))
+            .andExpect(jsonPath("$.dp7").value(DEFAULT_DP_7.intValue()))
             .andExpect(jsonPath("$.trend7").value(DEFAULT_TREND_7.intValue()))
             .andExpect(jsonPath("$.vol7").value(DEFAULT_VOL_7))
             .andExpect(jsonPath("$.mp30").value(DEFAULT_MP_30.intValue()))
@@ -361,6 +380,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.lp30").value(DEFAULT_LP_30.intValue()))
             .andExpect(jsonPath("$.hp30").value(DEFAULT_HP_30.intValue()))
             .andExpect(jsonPath("$.mad30").value(DEFAULT_MAD_30.intValue()))
+            .andExpect(jsonPath("$.dp30").value(DEFAULT_DP_30.intValue()))
             .andExpect(jsonPath("$.trend30").value(DEFAULT_TREND_30.intValue()))
             .andExpect(jsonPath("$.vol30").value(DEFAULT_VOL_30))
             .andExpect(jsonPath("$.mpAll").value(DEFAULT_MP_ALL.intValue()))
@@ -368,9 +388,10 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.lpAll").value(DEFAULT_LP_ALL.intValue()))
             .andExpect(jsonPath("$.hpAll").value(DEFAULT_HP_ALL.intValue()))
             .andExpect(jsonPath("$.madAll").value(DEFAULT_MAD_ALL.intValue()))
+            .andExpect(jsonPath("$.dpAll").value(DEFAULT_DP_ALL.intValue()))
             .andExpect(jsonPath("$.trendAll").value(DEFAULT_TREND_ALL.intValue()))
             .andExpect(jsonPath("$.volAll").value(DEFAULT_VOL_ALL))
-            .andExpect(jsonPath("$.first_seen").value(DEFAULT_FIRST_SEEN.toString()));
+            .andExpect(jsonPath("$.added").value(DEFAULT_ADDED.toString()));
     }
 
     @Test
@@ -753,6 +774,45 @@ public class CsgoItemResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllCsgoItemsByDp7IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dp7 equals to DEFAULT_DP_7
+        defaultCsgoItemShouldBeFound("dp7.equals=" + DEFAULT_DP_7);
+
+        // Get all the csgoItemList where dp7 equals to UPDATED_DP_7
+        defaultCsgoItemShouldNotBeFound("dp7.equals=" + UPDATED_DP_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDp7IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dp7 in DEFAULT_DP_7 or UPDATED_DP_7
+        defaultCsgoItemShouldBeFound("dp7.in=" + DEFAULT_DP_7 + "," + UPDATED_DP_7);
+
+        // Get all the csgoItemList where dp7 equals to UPDATED_DP_7
+        defaultCsgoItemShouldNotBeFound("dp7.in=" + UPDATED_DP_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDp7IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dp7 is not null
+        defaultCsgoItemShouldBeFound("dp7.specified=true");
+
+        // Get all the csgoItemList where dp7 is null
+        defaultCsgoItemShouldNotBeFound("dp7.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllCsgoItemsByTrend7IsEqualToSomething() throws Exception {
         // Initialize the database
         csgoItemRepository.saveAndFlush(csgoItem);
@@ -1049,6 +1109,45 @@ public class CsgoItemResourceIntTest {
 
         // Get all the csgoItemList where mad30 is null
         defaultCsgoItemShouldNotBeFound("mad30.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDp30IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dp30 equals to DEFAULT_DP_30
+        defaultCsgoItemShouldBeFound("dp30.equals=" + DEFAULT_DP_30);
+
+        // Get all the csgoItemList where dp30 equals to UPDATED_DP_30
+        defaultCsgoItemShouldNotBeFound("dp30.equals=" + UPDATED_DP_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDp30IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dp30 in DEFAULT_DP_30 or UPDATED_DP_30
+        defaultCsgoItemShouldBeFound("dp30.in=" + DEFAULT_DP_30 + "," + UPDATED_DP_30);
+
+        // Get all the csgoItemList where dp30 equals to UPDATED_DP_30
+        defaultCsgoItemShouldNotBeFound("dp30.in=" + UPDATED_DP_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDp30IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dp30 is not null
+        defaultCsgoItemShouldBeFound("dp30.specified=true");
+
+        // Get all the csgoItemList where dp30 is null
+        defaultCsgoItemShouldNotBeFound("dp30.specified=false");
     }
 
     @Test
@@ -1353,6 +1452,45 @@ public class CsgoItemResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllCsgoItemsByDpAllIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dpAll equals to DEFAULT_DP_ALL
+        defaultCsgoItemShouldBeFound("dpAll.equals=" + DEFAULT_DP_ALL);
+
+        // Get all the csgoItemList where dpAll equals to UPDATED_DP_ALL
+        defaultCsgoItemShouldNotBeFound("dpAll.equals=" + UPDATED_DP_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDpAllIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dpAll in DEFAULT_DP_ALL or UPDATED_DP_ALL
+        defaultCsgoItemShouldBeFound("dpAll.in=" + DEFAULT_DP_ALL + "," + UPDATED_DP_ALL);
+
+        // Get all the csgoItemList where dpAll equals to UPDATED_DP_ALL
+        defaultCsgoItemShouldNotBeFound("dpAll.in=" + UPDATED_DP_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDpAllIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dpAll is not null
+        defaultCsgoItemShouldBeFound("dpAll.specified=true");
+
+        // Get all the csgoItemList where dpAll is null
+        defaultCsgoItemShouldNotBeFound("dpAll.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllCsgoItemsByTrendAllIsEqualToSomething() throws Exception {
         // Initialize the database
         csgoItemRepository.saveAndFlush(csgoItem);
@@ -1458,41 +1596,41 @@ public class CsgoItemResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllCsgoItemsByFirst_seenIsEqualToSomething() throws Exception {
+    public void getAllCsgoItemsByAddedIsEqualToSomething() throws Exception {
         // Initialize the database
         csgoItemRepository.saveAndFlush(csgoItem);
 
-        // Get all the csgoItemList where first_seen equals to DEFAULT_FIRST_SEEN
-        defaultCsgoItemShouldBeFound("first_seen.equals=" + DEFAULT_FIRST_SEEN);
+        // Get all the csgoItemList where added equals to DEFAULT_ADDED
+        defaultCsgoItemShouldBeFound("added.equals=" + DEFAULT_ADDED);
 
-        // Get all the csgoItemList where first_seen equals to UPDATED_FIRST_SEEN
-        defaultCsgoItemShouldNotBeFound("first_seen.equals=" + UPDATED_FIRST_SEEN);
+        // Get all the csgoItemList where added equals to UPDATED_ADDED
+        defaultCsgoItemShouldNotBeFound("added.equals=" + UPDATED_ADDED);
     }
 
     @Test
     @Transactional
-    public void getAllCsgoItemsByFirst_seenIsInShouldWork() throws Exception {
+    public void getAllCsgoItemsByAddedIsInShouldWork() throws Exception {
         // Initialize the database
         csgoItemRepository.saveAndFlush(csgoItem);
 
-        // Get all the csgoItemList where first_seen in DEFAULT_FIRST_SEEN or UPDATED_FIRST_SEEN
-        defaultCsgoItemShouldBeFound("first_seen.in=" + DEFAULT_FIRST_SEEN + "," + UPDATED_FIRST_SEEN);
+        // Get all the csgoItemList where added in DEFAULT_ADDED or UPDATED_ADDED
+        defaultCsgoItemShouldBeFound("added.in=" + DEFAULT_ADDED + "," + UPDATED_ADDED);
 
-        // Get all the csgoItemList where first_seen equals to UPDATED_FIRST_SEEN
-        defaultCsgoItemShouldNotBeFound("first_seen.in=" + UPDATED_FIRST_SEEN);
+        // Get all the csgoItemList where added equals to UPDATED_ADDED
+        defaultCsgoItemShouldNotBeFound("added.in=" + UPDATED_ADDED);
     }
 
     @Test
     @Transactional
-    public void getAllCsgoItemsByFirst_seenIsNullOrNotNull() throws Exception {
+    public void getAllCsgoItemsByAddedIsNullOrNotNull() throws Exception {
         // Initialize the database
         csgoItemRepository.saveAndFlush(csgoItem);
 
-        // Get all the csgoItemList where first_seen is not null
-        defaultCsgoItemShouldBeFound("first_seen.specified=true");
+        // Get all the csgoItemList where added is not null
+        defaultCsgoItemShouldBeFound("added.specified=true");
 
-        // Get all the csgoItemList where first_seen is null
-        defaultCsgoItemShouldNotBeFound("first_seen.specified=false");
+        // Get all the csgoItemList where added is null
+        defaultCsgoItemShouldNotBeFound("added.specified=false");
     }
 
     /**
@@ -1512,6 +1650,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].lp7").value(hasItem(DEFAULT_LP_7.intValue())))
             .andExpect(jsonPath("$.[*].hp7").value(hasItem(DEFAULT_HP_7.intValue())))
             .andExpect(jsonPath("$.[*].mad7").value(hasItem(DEFAULT_MAD_7.intValue())))
+            .andExpect(jsonPath("$.[*].dp7").value(hasItem(DEFAULT_DP_7.intValue())))
             .andExpect(jsonPath("$.[*].trend7").value(hasItem(DEFAULT_TREND_7.intValue())))
             .andExpect(jsonPath("$.[*].vol7").value(hasItem(DEFAULT_VOL_7)))
             .andExpect(jsonPath("$.[*].mp30").value(hasItem(DEFAULT_MP_30.intValue())))
@@ -1519,6 +1658,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].lp30").value(hasItem(DEFAULT_LP_30.intValue())))
             .andExpect(jsonPath("$.[*].hp30").value(hasItem(DEFAULT_HP_30.intValue())))
             .andExpect(jsonPath("$.[*].mad30").value(hasItem(DEFAULT_MAD_30.intValue())))
+            .andExpect(jsonPath("$.[*].dp30").value(hasItem(DEFAULT_DP_30.intValue())))
             .andExpect(jsonPath("$.[*].trend30").value(hasItem(DEFAULT_TREND_30.intValue())))
             .andExpect(jsonPath("$.[*].vol30").value(hasItem(DEFAULT_VOL_30)))
             .andExpect(jsonPath("$.[*].mpAll").value(hasItem(DEFAULT_MP_ALL.intValue())))
@@ -1526,9 +1666,10 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].lpAll").value(hasItem(DEFAULT_LP_ALL.intValue())))
             .andExpect(jsonPath("$.[*].hpAll").value(hasItem(DEFAULT_HP_ALL.intValue())))
             .andExpect(jsonPath("$.[*].madAll").value(hasItem(DEFAULT_MAD_ALL.intValue())))
+            .andExpect(jsonPath("$.[*].dpAll").value(hasItem(DEFAULT_DP_ALL.intValue())))
             .andExpect(jsonPath("$.[*].trendAll").value(hasItem(DEFAULT_TREND_ALL.intValue())))
             .andExpect(jsonPath("$.[*].volAll").value(hasItem(DEFAULT_VOL_ALL)))
-            .andExpect(jsonPath("$.[*].first_seen").value(hasItem(DEFAULT_FIRST_SEEN.toString())));
+            .andExpect(jsonPath("$.[*].added").value(hasItem(DEFAULT_ADDED.toString())));
     }
 
     /**
@@ -1571,6 +1712,7 @@ public class CsgoItemResourceIntTest {
             .lp7(UPDATED_LP_7)
             .hp7(UPDATED_HP_7)
             .mad7(UPDATED_MAD_7)
+            .dp7(UPDATED_DP_7)
             .trend7(UPDATED_TREND_7)
             .vol7(UPDATED_VOL_7)
             .mp30(UPDATED_MP_30)
@@ -1578,6 +1720,7 @@ public class CsgoItemResourceIntTest {
             .lp30(UPDATED_LP_30)
             .hp30(UPDATED_HP_30)
             .mad30(UPDATED_MAD_30)
+            .dp30(UPDATED_DP_30)
             .trend30(UPDATED_TREND_30)
             .vol30(UPDATED_VOL_30)
             .mpAll(UPDATED_MP_ALL)
@@ -1585,9 +1728,10 @@ public class CsgoItemResourceIntTest {
             .lpAll(UPDATED_LP_ALL)
             .hpAll(UPDATED_HP_ALL)
             .madAll(UPDATED_MAD_ALL)
+            .dpAll(UPDATED_DP_ALL)
             .trendAll(UPDATED_TREND_ALL)
             .volAll(UPDATED_VOL_ALL)
-            .first_seen(UPDATED_FIRST_SEEN);
+            .added(UPDATED_ADDED);
         CsgoItemDTO csgoItemDTO = csgoItemMapper.toDto(updatedCsgoItem);
 
         restCsgoItemMockMvc.perform(put("/api/csgo-items")
@@ -1608,6 +1752,7 @@ public class CsgoItemResourceIntTest {
         assertThat(testCsgoItem.getLp7()).isEqualTo(UPDATED_LP_7);
         assertThat(testCsgoItem.getHp7()).isEqualTo(UPDATED_HP_7);
         assertThat(testCsgoItem.getMad7()).isEqualTo(UPDATED_MAD_7);
+        assertThat(testCsgoItem.getDp7()).isEqualTo(UPDATED_DP_7);
         assertThat(testCsgoItem.getTrend7()).isEqualTo(UPDATED_TREND_7);
         assertThat(testCsgoItem.getVol7()).isEqualTo(UPDATED_VOL_7);
         assertThat(testCsgoItem.getMp30()).isEqualTo(UPDATED_MP_30);
@@ -1615,6 +1760,7 @@ public class CsgoItemResourceIntTest {
         assertThat(testCsgoItem.getLp30()).isEqualTo(UPDATED_LP_30);
         assertThat(testCsgoItem.getHp30()).isEqualTo(UPDATED_HP_30);
         assertThat(testCsgoItem.getMad30()).isEqualTo(UPDATED_MAD_30);
+        assertThat(testCsgoItem.getDp30()).isEqualTo(UPDATED_DP_30);
         assertThat(testCsgoItem.getTrend30()).isEqualTo(UPDATED_TREND_30);
         assertThat(testCsgoItem.getVol30()).isEqualTo(UPDATED_VOL_30);
         assertThat(testCsgoItem.getMpAll()).isEqualTo(UPDATED_MP_ALL);
@@ -1622,9 +1768,10 @@ public class CsgoItemResourceIntTest {
         assertThat(testCsgoItem.getLpAll()).isEqualTo(UPDATED_LP_ALL);
         assertThat(testCsgoItem.getHpAll()).isEqualTo(UPDATED_HP_ALL);
         assertThat(testCsgoItem.getMadAll()).isEqualTo(UPDATED_MAD_ALL);
+        assertThat(testCsgoItem.getDpAll()).isEqualTo(UPDATED_DP_ALL);
         assertThat(testCsgoItem.getTrendAll()).isEqualTo(UPDATED_TREND_ALL);
         assertThat(testCsgoItem.getVolAll()).isEqualTo(UPDATED_VOL_ALL);
-        assertThat(testCsgoItem.getFirst_seen()).isEqualTo(UPDATED_FIRST_SEEN);
+        assertThat(testCsgoItem.getAdded()).isEqualTo(UPDATED_ADDED);
 
         // Validate the CsgoItem in Elasticsearch
         CsgoItem csgoItemEs = csgoItemSearchRepository.findOne(testCsgoItem.getId());
@@ -1693,6 +1840,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].lp7").value(hasItem(DEFAULT_LP_7.intValue())))
             .andExpect(jsonPath("$.[*].hp7").value(hasItem(DEFAULT_HP_7.intValue())))
             .andExpect(jsonPath("$.[*].mad7").value(hasItem(DEFAULT_MAD_7.intValue())))
+            .andExpect(jsonPath("$.[*].dp7").value(hasItem(DEFAULT_DP_7.intValue())))
             .andExpect(jsonPath("$.[*].trend7").value(hasItem(DEFAULT_TREND_7.intValue())))
             .andExpect(jsonPath("$.[*].vol7").value(hasItem(DEFAULT_VOL_7)))
             .andExpect(jsonPath("$.[*].mp30").value(hasItem(DEFAULT_MP_30.intValue())))
@@ -1700,6 +1848,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].lp30").value(hasItem(DEFAULT_LP_30.intValue())))
             .andExpect(jsonPath("$.[*].hp30").value(hasItem(DEFAULT_HP_30.intValue())))
             .andExpect(jsonPath("$.[*].mad30").value(hasItem(DEFAULT_MAD_30.intValue())))
+            .andExpect(jsonPath("$.[*].dp30").value(hasItem(DEFAULT_DP_30.intValue())))
             .andExpect(jsonPath("$.[*].trend30").value(hasItem(DEFAULT_TREND_30.intValue())))
             .andExpect(jsonPath("$.[*].vol30").value(hasItem(DEFAULT_VOL_30)))
             .andExpect(jsonPath("$.[*].mpAll").value(hasItem(DEFAULT_MP_ALL.intValue())))
@@ -1707,9 +1856,10 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].lpAll").value(hasItem(DEFAULT_LP_ALL.intValue())))
             .andExpect(jsonPath("$.[*].hpAll").value(hasItem(DEFAULT_HP_ALL.intValue())))
             .andExpect(jsonPath("$.[*].madAll").value(hasItem(DEFAULT_MAD_ALL.intValue())))
+            .andExpect(jsonPath("$.[*].dpAll").value(hasItem(DEFAULT_DP_ALL.intValue())))
             .andExpect(jsonPath("$.[*].trendAll").value(hasItem(DEFAULT_TREND_ALL.intValue())))
             .andExpect(jsonPath("$.[*].volAll").value(hasItem(DEFAULT_VOL_ALL)))
-            .andExpect(jsonPath("$.[*].first_seen").value(hasItem(DEFAULT_FIRST_SEEN.toString())));
+            .andExpect(jsonPath("$.[*].added").value(hasItem(DEFAULT_ADDED.toString())));
     }
 
     @Test

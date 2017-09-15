@@ -28,8 +28,8 @@ export class CsgoItemPopupService {
 
             if (id) {
                 this.csgoItemService.find(id).subscribe((csgoItem) => {
-                    csgoItem.first_seen = this.datePipe
-                        .transform(csgoItem.first_seen, 'yyyy-MM-ddTHH:mm:ss');
+                    csgoItem.added = this.datePipe
+                        .transform(csgoItem.added, 'yyyy-MM-ddTHH:mm:ss');
                     this.ngbModalRef = this.csgoItemModalRef(component, csgoItem);
                     resolve(this.ngbModalRef);
                 });

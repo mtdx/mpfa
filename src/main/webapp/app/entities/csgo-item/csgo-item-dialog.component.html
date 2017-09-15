@@ -64,6 +64,11 @@
                 [(ngModel)]="csgoItem.mad7"  />
         </div>
         <div class="form-group">
+            <label class="form-control-label" for="field_dp7">Dp 7</label>
+            <input type="number" class="form-control" name="dp7" id="field_dp7"
+                [(ngModel)]="csgoItem.dp7"  />
+        </div>
+        <div class="form-group">
             <label class="form-control-label" for="field_trend7">Trend 7</label>
             <input type="number" class="form-control" name="trend7" id="field_trend7"
                 [(ngModel)]="csgoItem.trend7"  />
@@ -97,6 +102,11 @@
             <label class="form-control-label" for="field_mad30">Mad 30</label>
             <input type="number" class="form-control" name="mad30" id="field_mad30"
                 [(ngModel)]="csgoItem.mad30"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dp30">Dp 30</label>
+            <input type="number" class="form-control" name="dp30" id="field_dp30"
+                [(ngModel)]="csgoItem.dp30"  />
         </div>
         <div class="form-group">
             <label class="form-control-label" for="field_trend30">Trend 30</label>
@@ -134,6 +144,11 @@
                 [(ngModel)]="csgoItem.madAll"  />
         </div>
         <div class="form-group">
+            <label class="form-control-label" for="field_dpAll">Dp All</label>
+            <input type="number" class="form-control" name="dpAll" id="field_dpAll"
+                [(ngModel)]="csgoItem.dpAll"  />
+        </div>
+        <div class="form-group">
             <label class="form-control-label" for="field_trendAll">Trend All</label>
             <input type="number" class="form-control" name="trendAll" id="field_trendAll"
                 [(ngModel)]="csgoItem.trendAll"  />
@@ -144,9 +159,9 @@
                 [(ngModel)]="csgoItem.volAll"  />
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_first_seen">First Seen</label>
+            <label class="form-control-label" for="field_added">Added</label>
             <div class="d-flex">
-                <input id="field_first_seen" type="datetime-local" class="form-control" name="first_seen" [(ngModel)]="csgoItem.first_seen"
+                <input id="field_added" type="datetime-local" class="form-control" name="added" [(ngModel)]="csgoItem.added"
                   />
             </div>
         </div>
