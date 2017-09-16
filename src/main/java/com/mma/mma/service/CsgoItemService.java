@@ -29,6 +29,7 @@ public class CsgoItemService {
     private final CsgoItemMapper csgoItemMapper;
 
     private final CsgoItemSearchRepository csgoItemSearchRepository;
+
     public CsgoItemService(CsgoItemRepository csgoItemRepository, CsgoItemMapper csgoItemMapper, CsgoItemSearchRepository csgoItemSearchRepository) {
         this.csgoItemRepository = csgoItemRepository;
         this.csgoItemMapper = csgoItemMapper;
