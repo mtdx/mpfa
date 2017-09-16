@@ -2,11 +2,11 @@ package com.mma.mma.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.mma.mma.service.CsgoItemService;
+import com.mma.mma.service.dto.CsgoItemDTO;
 import com.mma.mma.web.rest.util.HeaderUtil;
 import com.mma.mma.web.rest.util.PaginationUtil;
-import com.mma.mma.service.dto.CsgoItemDTO;
-import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -19,12 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing CsgoItem.
@@ -57,7 +53,8 @@ public class CsgoItemResource {
         if (csgoItemDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new csgoItem cannot already have an ID")).body(null);
         }
-        CsgoItemDTO result = csgoItemService.save(csgoItemDTO);
+//        CsgoItemDTO result = csgoItemService.save(csgoItemDTO);
+        CsgoItemDTO result = csgoItemDTO;
         return ResponseEntity.created(new URI("/api/csgo-items/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -79,7 +76,8 @@ public class CsgoItemResource {
         if (csgoItemDTO.getId() == null) {
             return createCsgoItem(csgoItemDTO);
         }
-        CsgoItemDTO result = csgoItemService.save(csgoItemDTO);
+//        CsgoItemDTO result = csgoItemService.save(csgoItemDTO);
+        CsgoItemDTO result = csgoItemDTO;
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, csgoItemDTO.getId().toString()))
             .body(result);
@@ -124,7 +122,7 @@ public class CsgoItemResource {
     @Timed
     public ResponseEntity<Void> deleteCsgoItem(@PathVariable Long id) {
         log.debug("REST request to delete CsgoItem : {}", id);
-        csgoItemService.delete(id);
+//        csgoItemService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
