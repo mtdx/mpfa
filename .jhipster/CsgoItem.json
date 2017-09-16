@@ -126,6 +126,6 @@
     "dto": "mapstruct",
     "service": "serviceClass",
     "entityTableName": "csgo_item",
-    "jpaMetamodelFiltering": true,
+    "jpaMetamodelFiltering": false,
     "pagination": "infinite-scroll"
 }
