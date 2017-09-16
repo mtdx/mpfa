@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
@@ -64,6 +66,17 @@ public class CsgoItemService {
     }
 
     /**
+     *  Get all the csgoItems.
+     *
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public List<CsgoItem> findAll() {
+        log.debug("Request to get all CsgoItems");
+        return csgoItemRepository.findAll();
+    }
+
+    /**
      *  Get one csgoItem by id.
      *
      *  @param id the id of the entity
@@ -99,5 +112,16 @@ public class CsgoItemService {
         log.debug("Request to search for a page of CsgoItems for query {}", query);
         Page<CsgoItem> result = csgoItemSearchRepository.search(queryStringQuery(query), pageable);
         return result.map(csgoItemMapper::toDto);
+    }
+
+
+    /**
+     * Refresh/Reindex elastic search
+     *
+     */
+    @Transactional(readOnly = true)
+    public void refreshsearch() {
+        log.debug("Refresh/Reindex CsgoItems elastic search {}");
+        csgoItemSearchRepository.refresh();
     }
 }
