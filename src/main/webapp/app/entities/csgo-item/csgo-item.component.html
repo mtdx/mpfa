@@ -42,7 +42,7 @@
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let csgoItem of csgoItems ;trackBy: trackId">
-                <td><a [routerLink]="['../csgo-item', csgoItem.id ]"></a>{{csgoItem.name}}</a></td>
+                <td><a [routerLink]="['../csgo-item', csgoItem.id ]">{{csgoItem.name}}</a></td>
                 <td>{{csgoItem.sp}}</td>
                 <td><i class="fa fa-circle opm {{csgoItem.opm}}" aria-hidden="true"></i></td>
                 <td>{{csgoItem.vol}}</td>
