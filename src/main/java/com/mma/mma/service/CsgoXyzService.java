@@ -17,10 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Transactional
@@ -50,11 +47,12 @@ public class CsgoXyzService {
      * </p>
      */
     @Async
-    @Scheduled(cron = "0 */11 * * * *") // 11
+    @Scheduled(cron = "0 */1 * * * *") // 11 TODO
     public void updateItems() {
         log.debug("Run scheduled csgo.steamlytics.xyz  update items {}");
 
         final String XYZ_API_URL = "http://api.csgo.steamlytics.xyz/v2/pricelist?key=" + XYZ_API_KEY;
+//        final String XYZ_API_URL = "https://raw.githubusercontent.com/mtdx/json/master/d";
 
         RestTemplate restTemplate = restTemplate();
 
@@ -84,8 +82,8 @@ public class CsgoXyzService {
         HashMap<String, XyzItem> xyzitems = xyzresp.getItems();
         Map<String, Double> cfPriceData = cfPriceData(restTemplate, headers);
         Map<String, String> ioPriceData = ioPriceData(restTemplate, headers);
-
-        for (String markethashname : xyzitems.keySet()) {
+        Set<String> keySet = xyzitems.keySet();
+        for (String markethashname : keySet) {
             if (existingItems.containsKey(markethashname)) {
                 item = existingItems.get(markethashname);
             } else {
@@ -93,8 +91,14 @@ public class CsgoXyzService {
                 item.setName(markethashname);
             }
             try {
-                mapNewItemData(item, xyzitems.get(markethashname),
-                    cfPriceData.get(markethashname), Double.valueOf(ioPriceData.get(markethashname)));
+                if (!xyzitems.containsKey(markethashname)) {
+                    continue;
+                }
+                Double ioPrice = null;
+                if (ioPriceData.containsKey(markethashname)) {
+                    ioPrice = Double.valueOf(ioPriceData.get(markethashname));
+                }
+                mapNewItemData(item, xyzitems.get(markethashname), cfPriceData.get(markethashname), ioPrice);
                 csgoItemService.save(csgoItemMapper.toDto(item));
             }catch (Exception ex) {
                 log.error("Failed to save/map csgo.steamlytics.xyz new item {}", ex.getMessage());
@@ -160,14 +164,18 @@ public class CsgoXyzService {
         item.setTrendAll(newitem.getAll_time().getTrend());
         item.setVolAll(newitem.getAll_time().getVolume());
 
-        if (cfPrice != null) {
-            item.setCfp(new BigDecimal(cfPrice));
+        if (cfPrice != null && cfPrice > 0) {
+            item.setCfp(BigDecimal.valueOf(cfPrice));
         }
-        if (ioPrice != null) {
-            item.setIop(new BigDecimal(ioPrice));
+        if (ioPrice != null && ioPrice > 0) {
+            item.setIop(BigDecimal.valueOf(ioPrice));
         }
-        if (cfPrice != null && newitem.getSafe_price() != null) {
-            item.setDcx(newitem.getSafe_price().subtract(new BigDecimal(cfPrice)).divide(newitem.getSafe_price(), 0).multiply(new BigDecimal(100)));
+        if (cfPrice != null && cfPrice > 0 && newitem.getSafe_price() != null) {
+            Double sp = newitem.getSafe_price().doubleValue();
+            if (sp > 0) {
+                long diff = Math.round((sp - cfPrice) / sp * 100);
+                item.setDcx(BigDecimal.valueOf(diff));
+            }
         }
 
         item.setAdded(newitem.getFirst_seen());
