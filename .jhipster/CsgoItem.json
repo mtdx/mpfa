@@ -118,6 +118,14 @@
             "fieldType": "Integer"
         },
         {
+            "fieldName": "cfp",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "iop",
+            "fieldType": "BigDecimal"
+        },
+        {
             "fieldName": "added",
             "fieldType": "Instant"
         }

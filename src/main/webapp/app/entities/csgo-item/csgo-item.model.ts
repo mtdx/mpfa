@@ -1,4 +1,4 @@
-import { BaseEntity } from './../../shared';
+import {BaseEntity} from './../../shared';
 
 export class CsgoItem implements BaseEntity {
     constructor(
@@ -31,6 +31,8 @@ export class CsgoItem implements BaseEntity {
         public dpAll?: number,
         public trendAll?: number,
         public volAll?: number,
+        public cfp?: number,
+        public iop?: number,
         public added?: any,
     ) {
         this.opm = false;

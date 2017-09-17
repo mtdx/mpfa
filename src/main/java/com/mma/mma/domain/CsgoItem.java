@@ -5,7 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -111,6 +111,12 @@ public class CsgoItem implements Serializable {
 
     @Column(name = "vol_all")
     private Integer volAll;
+
+    @Column(name = "cfp", precision=10, scale=2)
+    private BigDecimal cfp;
+
+    @Column(name = "iop", precision=10, scale=2)
+    private BigDecimal iop;
 
     @Column(name = "added")
     private Instant added;
@@ -488,6 +494,32 @@ public class CsgoItem implements Serializable {
         this.volAll = volAll;
     }
 
+    public BigDecimal getCfp() {
+        return cfp;
+    }
+
+    public void setCfp(BigDecimal cfp) {
+        this.cfp = cfp;
+    }
+
+    public CsgoItem cfp(BigDecimal cfp) {
+        this.cfp = cfp;
+        return this;
+    }
+
+    public BigDecimal getIop() {
+        return iop;
+    }
+
+    public void setIop(BigDecimal iop) {
+        this.iop = iop;
+    }
+
+    public CsgoItem iop(BigDecimal iop) {
+        this.iop = iop;
+        return this;
+    }
+
     public Instant getAdded() {
         return added;
     }
@@ -554,6 +586,8 @@ public class CsgoItem implements Serializable {
             ", dpAll='" + getDpAll() + "'" +
             ", trendAll='" + getTrendAll() + "'" +
             ", volAll='" + getVolAll() + "'" +
+            ", cfp='" + getCfp() + "'" +
+            ", iop='" + getIop() + "'" +
             ", added='" + getAdded() + "'" +
             "}";
     }

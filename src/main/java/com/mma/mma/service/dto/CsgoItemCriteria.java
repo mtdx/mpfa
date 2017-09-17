@@ -77,6 +77,10 @@ public class CsgoItemCriteria implements Serializable {
 
     private IntegerFilter volAll;
 
+    private BigDecimalFilter cfp;
+
+    private BigDecimalFilter iop;
+
     private InstantFilter added;
 
     public CsgoItemCriteria() {
@@ -314,6 +318,22 @@ public class CsgoItemCriteria implements Serializable {
         this.volAll = volAll;
     }
 
+    public BigDecimalFilter getCfp() {
+        return cfp;
+    }
+
+    public void setCfp(BigDecimalFilter cfp) {
+        this.cfp = cfp;
+    }
+
+    public BigDecimalFilter getIop() {
+        return iop;
+    }
+
+    public void setIop(BigDecimalFilter iop) {
+        this.iop = iop;
+    }
+
     public InstantFilter getAdded() {
         return added;
     }
@@ -354,6 +374,8 @@ public class CsgoItemCriteria implements Serializable {
                 (dpAll != null ? "dpAll=" + dpAll + ", " : "") +
                 (trendAll != null ? "trendAll=" + trendAll + ", " : "") +
                 (volAll != null ? "volAll=" + volAll + ", " : "") +
+                (cfp != null ? "cfp=" + cfp + ", " : "") +
+                (iop != null ? "iop=" + iop + ", " : "") +
                 (added != null ? "added=" + added + ", " : "") +
             "}";
     }

@@ -159,6 +159,16 @@
                 [(ngModel)]="csgoItem.volAll"  />
         </div>
         <div class="form-group">
+            <label class="form-control-label" for="field_cfp">Cfp</label>
+            <input type="number" class="form-control" name="cfp" id="field_cfp"
+                [(ngModel)]="csgoItem.cfp"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_iop">Iop</label>
+            <input type="number" class="form-control" name="iop" id="field_iop"
+                [(ngModel)]="csgoItem.iop"  />
+        </div>
+        <div class="form-group">
             <label class="form-control-label" for="field_added">Added</label>
             <div class="d-flex">
                 <input id="field_added" type="datetime-local" class="form-control" name="added" [(ngModel)]="csgoItem.added"

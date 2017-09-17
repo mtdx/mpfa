@@ -1,10 +1,10 @@
 package com.mma.mma.service.dto;
 
 
-import java.time.Instant;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Objects;
 
 /**
@@ -70,6 +70,10 @@ public class CsgoItemDTO implements Serializable {
     private BigDecimal trendAll;
 
     private Integer volAll;
+
+    private BigDecimal cfp;
+
+    private BigDecimal iop;
 
     private Instant added;
 
@@ -305,6 +309,22 @@ public class CsgoItemDTO implements Serializable {
         this.volAll = volAll;
     }
 
+    public BigDecimal getCfp() {
+        return cfp;
+    }
+
+    public void setCfp(BigDecimal cfp) {
+        this.cfp = cfp;
+    }
+
+    public BigDecimal getIop() {
+        return iop;
+    }
+
+    public void setIop(BigDecimal iop) {
+        this.iop = iop;
+    }
+
     public Instant getAdded() {
         return added;
     }
@@ -366,6 +386,8 @@ public class CsgoItemDTO implements Serializable {
             ", dpAll='" + getDpAll() + "'" +
             ", trendAll='" + getTrendAll() + "'" +
             ", volAll='" + getVolAll() + "'" +
+            ", cfp='" + getCfp() + "'" +
+            ", iop='" + getIop() + "'" +
             ", added='" + getAdded() + "'" +
             "}";
     }

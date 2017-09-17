@@ -127,6 +127,12 @@ public class CsgoItemResourceIntTest {
     private static final Integer DEFAULT_VOL_ALL = 1;
     private static final Integer UPDATED_VOL_ALL = 2;
 
+    private static final BigDecimal DEFAULT_CFP = new BigDecimal(1);
+    private static final BigDecimal UPDATED_CFP = new BigDecimal(2);
+
+    private static final BigDecimal DEFAULT_IOP = new BigDecimal(1);
+    private static final BigDecimal UPDATED_IOP = new BigDecimal(2);
+
     private static final Instant DEFAULT_ADDED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_ADDED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -207,6 +213,8 @@ public class CsgoItemResourceIntTest {
             .dpAll(DEFAULT_DP_ALL)
             .trendAll(DEFAULT_TREND_ALL)
             .volAll(DEFAULT_VOL_ALL)
+            .cfp(DEFAULT_CFP)
+            .iop(DEFAULT_IOP)
             .added(DEFAULT_ADDED);
         return csgoItem;
     }
@@ -261,6 +269,8 @@ public class CsgoItemResourceIntTest {
         assertThat(testCsgoItem.getDpAll()).isEqualTo(DEFAULT_DP_ALL);
         assertThat(testCsgoItem.getTrendAll()).isEqualTo(DEFAULT_TREND_ALL);
         assertThat(testCsgoItem.getVolAll()).isEqualTo(DEFAULT_VOL_ALL);
+        assertThat(testCsgoItem.getCfp()).isEqualTo(DEFAULT_CFP);
+        assertThat(testCsgoItem.getIop()).isEqualTo(DEFAULT_IOP);
         assertThat(testCsgoItem.getAdded()).isEqualTo(DEFAULT_ADDED);
 
         // Validate the CsgoItem in Elasticsearch
@@ -346,6 +356,8 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].dpAll").value(hasItem(DEFAULT_DP_ALL.intValue())))
             .andExpect(jsonPath("$.[*].trendAll").value(hasItem(DEFAULT_TREND_ALL.intValue())))
             .andExpect(jsonPath("$.[*].volAll").value(hasItem(DEFAULT_VOL_ALL)))
+            .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.intValue())))
+            .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.intValue())))
             .andExpect(jsonPath("$.[*].added").value(hasItem(DEFAULT_ADDED.toString())));
     }
 
@@ -388,6 +400,8 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.dpAll").value(DEFAULT_DP_ALL.intValue()))
             .andExpect(jsonPath("$.trendAll").value(DEFAULT_TREND_ALL.intValue()))
             .andExpect(jsonPath("$.volAll").value(DEFAULT_VOL_ALL))
+            .andExpect(jsonPath("$.cfp").value(DEFAULT_CFP.intValue()))
+            .andExpect(jsonPath("$.iop").value(DEFAULT_IOP.intValue()))
             .andExpect(jsonPath("$.added").value(DEFAULT_ADDED.toString()));
     }
 
@@ -1593,6 +1607,84 @@ public class CsgoItemResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllCsgoItemsByCfpIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where cfp equals to DEFAULT_CFP
+        defaultCsgoItemShouldBeFound("cfp.equals=" + DEFAULT_CFP);
+
+        // Get all the csgoItemList where cfp equals to UPDATED_CFP
+        defaultCsgoItemShouldNotBeFound("cfp.equals=" + UPDATED_CFP);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByCfpIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where cfp in DEFAULT_CFP or UPDATED_CFP
+        defaultCsgoItemShouldBeFound("cfp.in=" + DEFAULT_CFP + "," + UPDATED_CFP);
+
+        // Get all the csgoItemList where cfp equals to UPDATED_CFP
+        defaultCsgoItemShouldNotBeFound("cfp.in=" + UPDATED_CFP);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByCfpIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where cfp is not null
+        defaultCsgoItemShouldBeFound("cfp.specified=true");
+
+        // Get all the csgoItemList where cfp is null
+        defaultCsgoItemShouldNotBeFound("cfp.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByIopIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where iop equals to DEFAULT_IOP
+        defaultCsgoItemShouldBeFound("iop.equals=" + DEFAULT_IOP);
+
+        // Get all the csgoItemList where iop equals to UPDATED_IOP
+        defaultCsgoItemShouldNotBeFound("iop.equals=" + UPDATED_IOP);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByIopIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where iop in DEFAULT_IOP or UPDATED_IOP
+        defaultCsgoItemShouldBeFound("iop.in=" + DEFAULT_IOP + "," + UPDATED_IOP);
+
+        // Get all the csgoItemList where iop equals to UPDATED_IOP
+        defaultCsgoItemShouldNotBeFound("iop.in=" + UPDATED_IOP);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByIopIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where iop is not null
+        defaultCsgoItemShouldBeFound("iop.specified=true");
+
+        // Get all the csgoItemList where iop is null
+        defaultCsgoItemShouldNotBeFound("iop.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllCsgoItemsByAddedIsEqualToSomething() throws Exception {
         // Initialize the database
         csgoItemRepository.saveAndFlush(csgoItem);
@@ -1666,6 +1758,8 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].dpAll").value(hasItem(DEFAULT_DP_ALL.intValue())))
             .andExpect(jsonPath("$.[*].trendAll").value(hasItem(DEFAULT_TREND_ALL.intValue())))
             .andExpect(jsonPath("$.[*].volAll").value(hasItem(DEFAULT_VOL_ALL)))
+            .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.intValue())))
+            .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.intValue())))
             .andExpect(jsonPath("$.[*].added").value(hasItem(DEFAULT_ADDED.toString())));
     }
 
@@ -1728,6 +1822,8 @@ public class CsgoItemResourceIntTest {
             .dpAll(UPDATED_DP_ALL)
             .trendAll(UPDATED_TREND_ALL)
             .volAll(UPDATED_VOL_ALL)
+            .cfp(UPDATED_CFP)
+            .iop(UPDATED_IOP)
             .added(UPDATED_ADDED);
         CsgoItemDTO csgoItemDTO = csgoItemMapper.toDto(updatedCsgoItem);
 
@@ -1768,6 +1864,8 @@ public class CsgoItemResourceIntTest {
         assertThat(testCsgoItem.getDpAll()).isEqualTo(UPDATED_DP_ALL);
         assertThat(testCsgoItem.getTrendAll()).isEqualTo(UPDATED_TREND_ALL);
         assertThat(testCsgoItem.getVolAll()).isEqualTo(UPDATED_VOL_ALL);
+        assertThat(testCsgoItem.getCfp()).isEqualTo(UPDATED_CFP);
+        assertThat(testCsgoItem.getIop()).isEqualTo(UPDATED_IOP);
         assertThat(testCsgoItem.getAdded()).isEqualTo(UPDATED_ADDED);
 
         // Validate the CsgoItem in Elasticsearch
@@ -1856,6 +1954,8 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].dpAll").value(hasItem(DEFAULT_DP_ALL.intValue())))
             .andExpect(jsonPath("$.[*].trendAll").value(hasItem(DEFAULT_TREND_ALL.intValue())))
             .andExpect(jsonPath("$.[*].volAll").value(hasItem(DEFAULT_VOL_ALL)))
+            .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.intValue())))
+            .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.intValue())))
             .andExpect(jsonPath("$.[*].added").value(hasItem(DEFAULT_ADDED.toString())));
     }
 
