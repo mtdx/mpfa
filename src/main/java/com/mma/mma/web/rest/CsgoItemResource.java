@@ -1,7 +1,9 @@
 package com.mma.mma.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.mma.mma.service.CsgoItemQueryService;
 import com.mma.mma.service.CsgoItemService;
+import com.mma.mma.service.dto.CsgoItemCriteria;
 import com.mma.mma.service.dto.CsgoItemDTO;
 import com.mma.mma.web.rest.util.HeaderUtil;
 import com.mma.mma.web.rest.util.PaginationUtil;
@@ -35,8 +37,11 @@ public class CsgoItemResource {
 
     private final CsgoItemService csgoItemService;
 
-    public CsgoItemResource(CsgoItemService csgoItemService) {
+    private final CsgoItemQueryService csgoItemQueryService;
+
+    public CsgoItemResource(CsgoItemService csgoItemService, CsgoItemQueryService csgoItemQueryService) {
         this.csgoItemService = csgoItemService;
+        this.csgoItemQueryService = csgoItemQueryService;
     }
 
     /**
@@ -87,13 +92,14 @@ public class CsgoItemResource {
      * GET  /csgo-items : get all the csgoItems.
      *
      * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of csgoItems in body
      */
     @GetMapping("/csgo-items")
     @Timed
-    public ResponseEntity<List<CsgoItemDTO>> getAllCsgoItems(@ApiParam Pageable pageable) {
-        log.debug("REST request to get a page of CsgoItems");
-        Page<CsgoItemDTO> page = csgoItemService.findAll(pageable);
+    public ResponseEntity<List<CsgoItemDTO>> getAllCsgoItems(CsgoItemCriteria criteria,@ApiParam Pageable pageable) {
+        log.debug("REST request to get CsgoItems by criteria: {}", criteria);
+        Page<CsgoItemDTO> page = csgoItemQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/csgo-items");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

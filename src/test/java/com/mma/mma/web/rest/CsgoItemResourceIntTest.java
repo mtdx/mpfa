@@ -1,15 +1,14 @@
 package com.mma.mma.web.rest;
 
 import com.mma.mma.MmaApp;
-
 import com.mma.mma.domain.CsgoItem;
 import com.mma.mma.repository.CsgoItemRepository;
-import com.mma.mma.service.CsgoItemService;
 import com.mma.mma.repository.search.CsgoItemSearchRepository;
+import com.mma.mma.service.CsgoItemQueryService;
+import com.mma.mma.service.CsgoItemService;
 import com.mma.mma.service.dto.CsgoItemDTO;
 import com.mma.mma.service.mapper.CsgoItemMapper;
 import com.mma.mma.web.rest.errors.ExceptionTranslator;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -144,6 +143,9 @@ public class CsgoItemResourceIntTest {
     private CsgoItemSearchRepository csgoItemSearchRepository;
 
     @Autowired
+    private CsgoItemQueryService csgoItemQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -162,7 +164,7 @@ public class CsgoItemResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final CsgoItemResource csgoItemResource = new CsgoItemResource(csgoItemService);
+        final CsgoItemResource csgoItemResource = new CsgoItemResource(csgoItemService, csgoItemQueryService);
         this.restCsgoItemMockMvc = MockMvcBuilders.standaloneSetup(csgoItemResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -388,6 +390,1296 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.volAll").value(DEFAULT_VOL_ALL))
             .andExpect(jsonPath("$.added").value(DEFAULT_ADDED.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where name equals to DEFAULT_NAME
+        defaultCsgoItemShouldBeFound("name.equals=" + DEFAULT_NAME);
+
+        // Get all the csgoItemList where name equals to UPDATED_NAME
+        defaultCsgoItemShouldNotBeFound("name.equals=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultCsgoItemShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+
+        // Get all the csgoItemList where name equals to UPDATED_NAME
+        defaultCsgoItemShouldNotBeFound("name.in=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where name is not null
+        defaultCsgoItemShouldBeFound("name.specified=true");
+
+        // Get all the csgoItemList where name is null
+        defaultCsgoItemShouldNotBeFound("name.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsBySpIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where sp equals to DEFAULT_SP
+        defaultCsgoItemShouldBeFound("sp.equals=" + DEFAULT_SP);
+
+        // Get all the csgoItemList where sp equals to UPDATED_SP
+        defaultCsgoItemShouldNotBeFound("sp.equals=" + UPDATED_SP);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsBySpIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where sp in DEFAULT_SP or UPDATED_SP
+        defaultCsgoItemShouldBeFound("sp.in=" + DEFAULT_SP + "," + UPDATED_SP);
+
+        // Get all the csgoItemList where sp equals to UPDATED_SP
+        defaultCsgoItemShouldNotBeFound("sp.in=" + UPDATED_SP);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsBySpIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where sp is not null
+        defaultCsgoItemShouldBeFound("sp.specified=true");
+
+        // Get all the csgoItemList where sp is null
+        defaultCsgoItemShouldNotBeFound("sp.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByOpmIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where opm equals to DEFAULT_OPM
+        defaultCsgoItemShouldBeFound("opm.equals=" + DEFAULT_OPM);
+
+        // Get all the csgoItemList where opm equals to UPDATED_OPM
+        defaultCsgoItemShouldNotBeFound("opm.equals=" + UPDATED_OPM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByOpmIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where opm in DEFAULT_OPM or UPDATED_OPM
+        defaultCsgoItemShouldBeFound("opm.in=" + DEFAULT_OPM + "," + UPDATED_OPM);
+
+        // Get all the csgoItemList where opm equals to UPDATED_OPM
+        defaultCsgoItemShouldNotBeFound("opm.in=" + UPDATED_OPM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByOpmIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where opm is not null
+        defaultCsgoItemShouldBeFound("opm.specified=true");
+
+        // Get all the csgoItemList where opm is null
+        defaultCsgoItemShouldNotBeFound("opm.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVolIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where vol equals to DEFAULT_VOL
+        defaultCsgoItemShouldBeFound("vol.equals=" + DEFAULT_VOL);
+
+        // Get all the csgoItemList where vol equals to UPDATED_VOL
+        defaultCsgoItemShouldNotBeFound("vol.equals=" + UPDATED_VOL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVolIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where vol in DEFAULT_VOL or UPDATED_VOL
+        defaultCsgoItemShouldBeFound("vol.in=" + DEFAULT_VOL + "," + UPDATED_VOL);
+
+        // Get all the csgoItemList where vol equals to UPDATED_VOL
+        defaultCsgoItemShouldNotBeFound("vol.in=" + UPDATED_VOL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVolIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where vol is not null
+        defaultCsgoItemShouldBeFound("vol.specified=true");
+
+        // Get all the csgoItemList where vol is null
+        defaultCsgoItemShouldNotBeFound("vol.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVolIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where vol greater than or equals to DEFAULT_VOL
+        defaultCsgoItemShouldBeFound("vol.greaterOrEqualThan=" + DEFAULT_VOL);
+
+        // Get all the csgoItemList where vol greater than or equals to UPDATED_VOL
+        defaultCsgoItemShouldNotBeFound("vol.greaterOrEqualThan=" + UPDATED_VOL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVolIsLessThanSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where vol less than or equals to DEFAULT_VOL
+        defaultCsgoItemShouldNotBeFound("vol.lessThan=" + DEFAULT_VOL);
+
+        // Get all the csgoItemList where vol less than or equals to UPDATED_VOL
+        defaultCsgoItemShouldBeFound("vol.lessThan=" + UPDATED_VOL);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMp7IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where mp7 equals to DEFAULT_MP_7
+        defaultCsgoItemShouldBeFound("mp7.equals=" + DEFAULT_MP_7);
+
+        // Get all the csgoItemList where mp7 equals to UPDATED_MP_7
+        defaultCsgoItemShouldNotBeFound("mp7.equals=" + UPDATED_MP_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMp7IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where mp7 in DEFAULT_MP_7 or UPDATED_MP_7
+        defaultCsgoItemShouldBeFound("mp7.in=" + DEFAULT_MP_7 + "," + UPDATED_MP_7);
+
+        // Get all the csgoItemList where mp7 equals to UPDATED_MP_7
+        defaultCsgoItemShouldNotBeFound("mp7.in=" + UPDATED_MP_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMp7IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where mp7 is not null
+        defaultCsgoItemShouldBeFound("mp7.specified=true");
+
+        // Get all the csgoItemList where mp7 is null
+        defaultCsgoItemShouldNotBeFound("mp7.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByAvg7IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where avg7 equals to DEFAULT_AVG_7
+        defaultCsgoItemShouldBeFound("avg7.equals=" + DEFAULT_AVG_7);
+
+        // Get all the csgoItemList where avg7 equals to UPDATED_AVG_7
+        defaultCsgoItemShouldNotBeFound("avg7.equals=" + UPDATED_AVG_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByAvg7IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where avg7 in DEFAULT_AVG_7 or UPDATED_AVG_7
+        defaultCsgoItemShouldBeFound("avg7.in=" + DEFAULT_AVG_7 + "," + UPDATED_AVG_7);
+
+        // Get all the csgoItemList where avg7 equals to UPDATED_AVG_7
+        defaultCsgoItemShouldNotBeFound("avg7.in=" + UPDATED_AVG_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByAvg7IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where avg7 is not null
+        defaultCsgoItemShouldBeFound("avg7.specified=true");
+
+        // Get all the csgoItemList where avg7 is null
+        defaultCsgoItemShouldNotBeFound("avg7.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByLp7IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where lp7 equals to DEFAULT_LP_7
+        defaultCsgoItemShouldBeFound("lp7.equals=" + DEFAULT_LP_7);
+
+        // Get all the csgoItemList where lp7 equals to UPDATED_LP_7
+        defaultCsgoItemShouldNotBeFound("lp7.equals=" + UPDATED_LP_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByLp7IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where lp7 in DEFAULT_LP_7 or UPDATED_LP_7
+        defaultCsgoItemShouldBeFound("lp7.in=" + DEFAULT_LP_7 + "," + UPDATED_LP_7);
+
+        // Get all the csgoItemList where lp7 equals to UPDATED_LP_7
+        defaultCsgoItemShouldNotBeFound("lp7.in=" + UPDATED_LP_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByLp7IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where lp7 is not null
+        defaultCsgoItemShouldBeFound("lp7.specified=true");
+
+        // Get all the csgoItemList where lp7 is null
+        defaultCsgoItemShouldNotBeFound("lp7.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByHp7IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where hp7 equals to DEFAULT_HP_7
+        defaultCsgoItemShouldBeFound("hp7.equals=" + DEFAULT_HP_7);
+
+        // Get all the csgoItemList where hp7 equals to UPDATED_HP_7
+        defaultCsgoItemShouldNotBeFound("hp7.equals=" + UPDATED_HP_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByHp7IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where hp7 in DEFAULT_HP_7 or UPDATED_HP_7
+        defaultCsgoItemShouldBeFound("hp7.in=" + DEFAULT_HP_7 + "," + UPDATED_HP_7);
+
+        // Get all the csgoItemList where hp7 equals to UPDATED_HP_7
+        defaultCsgoItemShouldNotBeFound("hp7.in=" + UPDATED_HP_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByHp7IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where hp7 is not null
+        defaultCsgoItemShouldBeFound("hp7.specified=true");
+
+        // Get all the csgoItemList where hp7 is null
+        defaultCsgoItemShouldNotBeFound("hp7.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMad7IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where mad7 equals to DEFAULT_MAD_7
+        defaultCsgoItemShouldBeFound("mad7.equals=" + DEFAULT_MAD_7);
+
+        // Get all the csgoItemList where mad7 equals to UPDATED_MAD_7
+        defaultCsgoItemShouldNotBeFound("mad7.equals=" + UPDATED_MAD_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMad7IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where mad7 in DEFAULT_MAD_7 or UPDATED_MAD_7
+        defaultCsgoItemShouldBeFound("mad7.in=" + DEFAULT_MAD_7 + "," + UPDATED_MAD_7);
+
+        // Get all the csgoItemList where mad7 equals to UPDATED_MAD_7
+        defaultCsgoItemShouldNotBeFound("mad7.in=" + UPDATED_MAD_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMad7IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where mad7 is not null
+        defaultCsgoItemShouldBeFound("mad7.specified=true");
+
+        // Get all the csgoItemList where mad7 is null
+        defaultCsgoItemShouldNotBeFound("mad7.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDp7IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dp7 equals to DEFAULT_DP_7
+        defaultCsgoItemShouldBeFound("dp7.equals=" + DEFAULT_DP_7);
+
+        // Get all the csgoItemList where dp7 equals to UPDATED_DP_7
+        defaultCsgoItemShouldNotBeFound("dp7.equals=" + UPDATED_DP_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDp7IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dp7 in DEFAULT_DP_7 or UPDATED_DP_7
+        defaultCsgoItemShouldBeFound("dp7.in=" + DEFAULT_DP_7 + "," + UPDATED_DP_7);
+
+        // Get all the csgoItemList where dp7 equals to UPDATED_DP_7
+        defaultCsgoItemShouldNotBeFound("dp7.in=" + UPDATED_DP_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDp7IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dp7 is not null
+        defaultCsgoItemShouldBeFound("dp7.specified=true");
+
+        // Get all the csgoItemList where dp7 is null
+        defaultCsgoItemShouldNotBeFound("dp7.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByTrend7IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where trend7 equals to DEFAULT_TREND_7
+        defaultCsgoItemShouldBeFound("trend7.equals=" + DEFAULT_TREND_7);
+
+        // Get all the csgoItemList where trend7 equals to UPDATED_TREND_7
+        defaultCsgoItemShouldNotBeFound("trend7.equals=" + UPDATED_TREND_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByTrend7IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where trend7 in DEFAULT_TREND_7 or UPDATED_TREND_7
+        defaultCsgoItemShouldBeFound("trend7.in=" + DEFAULT_TREND_7 + "," + UPDATED_TREND_7);
+
+        // Get all the csgoItemList where trend7 equals to UPDATED_TREND_7
+        defaultCsgoItemShouldNotBeFound("trend7.in=" + UPDATED_TREND_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByTrend7IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where trend7 is not null
+        defaultCsgoItemShouldBeFound("trend7.specified=true");
+
+        // Get all the csgoItemList where trend7 is null
+        defaultCsgoItemShouldNotBeFound("trend7.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVol7IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where vol7 equals to DEFAULT_VOL_7
+        defaultCsgoItemShouldBeFound("vol7.equals=" + DEFAULT_VOL_7);
+
+        // Get all the csgoItemList where vol7 equals to UPDATED_VOL_7
+        defaultCsgoItemShouldNotBeFound("vol7.equals=" + UPDATED_VOL_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVol7IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where vol7 in DEFAULT_VOL_7 or UPDATED_VOL_7
+        defaultCsgoItemShouldBeFound("vol7.in=" + DEFAULT_VOL_7 + "," + UPDATED_VOL_7);
+
+        // Get all the csgoItemList where vol7 equals to UPDATED_VOL_7
+        defaultCsgoItemShouldNotBeFound("vol7.in=" + UPDATED_VOL_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVol7IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where vol7 is not null
+        defaultCsgoItemShouldBeFound("vol7.specified=true");
+
+        // Get all the csgoItemList where vol7 is null
+        defaultCsgoItemShouldNotBeFound("vol7.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVol7IsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where vol7 greater than or equals to DEFAULT_VOL_7
+        defaultCsgoItemShouldBeFound("vol7.greaterOrEqualThan=" + DEFAULT_VOL_7);
+
+        // Get all the csgoItemList where vol7 greater than or equals to UPDATED_VOL_7
+        defaultCsgoItemShouldNotBeFound("vol7.greaterOrEqualThan=" + UPDATED_VOL_7);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVol7IsLessThanSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where vol7 less than or equals to DEFAULT_VOL_7
+        defaultCsgoItemShouldNotBeFound("vol7.lessThan=" + DEFAULT_VOL_7);
+
+        // Get all the csgoItemList where vol7 less than or equals to UPDATED_VOL_7
+        defaultCsgoItemShouldBeFound("vol7.lessThan=" + UPDATED_VOL_7);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMp30IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where mp30 equals to DEFAULT_MP_30
+        defaultCsgoItemShouldBeFound("mp30.equals=" + DEFAULT_MP_30);
+
+        // Get all the csgoItemList where mp30 equals to UPDATED_MP_30
+        defaultCsgoItemShouldNotBeFound("mp30.equals=" + UPDATED_MP_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMp30IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where mp30 in DEFAULT_MP_30 or UPDATED_MP_30
+        defaultCsgoItemShouldBeFound("mp30.in=" + DEFAULT_MP_30 + "," + UPDATED_MP_30);
+
+        // Get all the csgoItemList where mp30 equals to UPDATED_MP_30
+        defaultCsgoItemShouldNotBeFound("mp30.in=" + UPDATED_MP_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMp30IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where mp30 is not null
+        defaultCsgoItemShouldBeFound("mp30.specified=true");
+
+        // Get all the csgoItemList where mp30 is null
+        defaultCsgoItemShouldNotBeFound("mp30.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByAvg30IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where avg30 equals to DEFAULT_AVG_30
+        defaultCsgoItemShouldBeFound("avg30.equals=" + DEFAULT_AVG_30);
+
+        // Get all the csgoItemList where avg30 equals to UPDATED_AVG_30
+        defaultCsgoItemShouldNotBeFound("avg30.equals=" + UPDATED_AVG_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByAvg30IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where avg30 in DEFAULT_AVG_30 or UPDATED_AVG_30
+        defaultCsgoItemShouldBeFound("avg30.in=" + DEFAULT_AVG_30 + "," + UPDATED_AVG_30);
+
+        // Get all the csgoItemList where avg30 equals to UPDATED_AVG_30
+        defaultCsgoItemShouldNotBeFound("avg30.in=" + UPDATED_AVG_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByAvg30IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where avg30 is not null
+        defaultCsgoItemShouldBeFound("avg30.specified=true");
+
+        // Get all the csgoItemList where avg30 is null
+        defaultCsgoItemShouldNotBeFound("avg30.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByLp30IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where lp30 equals to DEFAULT_LP_30
+        defaultCsgoItemShouldBeFound("lp30.equals=" + DEFAULT_LP_30);
+
+        // Get all the csgoItemList where lp30 equals to UPDATED_LP_30
+        defaultCsgoItemShouldNotBeFound("lp30.equals=" + UPDATED_LP_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByLp30IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where lp30 in DEFAULT_LP_30 or UPDATED_LP_30
+        defaultCsgoItemShouldBeFound("lp30.in=" + DEFAULT_LP_30 + "," + UPDATED_LP_30);
+
+        // Get all the csgoItemList where lp30 equals to UPDATED_LP_30
+        defaultCsgoItemShouldNotBeFound("lp30.in=" + UPDATED_LP_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByLp30IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where lp30 is not null
+        defaultCsgoItemShouldBeFound("lp30.specified=true");
+
+        // Get all the csgoItemList where lp30 is null
+        defaultCsgoItemShouldNotBeFound("lp30.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByHp30IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where hp30 equals to DEFAULT_HP_30
+        defaultCsgoItemShouldBeFound("hp30.equals=" + DEFAULT_HP_30);
+
+        // Get all the csgoItemList where hp30 equals to UPDATED_HP_30
+        defaultCsgoItemShouldNotBeFound("hp30.equals=" + UPDATED_HP_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByHp30IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where hp30 in DEFAULT_HP_30 or UPDATED_HP_30
+        defaultCsgoItemShouldBeFound("hp30.in=" + DEFAULT_HP_30 + "," + UPDATED_HP_30);
+
+        // Get all the csgoItemList where hp30 equals to UPDATED_HP_30
+        defaultCsgoItemShouldNotBeFound("hp30.in=" + UPDATED_HP_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByHp30IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where hp30 is not null
+        defaultCsgoItemShouldBeFound("hp30.specified=true");
+
+        // Get all the csgoItemList where hp30 is null
+        defaultCsgoItemShouldNotBeFound("hp30.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMad30IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where mad30 equals to DEFAULT_MAD_30
+        defaultCsgoItemShouldBeFound("mad30.equals=" + DEFAULT_MAD_30);
+
+        // Get all the csgoItemList where mad30 equals to UPDATED_MAD_30
+        defaultCsgoItemShouldNotBeFound("mad30.equals=" + UPDATED_MAD_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMad30IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where mad30 in DEFAULT_MAD_30 or UPDATED_MAD_30
+        defaultCsgoItemShouldBeFound("mad30.in=" + DEFAULT_MAD_30 + "," + UPDATED_MAD_30);
+
+        // Get all the csgoItemList where mad30 equals to UPDATED_MAD_30
+        defaultCsgoItemShouldNotBeFound("mad30.in=" + UPDATED_MAD_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMad30IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where mad30 is not null
+        defaultCsgoItemShouldBeFound("mad30.specified=true");
+
+        // Get all the csgoItemList where mad30 is null
+        defaultCsgoItemShouldNotBeFound("mad30.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDp30IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dp30 equals to DEFAULT_DP_30
+        defaultCsgoItemShouldBeFound("dp30.equals=" + DEFAULT_DP_30);
+
+        // Get all the csgoItemList where dp30 equals to UPDATED_DP_30
+        defaultCsgoItemShouldNotBeFound("dp30.equals=" + UPDATED_DP_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDp30IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dp30 in DEFAULT_DP_30 or UPDATED_DP_30
+        defaultCsgoItemShouldBeFound("dp30.in=" + DEFAULT_DP_30 + "," + UPDATED_DP_30);
+
+        // Get all the csgoItemList where dp30 equals to UPDATED_DP_30
+        defaultCsgoItemShouldNotBeFound("dp30.in=" + UPDATED_DP_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDp30IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dp30 is not null
+        defaultCsgoItemShouldBeFound("dp30.specified=true");
+
+        // Get all the csgoItemList where dp30 is null
+        defaultCsgoItemShouldNotBeFound("dp30.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByTrend30IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where trend30 equals to DEFAULT_TREND_30
+        defaultCsgoItemShouldBeFound("trend30.equals=" + DEFAULT_TREND_30);
+
+        // Get all the csgoItemList where trend30 equals to UPDATED_TREND_30
+        defaultCsgoItemShouldNotBeFound("trend30.equals=" + UPDATED_TREND_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByTrend30IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where trend30 in DEFAULT_TREND_30 or UPDATED_TREND_30
+        defaultCsgoItemShouldBeFound("trend30.in=" + DEFAULT_TREND_30 + "," + UPDATED_TREND_30);
+
+        // Get all the csgoItemList where trend30 equals to UPDATED_TREND_30
+        defaultCsgoItemShouldNotBeFound("trend30.in=" + UPDATED_TREND_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByTrend30IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where trend30 is not null
+        defaultCsgoItemShouldBeFound("trend30.specified=true");
+
+        // Get all the csgoItemList where trend30 is null
+        defaultCsgoItemShouldNotBeFound("trend30.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVol30IsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where vol30 equals to DEFAULT_VOL_30
+        defaultCsgoItemShouldBeFound("vol30.equals=" + DEFAULT_VOL_30);
+
+        // Get all the csgoItemList where vol30 equals to UPDATED_VOL_30
+        defaultCsgoItemShouldNotBeFound("vol30.equals=" + UPDATED_VOL_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVol30IsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where vol30 in DEFAULT_VOL_30 or UPDATED_VOL_30
+        defaultCsgoItemShouldBeFound("vol30.in=" + DEFAULT_VOL_30 + "," + UPDATED_VOL_30);
+
+        // Get all the csgoItemList where vol30 equals to UPDATED_VOL_30
+        defaultCsgoItemShouldNotBeFound("vol30.in=" + UPDATED_VOL_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVol30IsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where vol30 is not null
+        defaultCsgoItemShouldBeFound("vol30.specified=true");
+
+        // Get all the csgoItemList where vol30 is null
+        defaultCsgoItemShouldNotBeFound("vol30.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVol30IsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where vol30 greater than or equals to DEFAULT_VOL_30
+        defaultCsgoItemShouldBeFound("vol30.greaterOrEqualThan=" + DEFAULT_VOL_30);
+
+        // Get all the csgoItemList where vol30 greater than or equals to UPDATED_VOL_30
+        defaultCsgoItemShouldNotBeFound("vol30.greaterOrEqualThan=" + UPDATED_VOL_30);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVol30IsLessThanSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where vol30 less than or equals to DEFAULT_VOL_30
+        defaultCsgoItemShouldNotBeFound("vol30.lessThan=" + DEFAULT_VOL_30);
+
+        // Get all the csgoItemList where vol30 less than or equals to UPDATED_VOL_30
+        defaultCsgoItemShouldBeFound("vol30.lessThan=" + UPDATED_VOL_30);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMpAllIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where mpAll equals to DEFAULT_MP_ALL
+        defaultCsgoItemShouldBeFound("mpAll.equals=" + DEFAULT_MP_ALL);
+
+        // Get all the csgoItemList where mpAll equals to UPDATED_MP_ALL
+        defaultCsgoItemShouldNotBeFound("mpAll.equals=" + UPDATED_MP_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMpAllIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where mpAll in DEFAULT_MP_ALL or UPDATED_MP_ALL
+        defaultCsgoItemShouldBeFound("mpAll.in=" + DEFAULT_MP_ALL + "," + UPDATED_MP_ALL);
+
+        // Get all the csgoItemList where mpAll equals to UPDATED_MP_ALL
+        defaultCsgoItemShouldNotBeFound("mpAll.in=" + UPDATED_MP_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMpAllIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where mpAll is not null
+        defaultCsgoItemShouldBeFound("mpAll.specified=true");
+
+        // Get all the csgoItemList where mpAll is null
+        defaultCsgoItemShouldNotBeFound("mpAll.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByAvgAllIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where avgAll equals to DEFAULT_AVG_ALL
+        defaultCsgoItemShouldBeFound("avgAll.equals=" + DEFAULT_AVG_ALL);
+
+        // Get all the csgoItemList where avgAll equals to UPDATED_AVG_ALL
+        defaultCsgoItemShouldNotBeFound("avgAll.equals=" + UPDATED_AVG_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByAvgAllIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where avgAll in DEFAULT_AVG_ALL or UPDATED_AVG_ALL
+        defaultCsgoItemShouldBeFound("avgAll.in=" + DEFAULT_AVG_ALL + "," + UPDATED_AVG_ALL);
+
+        // Get all the csgoItemList where avgAll equals to UPDATED_AVG_ALL
+        defaultCsgoItemShouldNotBeFound("avgAll.in=" + UPDATED_AVG_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByAvgAllIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where avgAll is not null
+        defaultCsgoItemShouldBeFound("avgAll.specified=true");
+
+        // Get all the csgoItemList where avgAll is null
+        defaultCsgoItemShouldNotBeFound("avgAll.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByLpAllIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where lpAll equals to DEFAULT_LP_ALL
+        defaultCsgoItemShouldBeFound("lpAll.equals=" + DEFAULT_LP_ALL);
+
+        // Get all the csgoItemList where lpAll equals to UPDATED_LP_ALL
+        defaultCsgoItemShouldNotBeFound("lpAll.equals=" + UPDATED_LP_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByLpAllIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where lpAll in DEFAULT_LP_ALL or UPDATED_LP_ALL
+        defaultCsgoItemShouldBeFound("lpAll.in=" + DEFAULT_LP_ALL + "," + UPDATED_LP_ALL);
+
+        // Get all the csgoItemList where lpAll equals to UPDATED_LP_ALL
+        defaultCsgoItemShouldNotBeFound("lpAll.in=" + UPDATED_LP_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByLpAllIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where lpAll is not null
+        defaultCsgoItemShouldBeFound("lpAll.specified=true");
+
+        // Get all the csgoItemList where lpAll is null
+        defaultCsgoItemShouldNotBeFound("lpAll.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByHpAllIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where hpAll equals to DEFAULT_HP_ALL
+        defaultCsgoItemShouldBeFound("hpAll.equals=" + DEFAULT_HP_ALL);
+
+        // Get all the csgoItemList where hpAll equals to UPDATED_HP_ALL
+        defaultCsgoItemShouldNotBeFound("hpAll.equals=" + UPDATED_HP_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByHpAllIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where hpAll in DEFAULT_HP_ALL or UPDATED_HP_ALL
+        defaultCsgoItemShouldBeFound("hpAll.in=" + DEFAULT_HP_ALL + "," + UPDATED_HP_ALL);
+
+        // Get all the csgoItemList where hpAll equals to UPDATED_HP_ALL
+        defaultCsgoItemShouldNotBeFound("hpAll.in=" + UPDATED_HP_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByHpAllIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where hpAll is not null
+        defaultCsgoItemShouldBeFound("hpAll.specified=true");
+
+        // Get all the csgoItemList where hpAll is null
+        defaultCsgoItemShouldNotBeFound("hpAll.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMadAllIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where madAll equals to DEFAULT_MAD_ALL
+        defaultCsgoItemShouldBeFound("madAll.equals=" + DEFAULT_MAD_ALL);
+
+        // Get all the csgoItemList where madAll equals to UPDATED_MAD_ALL
+        defaultCsgoItemShouldNotBeFound("madAll.equals=" + UPDATED_MAD_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMadAllIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where madAll in DEFAULT_MAD_ALL or UPDATED_MAD_ALL
+        defaultCsgoItemShouldBeFound("madAll.in=" + DEFAULT_MAD_ALL + "," + UPDATED_MAD_ALL);
+
+        // Get all the csgoItemList where madAll equals to UPDATED_MAD_ALL
+        defaultCsgoItemShouldNotBeFound("madAll.in=" + UPDATED_MAD_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByMadAllIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where madAll is not null
+        defaultCsgoItemShouldBeFound("madAll.specified=true");
+
+        // Get all the csgoItemList where madAll is null
+        defaultCsgoItemShouldNotBeFound("madAll.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDpAllIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dpAll equals to DEFAULT_DP_ALL
+        defaultCsgoItemShouldBeFound("dpAll.equals=" + DEFAULT_DP_ALL);
+
+        // Get all the csgoItemList where dpAll equals to UPDATED_DP_ALL
+        defaultCsgoItemShouldNotBeFound("dpAll.equals=" + UPDATED_DP_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDpAllIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dpAll in DEFAULT_DP_ALL or UPDATED_DP_ALL
+        defaultCsgoItemShouldBeFound("dpAll.in=" + DEFAULT_DP_ALL + "," + UPDATED_DP_ALL);
+
+        // Get all the csgoItemList where dpAll equals to UPDATED_DP_ALL
+        defaultCsgoItemShouldNotBeFound("dpAll.in=" + UPDATED_DP_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDpAllIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dpAll is not null
+        defaultCsgoItemShouldBeFound("dpAll.specified=true");
+
+        // Get all the csgoItemList where dpAll is null
+        defaultCsgoItemShouldNotBeFound("dpAll.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByTrendAllIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where trendAll equals to DEFAULT_TREND_ALL
+        defaultCsgoItemShouldBeFound("trendAll.equals=" + DEFAULT_TREND_ALL);
+
+        // Get all the csgoItemList where trendAll equals to UPDATED_TREND_ALL
+        defaultCsgoItemShouldNotBeFound("trendAll.equals=" + UPDATED_TREND_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByTrendAllIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where trendAll in DEFAULT_TREND_ALL or UPDATED_TREND_ALL
+        defaultCsgoItemShouldBeFound("trendAll.in=" + DEFAULT_TREND_ALL + "," + UPDATED_TREND_ALL);
+
+        // Get all the csgoItemList where trendAll equals to UPDATED_TREND_ALL
+        defaultCsgoItemShouldNotBeFound("trendAll.in=" + UPDATED_TREND_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByTrendAllIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where trendAll is not null
+        defaultCsgoItemShouldBeFound("trendAll.specified=true");
+
+        // Get all the csgoItemList where trendAll is null
+        defaultCsgoItemShouldNotBeFound("trendAll.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVolAllIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where volAll equals to DEFAULT_VOL_ALL
+        defaultCsgoItemShouldBeFound("volAll.equals=" + DEFAULT_VOL_ALL);
+
+        // Get all the csgoItemList where volAll equals to UPDATED_VOL_ALL
+        defaultCsgoItemShouldNotBeFound("volAll.equals=" + UPDATED_VOL_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVolAllIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where volAll in DEFAULT_VOL_ALL or UPDATED_VOL_ALL
+        defaultCsgoItemShouldBeFound("volAll.in=" + DEFAULT_VOL_ALL + "," + UPDATED_VOL_ALL);
+
+        // Get all the csgoItemList where volAll equals to UPDATED_VOL_ALL
+        defaultCsgoItemShouldNotBeFound("volAll.in=" + UPDATED_VOL_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVolAllIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where volAll is not null
+        defaultCsgoItemShouldBeFound("volAll.specified=true");
+
+        // Get all the csgoItemList where volAll is null
+        defaultCsgoItemShouldNotBeFound("volAll.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVolAllIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where volAll greater than or equals to DEFAULT_VOL_ALL
+        defaultCsgoItemShouldBeFound("volAll.greaterOrEqualThan=" + DEFAULT_VOL_ALL);
+
+        // Get all the csgoItemList where volAll greater than or equals to UPDATED_VOL_ALL
+        defaultCsgoItemShouldNotBeFound("volAll.greaterOrEqualThan=" + UPDATED_VOL_ALL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByVolAllIsLessThanSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where volAll less than or equals to DEFAULT_VOL_ALL
+        defaultCsgoItemShouldNotBeFound("volAll.lessThan=" + DEFAULT_VOL_ALL);
+
+        // Get all the csgoItemList where volAll less than or equals to UPDATED_VOL_ALL
+        defaultCsgoItemShouldBeFound("volAll.lessThan=" + UPDATED_VOL_ALL);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByAddedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where added equals to DEFAULT_ADDED
+        defaultCsgoItemShouldBeFound("added.equals=" + DEFAULT_ADDED);
+
+        // Get all the csgoItemList where added equals to UPDATED_ADDED
+        defaultCsgoItemShouldNotBeFound("added.equals=" + UPDATED_ADDED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByAddedIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where added in DEFAULT_ADDED or UPDATED_ADDED
+        defaultCsgoItemShouldBeFound("added.in=" + DEFAULT_ADDED + "," + UPDATED_ADDED);
+
+        // Get all the csgoItemList where added equals to UPDATED_ADDED
+        defaultCsgoItemShouldNotBeFound("added.in=" + UPDATED_ADDED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByAddedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where added is not null
+        defaultCsgoItemShouldBeFound("added.specified=true");
+
+        // Get all the csgoItemList where added is null
+        defaultCsgoItemShouldNotBeFound("added.specified=false");
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned
+     */
+    private void defaultCsgoItemShouldBeFound(String filter) throws Exception {
+        restCsgoItemMockMvc.perform(get("/api/csgo-items?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(csgoItem.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].sp").value(hasItem(DEFAULT_SP.intValue())))
+            .andExpect(jsonPath("$.[*].opm").value(hasItem(DEFAULT_OPM.booleanValue())))
+            .andExpect(jsonPath("$.[*].vol").value(hasItem(DEFAULT_VOL)))
+            .andExpect(jsonPath("$.[*].mp7").value(hasItem(DEFAULT_MP_7.intValue())))
+            .andExpect(jsonPath("$.[*].avg7").value(hasItem(DEFAULT_AVG_7.intValue())))
+            .andExpect(jsonPath("$.[*].lp7").value(hasItem(DEFAULT_LP_7.intValue())))
+            .andExpect(jsonPath("$.[*].hp7").value(hasItem(DEFAULT_HP_7.intValue())))
+            .andExpect(jsonPath("$.[*].mad7").value(hasItem(DEFAULT_MAD_7.intValue())))
+            .andExpect(jsonPath("$.[*].dp7").value(hasItem(DEFAULT_DP_7.intValue())))
+            .andExpect(jsonPath("$.[*].trend7").value(hasItem(DEFAULT_TREND_7.intValue())))
+            .andExpect(jsonPath("$.[*].vol7").value(hasItem(DEFAULT_VOL_7)))
+            .andExpect(jsonPath("$.[*].mp30").value(hasItem(DEFAULT_MP_30.intValue())))
+            .andExpect(jsonPath("$.[*].avg30").value(hasItem(DEFAULT_AVG_30.intValue())))
+            .andExpect(jsonPath("$.[*].lp30").value(hasItem(DEFAULT_LP_30.intValue())))
+            .andExpect(jsonPath("$.[*].hp30").value(hasItem(DEFAULT_HP_30.intValue())))
+            .andExpect(jsonPath("$.[*].mad30").value(hasItem(DEFAULT_MAD_30.intValue())))
+            .andExpect(jsonPath("$.[*].dp30").value(hasItem(DEFAULT_DP_30.intValue())))
+            .andExpect(jsonPath("$.[*].trend30").value(hasItem(DEFAULT_TREND_30.intValue())))
+            .andExpect(jsonPath("$.[*].vol30").value(hasItem(DEFAULT_VOL_30)))
+            .andExpect(jsonPath("$.[*].mpAll").value(hasItem(DEFAULT_MP_ALL.intValue())))
+            .andExpect(jsonPath("$.[*].avgAll").value(hasItem(DEFAULT_AVG_ALL.intValue())))
+            .andExpect(jsonPath("$.[*].lpAll").value(hasItem(DEFAULT_LP_ALL.intValue())))
+            .andExpect(jsonPath("$.[*].hpAll").value(hasItem(DEFAULT_HP_ALL.intValue())))
+            .andExpect(jsonPath("$.[*].madAll").value(hasItem(DEFAULT_MAD_ALL.intValue())))
+            .andExpect(jsonPath("$.[*].dpAll").value(hasItem(DEFAULT_DP_ALL.intValue())))
+            .andExpect(jsonPath("$.[*].trendAll").value(hasItem(DEFAULT_TREND_ALL.intValue())))
+            .andExpect(jsonPath("$.[*].volAll").value(hasItem(DEFAULT_VOL_ALL)))
+            .andExpect(jsonPath("$.[*].added").value(hasItem(DEFAULT_ADDED.toString())));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned
+     */
+    private void defaultCsgoItemShouldNotBeFound(String filter) throws Exception {
+        restCsgoItemMockMvc.perform(get("/api/csgo-items?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+    }
+
 
     @Test
     @Transactional
