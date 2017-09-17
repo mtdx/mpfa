@@ -50,12 +50,11 @@ public class CsgoXyzService {
      * </p>
      */
     @Async
-    @Scheduled(cron = "0 */1 * * * *") // 11 TODO:
+    @Scheduled(cron = "0 */11 * * * *") // 11
     public void updateItems() {
         log.debug("Run scheduled csgo.steamlytics.xyz  update items {}");
 
-//        final String XYZ_API_URL = "http://api.csgo.steamlytics.xyz/v2/pricelist?key=" + XYZ_API_KEY; TODO
-        final String XYZ_API_URL = "https://raw.githubusercontent.com/mtdx/json/master/d";
+        final String XYZ_API_URL = "http://api.csgo.steamlytics.xyz/v2/pricelist?key=" + XYZ_API_KEY;
 
         RestTemplate restTemplate = restTemplate();
 
