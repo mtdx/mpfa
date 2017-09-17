@@ -16,7 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.*;
 
 @Service
@@ -90,9 +91,6 @@ public class CsgoXyzService {
                 item.setName(markethashname);
             }
             try {
-                if (!xyzitems.containsKey(markethashname)) {
-                    continue;
-                }
                 Double ioPrice = null;
                 if (ioPriceData.containsKey(markethashname)) {
                     ioPrice = Double.valueOf(ioPriceData.get(markethashname));
@@ -141,8 +139,8 @@ public class CsgoXyzService {
         item.setLp7(newitem.get7_days().getLowest_price());
         item.setHp7(newitem.get7_days().getHighest_price());
         item.setMad7(newitem.get7_days().getMean_absolute_deviation());
-        item.setDp7(newitem.get7_days().getDeviation_percentage());
-        item.setTrend7(newitem.get7_days().getTrend());
+        item.setDp7(newitem.get7_days().getDeviation_percentage().round(new MathContext(2, RoundingMode.HALF_UP)));
+        item.setTrend7(newitem.get7_days().getTrend().round(new MathContext(4, RoundingMode.HALF_UP)));
         item.setVol7(newitem.get7_days().getVolume());
 
         item.setMp30(newitem.get30_days().getMedian_price());
@@ -150,8 +148,8 @@ public class CsgoXyzService {
         item.setLp30(newitem.get30_days().getLowest_price());
         item.setHp30(newitem.get30_days().getHighest_price());
         item.setMad30(newitem.get30_days().getMean_absolute_deviation());
-        item.setDp30(newitem.get30_days().getDeviation_percentage());
-        item.setTrend30(newitem.get30_days().getTrend());
+        item.setDp30(newitem.get30_days().getDeviation_percentage().round(new MathContext(2, RoundingMode.HALF_UP)));
+        item.setTrend30(newitem.get30_days().getTrend().round(new MathContext(4, RoundingMode.HALF_UP)));
         item.setVol30(newitem.get30_days().getVolume());
 
         item.setMpAll(newitem.getAll_time().getMedian_price());
@@ -159,21 +157,21 @@ public class CsgoXyzService {
         item.setLpAll(newitem.getAll_time().getLowest_price());
         item.setHpAll(newitem.getAll_time().getHighest_price());
         item.setMadAll(newitem.getAll_time().getMean_absolute_deviation());
-        item.setDpAll(newitem.getAll_time().getDeviation_percentage());
-        item.setTrendAll(newitem.getAll_time().getTrend());
+        item.setDpAll(newitem.getAll_time().getDeviation_percentage().round(new MathContext(2, RoundingMode.HALF_UP)));
+        item.setTrendAll(newitem.getAll_time().getTrend().round(new MathContext(4, RoundingMode.HALF_UP)));
         item.setVolAll(newitem.getAll_time().getVolume());
 
         if (cfPrice != null && cfPrice > 0) {
-            item.setCfp(BigDecimal.valueOf(cfPrice));
+            item.setCfp(cfPrice);
         }
         if (ioPrice != null && ioPrice > 0) {
-            item.setIop(BigDecimal.valueOf(ioPrice));
+            item.setIop(ioPrice);
         }
         if (cfPrice != null && cfPrice > 0 && newitem.getSafe_price() != null) {
             Double sp = newitem.getSafe_price().doubleValue();
             if (sp > 0) {
                 long diff = Math.round((sp - cfPrice) / sp * 100);
-                item.setDcx(BigDecimal.valueOf(diff));
+                item.setDcx((double) diff);
             }
         }
 
