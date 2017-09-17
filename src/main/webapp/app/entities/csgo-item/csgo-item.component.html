@@ -52,16 +52,16 @@
                 <td>{{csgoItem.mp7 | currency:'USD':true}}</td>
                 <td>{{csgoItem.mp30 | currency:'USD':true}}</td>
                 <td>{{csgoItem.mpAll | currency:'USD':true}}</td>
-                <td>{{csgoItem.cfp}}</td>
-                <td>{{csgoItem.iop}}</td>
-                <td>{{csgoItem.dcx}}</td>
+                <td>{{csgoItem.cfp | currency:'USD':true}}</td>
+                <td>{{csgoItem.iop | currency:'USD':true}}</td>
+                <td>{{csgoItem.dcx}}%</td>
                 <td>{{csgoItem.added | date: 'dd/MM/yyyy'}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <a href="https://opskins.com/?app=730_2&loc=shop_search&search_item={{csgoItem.name}}&sort=lh" target="_blank">
                             <span class="fa fa-eye"></span>
                         </a>
-                        <button type="submit"
+                        <button hidden type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'csgo-item/'+ csgoItem.id + '/edit'} }]"
                                 replaceUrl="true"
                                 class="btn btn-primary btn-sm">
