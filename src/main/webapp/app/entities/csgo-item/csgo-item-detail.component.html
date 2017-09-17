@@ -3,124 +3,135 @@
     <h2><span>Csgo Item</span> {{csgoItem.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <dt><span>Name (Market Hash Name)</span></dt>
-        <dd>
-            <span>{{csgoItem.name}}</span>
-        </dd>
-        <dt><span>Safe Price (Sp)</span></dt>
-        <dd>
-            <span>{{csgoItem.sp}}</span>
-        </dd>
-        <dt><span>Ongoing Price Panipulation (Opm)</span></dt>
-        <dd>
-            <span>{{csgoItem.opm}}</span>
-        </dd>
-        <dt><span>Total Volume (Vol)</span></dt>
-        <dd>
-            <span>{{csgoItem.vol}}</span>
-        </dd>
-        <dt><span>7 Days Median Price (Mp 7)</span></dt>
-        <dd>
-            <span>{{csgoItem.mp7}}</span>
-        </dd>
-        <dt><span>7 Days Average Price (Avg 7)</span></dt>
-        <dd>
-            <span>{{csgoItem.avg7}}</span>
-        </dd>
-        <dt><span>7 Days Lowest Price (Lp 7)</span></dt>
-        <dd>
-            <span>{{csgoItem.lp7}}</span>
-        </dd>
-        <dt><span>7 Days Highest Price (Hp 7)</span></dt>
-        <dd>
-            <span>{{csgoItem.hp7}}</span>
-        </dd>
-        <dt><span>7 Days Mean Absolute Deviation (Mad 7)</span></dt>
-        <dd>
-            <span>{{csgoItem.mad7}}</span>
-        </dd>
-        <dt><span>7 Days Deviation Percentage (Dp 7)</span></dt>
-        <dd>
-            <span>{{csgoItem.dp7}}</span>
-        </dd>
-        <dt><span>7 Days Trend (Trend 7)</span></dt>
-        <dd>
-            <span>{{csgoItem.trend7}}</span>
-        </dd>
-        <dt><span>7 Days Volume (Vol 7)</span></dt>
-        <dd>
-            <span>{{csgoItem.vol7}}</span>
-        </dd>
-        <dt><span>30 Days Median Price (Mp 30)</span></dt>
-        <dd>
-            <span>{{csgoItem.mp30}}</span>
-        </dd>
-        <dt><span>30 Days Average Price (Avg 30)</span></dt>
-        <dd>
-            <span>{{csgoItem.avg30}}</span>
-        </dd>
-        <dt><span>30 Days Lowest Price (Lp 30)</span></dt>
-        <dd>
-            <span>{{csgoItem.lp30}}</span>
-        </dd>
-        <dt><span>30 Days Highest Price (Hp 30)</span></dt>
-        <dd>
-            <span>{{csgoItem.hp30}}</span>
-        </dd>
-        <dt><span>30 Days Mean Absolute Deviation (Mad 30)</span></dt>
-        <dd>
-            <span>{{csgoItem.mad30}}</span>
-        </dd>
-        <dt><span>30 Days Deviation Percentage (Dp 30)</span></dt>
-        <dd>
-            <span>{{csgoItem.dp30}}</span>
-        </dd>
-        <dt><span>30 Days Trend (Trend 30)</span></dt>
-        <dd>
-            <span>{{csgoItem.trend30}}</span>
-        </dd>
-        <dt><span>30 Days Volume (Vol 30)</span></dt>
-        <dd>
-            <span>{{csgoItem.vol30}}</span>
-        </dd>
-        <dt><span>All Time Median Price (Mp All)</span></dt>
-        <dd>
-            <span>{{csgoItem.mpAll}}</span>
-        </dd>
-        <dt><span>All Time Average Price (Avg All)</span></dt>
-        <dd>
-            <span>{{csgoItem.avgAll}}</span>
-        </dd>
-        <dt><span>All Time Lowest Price (Lp All)</span></dt>
-        <dd>
-            <span>{{csgoItem.lpAll}}</span>
-        </dd>
-        <dt><span>All Time Highest Price (Hp All)</span></dt>
-        <dd>
-            <span>{{csgoItem.hpAll}}</span>
-        </dd>
-        <dt><span>All Time Mean Absolute Deviation (Mad All)</span></dt>
-        <dd>
-            <span>{{csgoItem.madAll}}</span>
-        </dd>
-        <dt><span>All Time Deviation Percentage (Dp All)</span></dt>
-        <dd>
-            <span>{{csgoItem.dpAll}}</span>
-        </dd>
-        <dt><span>All Time Trend (Trend All)</span></dt>
-        <dd>
-            <span>{{csgoItem.trendAll}}</span>
-        </dd>
-        <dt><span>All Time Volume (Vol All)</span></dt>
-        <dd>
-            <span>{{csgoItem.volAll}}</span>
-        </dd>
-        <dt><span>First Seen (Added)</span></dt>
-        <dd>
-            <span>{{csgoItem.added | date:'medium'}}</span>
-        </dd>
-    </dl>
+
+    <div class="row">
+        <div class="row col-6">
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name <mark>(Market Hash Name)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.name}}</kbd>
+                </dd>
+                <dt><span>Safe Price <mark>(Sp)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.sp}}</kbd>
+                </dd>
+                <dt><span>Ongoing Price Panipulation <mark>(Opm)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.opm}}</kbd>
+                </dd>
+                <dt><span>Total Volume <mark>(Vol)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.vol}}</kbd>
+                </dd>
+                <dt><span>7 Days Median Price <mark>(Mp 7)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.mp7}}</kbd>
+                </dd>
+                <dt><span>7 Days Average Price <mark>(Avg 7)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.avg7}}</kbd>
+                </dd>
+                <dt><span>7 Days Lowest Price <mark>(Lp 7)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.lp7}}</kbd>
+                </dd>
+                <dt><span>7 Days Highest Price <mark>(Hp 7)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.hp7}}</kbd>
+                </dd>
+                <dt><span>7 Days Mean Absolute Deviation <mark>(Mad 7)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.mad7}}</kbd>
+                </dd>
+                <dt><span>7 Days Deviation Percentage <mark>(Dp 7)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.dp7}}</kbd>
+                </dd>
+                <dt><span>7 Days Trend <mark>(Trend 7)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.trend7}}</kbd>
+                </dd>
+                <dt><span>7 Days Volume <mark>(Vol 7)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.vol7}}</kbd>
+                </dd>
+            </dl>
+        </div>
+        <div class="row col-6">
+            <dl class="row-md jh-entity-details">
+                <dt><span>30 Days Median Price <mark>(Mp 30)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.mp30}}</kbd>
+                </dd>
+                <dt><span>30 Days Average Price <mark>(Avg 30)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.avg30}}</kbd>
+                </dd>
+                <dt><span>30 Days Lowest Price <mark>(Lp 30)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.lp30}}</kbd>
+                </dd>
+                <dt><span>30 Days Highest Price <mark>(Hp 30)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.hp30}}</kbd>
+                </dd>
+                <dt><span>30 Days Mean Absolute Deviation <mark>(Mad 30)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.mad30}}</kbd>
+                </dd>
+                <dt><span>30 Days Deviation Percentage <mark>(Dp 30)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.dp30}}</kbd>
+                </dd>
+                <dt><span>30 Days Trend <mark>(Trend 30)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.trend30}}</kbd>
+                </dd>
+                <dt><span>30 Days Volume <mark>(Vol 30)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.vol30}}</kbd>
+                </dd>
+                <dt><span>All Time Median Price <mark>(Mp All)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.mpAll}}</kbd>
+                </dd>
+                <dt><span>All Time Average Price <mark>(Avg All)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.avgAll}}</kbd>
+                </dd>
+                <dt><span>All Time Lowest Price <mark>(Lp All)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.lpAll}}</kbd>
+                </dd>
+                <dt><span>All Time Highest Price <mark>(Hp All)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.hpAll}}</kbd>
+                </dd>
+                <dt><span>All Time Mean Absolute Deviation <mark>(Mad All)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.madAll}}</kbd>
+                </dd>
+                <dt><span>All Time Deviation Percentage <mark>(Dp All)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.dpAll}}</kbd>
+                </dd>
+                <dt><span>All Time Trend <mark>(Trend All)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.trendAll}}</kbd>
+                </dd>
+                <dt><span>All Time Volume <mark>(Vol All)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.volAll}}</kbd>
+                </dd>
+                <dt><span>First Seen <mark>(Added)</mark></span></dt>
+                <dd>
+                    <kbd>{{csgoItem.added | date:'medium'}}</kbd>
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+
 
     <button type="submit"
             (click)="previousState()"
