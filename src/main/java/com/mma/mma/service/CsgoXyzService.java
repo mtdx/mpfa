@@ -19,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -45,11 +46,12 @@ public class CsgoXyzService {
      * </p>
      */
     @Async
-    @Scheduled(cron = "0 */11 * * * *") // 11
+    @Scheduled(cron = "0 */1 * * * *") // 11 TODO:
     public void updateItems() {
         log.debug("Run scheduled csgo.steamlytics.xyz  update items {}");
 
-        final String XYZ_API_URL = "http://api.csgo.steamlytics.xyz/v2/pricelist?key=" + XYZ_API_KEY;
+//        final String XYZ_API_URL = "http://api.csgo.steamlytics.xyz/v2/pricelist?key=" + XYZ_API_KEY; TODO
+        final String XYZ_API_URL = "https://raw.githubusercontent.com/mtdx/json/master/d";
 
         RestTemplate restTemplate = restTemplate();
 
@@ -63,7 +65,7 @@ public class CsgoXyzService {
         try {
             respEntity = restTemplate.exchange(XYZ_API_URL, HttpMethod.GET, entity, XyzDTO.class);
         } catch (Exception ex) {
-            log.error("Failled to fetch csgo.steamlytics.xyz fata {}", ex.getMessage());
+            log.error("Failled to fetch csgo.steamlytics.xyz data {}", ex.getMessage());
             return;
         }
 
@@ -76,7 +78,10 @@ public class CsgoXyzService {
         }
 
         CsgoItem item;
-        for (String markethashname : xyzresp.getItems().keySet()) {
+        HashMap<String, XyzItem> xyzitems = xyzresp.getItems();
+        Map<String, Double> cfPriceData = cfPriceData(restTemplate, headers);
+
+        for (String markethashname : xyzitems.keySet()) {
             if (existingItems.containsKey(markethashname)) {
                 item = existingItems.get(markethashname);
             } else {
@@ -84,10 +89,10 @@ public class CsgoXyzService {
                 item.setName(markethashname);
             }
             try {
-                mapNewItemData(item, xyzresp.getItems().get(markethashname));
+                mapNewItemData(item, xyzitems.get(markethashname), cfPriceData.get(markethashname));
                 csgoItemService.save(csgoItemMapper.toDto(item));
             }catch (Exception ex) {
-                log.error("Failled to save/map csgo.steamlytics.xyz new item {}", ex.getMessage());
+                log.error("Failed to save/map csgo.steamlytics.xyz new item {}", ex.getMessage());
             }
         }
         csgoItemService.refreshsearch();
@@ -118,7 +123,7 @@ public class CsgoXyzService {
         return map;
     }
 
-    private void mapNewItemData(CsgoItem item, XyzItem newitem) {
+    private void mapNewItemData(CsgoItem item, XyzItem newitem, Double cfprice) {
         item.setSp(newitem.getSafe_price());
         item.setOpm(newitem.isOngoing_price_manipulation());
         item.setVol(newitem.getTotal_volume());
@@ -151,6 +156,20 @@ public class CsgoXyzService {
         item.setVolAll(newitem.getAll_time().getVolume());
 
         item.setAdded(newitem.getFirst_seen());
+    }
+
+    private Map<String, Double> cfPriceData(RestTemplate restTemplate, HttpHeaders headers) {
+        final String CF_API_URL = "https://api.csgofast.com/price/all";
+        HttpEntity<String> entityCF = new HttpEntity<>("parameters", headers);
+        ResponseEntity<Map> respEntityCF;
+        Map<String, Double> cfresp = new HashMap<>();
+        try {
+            respEntityCF = restTemplate.exchange(CF_API_URL, HttpMethod.GET, entityCF, Map.class);
+            cfresp = respEntityCF.getBody();
+        } catch (Exception ex) {
+            log.error("Failled to fetch CF data", ex.getMessage());
+        }
+        return cfresp;
     }
 
 }

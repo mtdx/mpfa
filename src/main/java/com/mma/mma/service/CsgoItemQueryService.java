@@ -74,98 +74,98 @@ public class CsgoItemQueryService extends QueryService<CsgoItem> {
      */
     private Specifications<CsgoItem> createSpecification(CsgoItemCriteria criteria) {
         Specifications<CsgoItem> specification = Specifications.where(null);
-        if (criteria != null) {
-            if (criteria.getId() != null) {
-                specification = specification.and(buildSpecification(criteria.getId(), CsgoItem_.id));
-            }
-            if (criteria.getName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getName(), CsgoItem_.name));
-            }
-            if (criteria.getSp() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getSp(), CsgoItem_.sp));
-            }
-            if (criteria.getOpm() != null) {
-                specification = specification.and(buildSpecification(criteria.getOpm(), CsgoItem_.opm));
-            }
-            if (criteria.getVol() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getVol(), CsgoItem_.vol));
-            }
-            if (criteria.getMp7() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getMp7(), CsgoItem_.mp7));
-            }
-            if (criteria.getAvg7() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getAvg7(), CsgoItem_.avg7));
-            }
-            if (criteria.getLp7() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLp7(), CsgoItem_.lp7));
-            }
-            if (criteria.getHp7() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getHp7(), CsgoItem_.hp7));
-            }
-            if (criteria.getMad7() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getMad7(), CsgoItem_.mad7));
-            }
-            if (criteria.getDp7() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getDp7(), CsgoItem_.dp7));
-            }
-            if (criteria.getTrend7() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getTrend7(), CsgoItem_.trend7));
-            }
-            if (criteria.getVol7() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getVol7(), CsgoItem_.vol7));
-            }
-            if (criteria.getMp30() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getMp30(), CsgoItem_.mp30));
-            }
-            if (criteria.getAvg30() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getAvg30(), CsgoItem_.avg30));
-            }
-            if (criteria.getLp30() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLp30(), CsgoItem_.lp30));
-            }
-            if (criteria.getHp30() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getHp30(), CsgoItem_.hp30));
-            }
-            if (criteria.getMad30() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getMad30(), CsgoItem_.mad30));
-            }
-            if (criteria.getDp30() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getDp30(), CsgoItem_.dp30));
-            }
-            if (criteria.getTrend30() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getTrend30(), CsgoItem_.trend30));
-            }
-            if (criteria.getVol30() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getVol30(), CsgoItem_.vol30));
-            }
-            if (criteria.getMpAll() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getMpAll(), CsgoItem_.mpAll));
-            }
-            if (criteria.getAvgAll() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getAvgAll(), CsgoItem_.avgAll));
-            }
-            if (criteria.getLpAll() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLpAll(), CsgoItem_.lpAll));
-            }
-            if (criteria.getHpAll() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getHpAll(), CsgoItem_.hpAll));
-            }
-            if (criteria.getMadAll() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getMadAll(), CsgoItem_.madAll));
-            }
-            if (criteria.getDpAll() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getDpAll(), CsgoItem_.dpAll));
-            }
-            if (criteria.getTrendAll() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getTrendAll(), CsgoItem_.trendAll));
-            }
-            if (criteria.getVolAll() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getVolAll(), CsgoItem_.volAll));
-            }
-            if (criteria.getAdded() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getAdded(), CsgoItem_.added));
-            }
-        }
+//        if (criteria != null) {
+//            if (criteria.getId() != null) {
+//                specification = specification.and(buildSpecification(criteria.getId(), CsgoItem_.id));
+//            }
+//            if (criteria.getName() != null) {
+//                specification = specification.and(buildStringSpecification(criteria.getName(), CsgoItem_.name));
+//            }
+//            if (criteria.getSp() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getSp(), CsgoItem_.sp));
+//            }
+//            if (criteria.getOpm() != null) {
+//                specification = specification.and(buildSpecification(criteria.getOpm(), CsgoItem_.opm));
+//            }
+//            if (criteria.getVol() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getVol(), CsgoItem_.vol));
+//            }
+//            if (criteria.getMp7() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getMp7(), CsgoItem_.mp7));
+//            }
+//            if (criteria.getAvg7() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getAvg7(), CsgoItem_.avg7));
+//            }
+//            if (criteria.getLp7() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getLp7(), CsgoItem_.lp7));
+//            }
+//            if (criteria.getHp7() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getHp7(), CsgoItem_.hp7));
+//            }
+//            if (criteria.getMad7() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getMad7(), CsgoItem_.mad7));
+//            }
+//            if (criteria.getDp7() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getDp7(), CsgoItem_.dp7));
+//            }
+//            if (criteria.getTrend7() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getTrend7(), CsgoItem_.trend7));
+//            }
+//            if (criteria.getVol7() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getVol7(), CsgoItem_.vol7));
+//            }
+//            if (criteria.getMp30() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getMp30(), CsgoItem_.mp30));
+//            }
+//            if (criteria.getAvg30() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getAvg30(), CsgoItem_.avg30));
+//            }
+//            if (criteria.getLp30() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getLp30(), CsgoItem_.lp30));
+//            }
+//            if (criteria.getHp30() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getHp30(), CsgoItem_.hp30));
+//            }
+//            if (criteria.getMad30() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getMad30(), CsgoItem_.mad30));
+//            }
+//            if (criteria.getDp30() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getDp30(), CsgoItem_.dp30));
+//            }
+//            if (criteria.getTrend30() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getTrend30(), CsgoItem_.trend30));
+//            }
+//            if (criteria.getVol30() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getVol30(), CsgoItem_.vol30));
+//            }
+//            if (criteria.getMpAll() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getMpAll(), CsgoItem_.mpAll));
+//            }
+//            if (criteria.getAvgAll() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getAvgAll(), CsgoItem_.avgAll));
+//            }
+//            if (criteria.getLpAll() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getLpAll(), CsgoItem_.lpAll));
+//            }
+//            if (criteria.getHpAll() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getHpAll(), CsgoItem_.hpAll));
+//            }
+//            if (criteria.getMadAll() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getMadAll(), CsgoItem_.madAll));
+//            }
+//            if (criteria.getDpAll() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getDpAll(), CsgoItem_.dpAll));
+//            }
+//            if (criteria.getTrendAll() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getTrendAll(), CsgoItem_.trendAll));
+//            }
+//            if (criteria.getVolAll() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getVolAll(), CsgoItem_.volAll));
+//            }
+//            if (criteria.getAdded() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getAdded(), CsgoItem_.added));
+//            }
+//        }
         return specification;
     }
 
