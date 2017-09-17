@@ -28,6 +28,9 @@ public class CsgoXyzService {
     @Value("${XYZ_API_KEY}")
     private String XYZ_API_KEY;
 
+    @Value("${IO_API_KEY}")
+    private String IO_API_KEY;
+
     private final Logger log = LoggerFactory.getLogger(CsgoXyzService.class);
 
     private final CsgoItemService csgoItemService;
@@ -80,6 +83,7 @@ public class CsgoXyzService {
         CsgoItem item;
         HashMap<String, XyzItem> xyzitems = xyzresp.getItems();
         Map<String, Double> cfPriceData = cfPriceData(restTemplate, headers);
+        Map<String, String> ioPriceData = ioPriceData(restTemplate, headers);
 
         for (String markethashname : xyzitems.keySet()) {
             if (existingItems.containsKey(markethashname)) {
@@ -89,7 +93,8 @@ public class CsgoXyzService {
                 item.setName(markethashname);
             }
             try {
-                mapNewItemData(item, xyzitems.get(markethashname), cfPriceData.get(markethashname));
+                mapNewItemData(item, xyzitems.get(markethashname),
+                    cfPriceData.get(markethashname), Double.valueOf(ioPriceData.get(markethashname)));
                 csgoItemService.save(csgoItemMapper.toDto(item));
             }catch (Exception ex) {
                 log.error("Failed to save/map csgo.steamlytics.xyz new item {}", ex.getMessage());
@@ -123,7 +128,7 @@ public class CsgoXyzService {
         return map;
     }
 
-    private void mapNewItemData(CsgoItem item, XyzItem newitem, Double cfprice) {
+    private void mapNewItemData(CsgoItem item, XyzItem newitem, Double cfPrice, Double ioPrice) {
         item.setSp(newitem.getSafe_price());
         item.setOpm(newitem.isOngoing_price_manipulation());
         item.setVol(newitem.getTotal_volume());
@@ -172,4 +177,18 @@ public class CsgoXyzService {
         return cfresp;
     }
 
+
+    private Map<String, String> ioPriceData(RestTemplate restTemplate, HttpHeaders headers) {
+        final String IO_API_URL = "https://api.steamapi.io/market/prices/730?key=" + IO_API_KEY;
+        HttpEntity<String> entityIO = new HttpEntity<>("parameters", headers);
+        ResponseEntity<Map> respEntityIO;
+        Map<String, String> ioresp = new HashMap<>();
+        try {
+            respEntityIO = restTemplate.exchange(IO_API_URL, HttpMethod.GET, entityIO, Map.class);
+            ioresp = respEntityIO.getBody();
+        } catch (Exception ex) {
+            log.error("Failled to fetch CF data", ex.getMessage());
+        }
+        return ioresp;
+    }
 }
