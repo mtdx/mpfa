@@ -119,15 +119,15 @@
         },
         {
             "fieldName": "cfp",
-            "fieldType": "BigDecimal"
+            "fieldType": "Double"
         },
         {
             "fieldName": "iop",
-            "fieldType": "BigDecimal"
+            "fieldType": "Double"
         },
         {
             "fieldName": "dcx",
-            "fieldType": "BigDecimal"
+            "fieldType": "Double"
         },
         {
             "fieldName": "added",

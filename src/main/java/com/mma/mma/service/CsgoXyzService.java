@@ -52,7 +52,6 @@ public class CsgoXyzService {
         log.debug("Run scheduled csgo.steamlytics.xyz  update items {}");
 
         final String XYZ_API_URL = "http://api.csgo.steamlytics.xyz/v2/pricelist?key=" + XYZ_API_KEY;
-//        final String XYZ_API_URL = "https://raw.githubusercontent.com/mtdx/json/master/d";
 
         RestTemplate restTemplate = restTemplate();
 
