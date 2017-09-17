@@ -2,8 +2,8 @@ version: '2'
 services:
     mma-postgresql:
         image: postgres:9.6.5
-        # volumes:
-        #     - ~/volumes/jhipster/mma/postgresql/:/var/lib/postgresql/data/
+        volumes:
+            - ~/volumes/jhipster/mma/postgresql/:/var/lib/postgresql/data/
         environment:
             - POSTGRES_USER=mma
             - POSTGRES_PASSWORD=
