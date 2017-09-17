@@ -196,11 +196,11 @@ ui bootstrap tweaks
 }
 
 i.opm.fa-circle.false {
-    color: green
+    color: gray;
 }
 
 i.opm.fa-circle.true {
-    color: red
+    color: green;
 }
 
 /* jhipster-needle-css-add-main JHipster will add new css style */
