@@ -48,7 +48,7 @@ public class CsgoXyzService {
      * </p>
      */
     @Async
-    @Scheduled(cron = "0 */1 * * * *") // 11 TODO
+    @Scheduled(cron = "0 */11 * * * *") // 11
     public void updateItems() {
         log.debug("Run scheduled csgo.steamlytics.xyz  update items {}");
 
@@ -94,8 +94,11 @@ public class CsgoXyzService {
                 Double ioPrice = null;
                 if (ioPriceData.containsKey(markethashname)) {
                     ioPrice = Double.valueOf(ioPriceData.get(markethashname));
+                    if (ioPrice < 0.25) continue;
                 }
-                mapNewItemData(item, xyzitems.get(markethashname), cfPriceData.get(markethashname), ioPrice);
+                double cfprice = cfPriceData.get(markethashname);
+                if (cfprice < 0.25) continue;
+                mapNewItemData(item, xyzitems.get(markethashname), cfprice, ioPrice);
                 csgoItemService.save(csgoItemMapper.toDto(item));
             }catch (Exception ex) {
                 log.error("Failed to save/map csgo.steamlytics.xyz new item {}", ex.getMessage());
