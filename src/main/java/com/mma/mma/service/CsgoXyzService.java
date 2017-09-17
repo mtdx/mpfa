@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -159,6 +160,16 @@ public class CsgoXyzService {
         item.setDpAll(newitem.getAll_time().getDeviation_percentage());
         item.setTrendAll(newitem.getAll_time().getTrend());
         item.setVolAll(newitem.getAll_time().getVolume());
+
+        if (cfPrice != null) {
+            item.setCfp(new BigDecimal(cfPrice));
+        }
+        if (ioPrice != null) {
+            item.setIop(new BigDecimal(ioPrice));
+        }
+        if (cfPrice != null && newitem.getSafe_price() != null) {
+            item.setDcx(newitem.getSafe_price().subtract(new BigDecimal(cfPrice)).divide(newitem.getSafe_price(), 0).multiply(new BigDecimal(100)));
+        }
 
         item.setAdded(newitem.getFirst_seen());
     }
