@@ -75,6 +75,8 @@ public class CsgoItemDTO implements Serializable {
 
     private BigDecimal iop;
 
+    private BigDecimal dcx;
+
     private Instant added;
 
     public Long getId() {
@@ -325,6 +327,14 @@ public class CsgoItemDTO implements Serializable {
         this.iop = iop;
     }
 
+    public BigDecimal getDcx() {
+        return dcx;
+    }
+
+    public void setDcx(BigDecimal dcx) {
+        this.dcx = dcx;
+    }
+
     public Instant getAdded() {
         return added;
     }
@@ -388,6 +398,7 @@ public class CsgoItemDTO implements Serializable {
             ", volAll='" + getVolAll() + "'" +
             ", cfp='" + getCfp() + "'" +
             ", iop='" + getIop() + "'" +
+            ", dcx='" + getDcx() + "'" +
             ", added='" + getAdded() + "'" +
             "}";
     }

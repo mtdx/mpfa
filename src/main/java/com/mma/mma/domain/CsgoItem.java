@@ -118,6 +118,9 @@ public class CsgoItem implements Serializable {
     @Column(name = "iop", precision=10, scale=2)
     private BigDecimal iop;
 
+    @Column(name = "dcx", precision=10, scale=2)
+    private BigDecimal dcx;
+
     @Column(name = "added")
     private Instant added;
 
@@ -498,25 +501,38 @@ public class CsgoItem implements Serializable {
         return cfp;
     }
 
-    public void setCfp(BigDecimal cfp) {
-        this.cfp = cfp;
-    }
-
     public CsgoItem cfp(BigDecimal cfp) {
         this.cfp = cfp;
         return this;
+    }
+
+    public void setCfp(BigDecimal cfp) {
+        this.cfp = cfp;
     }
 
     public BigDecimal getIop() {
         return iop;
     }
 
+    public CsgoItem iop(BigDecimal iop) {
+        this.iop = iop;
+        return this;
+    }
+
     public void setIop(BigDecimal iop) {
         this.iop = iop;
     }
 
-    public CsgoItem iop(BigDecimal iop) {
-        this.iop = iop;
+    public BigDecimal getDcx() {
+        return dcx;
+    }
+
+    public void setDcx(BigDecimal dcx) {
+        this.dcx = dcx;
+    }
+
+    public CsgoItem dcx(BigDecimal dcx) {
+        this.dcx = dcx;
         return this;
     }
 
@@ -588,6 +604,7 @@ public class CsgoItem implements Serializable {
             ", volAll='" + getVolAll() + "'" +
             ", cfp='" + getCfp() + "'" +
             ", iop='" + getIop() + "'" +
+            ", dcx='" + getDcx() + "'" +
             ", added='" + getAdded() + "'" +
             "}";
     }

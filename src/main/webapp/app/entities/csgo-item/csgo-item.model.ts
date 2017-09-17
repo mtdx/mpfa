@@ -33,6 +33,7 @@ export class CsgoItem implements BaseEntity {
         public volAll?: number,
         public cfp?: number,
         public iop?: number,
+        public dcx?: number,
         public added?: any,
     ) {
         this.opm = false;

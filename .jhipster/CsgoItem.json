@@ -126,6 +126,10 @@
             "fieldType": "BigDecimal"
         },
         {
+            "fieldName": "dcx",
+            "fieldType": "BigDecimal"
+        },
+        {
             "fieldName": "added",
             "fieldType": "Instant"
         }

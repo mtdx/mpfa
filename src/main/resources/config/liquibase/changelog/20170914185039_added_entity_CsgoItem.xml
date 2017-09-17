@@ -139,6 +139,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="dcx" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="added" type="timestamp">
                 <constraints nullable="true" />
             </column>
