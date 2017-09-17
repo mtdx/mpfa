@@ -43,12 +43,12 @@
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let csgoItem of csgoItems ;trackBy: trackId">
                 <td><a [routerLink]="['../csgo-item', csgoItem.id ]">{{csgoItem.name}}</a></td>
-                <td>{{csgoItem.sp}}</td>
+                <td>{{csgoItem.sp | currency:'USD':true}}</td>
                 <td><i class="fa fa-circle opm {{csgoItem.opm}}" aria-hidden="true"></i></td>
                 <td>{{csgoItem.vol}}</td>
-                <td>{{csgoItem.mp7}}</td>
-                <td>{{csgoItem.mp30}}</td>
-                <td>{{csgoItem.mpAll}}</td>
+                <td>{{csgoItem.mp7 | currency:'USD':true}}</td>
+                <td>{{csgoItem.mp30 | currency:'USD':true}}</td>
+                <td>{{csgoItem.mpAll | currency:'USD':true}}</td>
                 <td>{{csgoItem.added | date:'short'}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
