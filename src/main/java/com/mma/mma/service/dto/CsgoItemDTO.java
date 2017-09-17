@@ -71,11 +71,11 @@ public class CsgoItemDTO implements Serializable {
 
     private Integer volAll;
 
-    private BigDecimal cfp;
+    private Double cfp;
 
-    private BigDecimal iop;
+    private Double iop;
 
-    private BigDecimal dcx;
+    private Double dcx;
 
     private Instant added;
 
@@ -311,27 +311,27 @@ public class CsgoItemDTO implements Serializable {
         this.volAll = volAll;
     }
 
-    public BigDecimal getCfp() {
+    public Double getCfp() {
         return cfp;
     }
 
-    public void setCfp(BigDecimal cfp) {
+    public void setCfp(Double cfp) {
         this.cfp = cfp;
     }
 
-    public BigDecimal getIop() {
+    public Double getIop() {
         return iop;
     }
 
-    public void setIop(BigDecimal iop) {
+    public void setIop(Double iop) {
         this.iop = iop;
     }
 
-    public BigDecimal getDcx() {
+    public Double getDcx() {
         return dcx;
     }
 
-    public void setDcx(BigDecimal dcx) {
+    public void setDcx(Double dcx) {
         this.dcx = dcx;
     }
 

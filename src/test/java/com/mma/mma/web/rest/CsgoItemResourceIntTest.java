@@ -127,14 +127,14 @@ public class CsgoItemResourceIntTest {
     private static final Integer DEFAULT_VOL_ALL = 1;
     private static final Integer UPDATED_VOL_ALL = 2;
 
-    private static final BigDecimal DEFAULT_CFP = new BigDecimal(1);
-    private static final BigDecimal UPDATED_CFP = new BigDecimal(2);
+    private static final Double DEFAULT_CFP = 1D;
+    private static final Double UPDATED_CFP = 2D;
 
-    private static final BigDecimal DEFAULT_IOP = new BigDecimal(1);
-    private static final BigDecimal UPDATED_IOP = new BigDecimal(2);
+    private static final Double DEFAULT_IOP = 1D;
+    private static final Double UPDATED_IOP = 2D;
 
-    private static final BigDecimal DEFAULT_DCX = new BigDecimal(1);
-    private static final BigDecimal UPDATED_DCX = new BigDecimal(2);
+    private static final Double DEFAULT_DCX = 1D;
+    private static final Double UPDATED_DCX = 2D;
 
     private static final Instant DEFAULT_ADDED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_ADDED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -361,9 +361,9 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].dpAll").value(hasItem(DEFAULT_DP_ALL.intValue())))
             .andExpect(jsonPath("$.[*].trendAll").value(hasItem(DEFAULT_TREND_ALL.intValue())))
             .andExpect(jsonPath("$.[*].volAll").value(hasItem(DEFAULT_VOL_ALL)))
-            .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.intValue())))
-            .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.intValue())))
-            .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.intValue())))
+            .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.doubleValue())))
+            .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.doubleValue())))
+            .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.doubleValue())))
             .andExpect(jsonPath("$.[*].added").value(hasItem(DEFAULT_ADDED.toString())));
     }
 
@@ -406,9 +406,9 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.dpAll").value(DEFAULT_DP_ALL.intValue()))
             .andExpect(jsonPath("$.trendAll").value(DEFAULT_TREND_ALL.intValue()))
             .andExpect(jsonPath("$.volAll").value(DEFAULT_VOL_ALL))
-            .andExpect(jsonPath("$.cfp").value(DEFAULT_CFP.intValue()))
-            .andExpect(jsonPath("$.iop").value(DEFAULT_IOP.intValue()))
-            .andExpect(jsonPath("$.dcx").value(DEFAULT_DCX.intValue()))
+            .andExpect(jsonPath("$.cfp").value(DEFAULT_CFP.doubleValue()))
+            .andExpect(jsonPath("$.iop").value(DEFAULT_IOP.doubleValue()))
+            .andExpect(jsonPath("$.dcx").value(DEFAULT_DCX.doubleValue()))
             .andExpect(jsonPath("$.added").value(DEFAULT_ADDED.toString()));
     }
 
@@ -1804,9 +1804,9 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].dpAll").value(hasItem(DEFAULT_DP_ALL.intValue())))
             .andExpect(jsonPath("$.[*].trendAll").value(hasItem(DEFAULT_TREND_ALL.intValue())))
             .andExpect(jsonPath("$.[*].volAll").value(hasItem(DEFAULT_VOL_ALL)))
-            .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.intValue())))
-            .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.intValue())))
-            .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.intValue())))
+            .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.doubleValue())))
+            .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.doubleValue())))
+            .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.doubleValue())))
             .andExpect(jsonPath("$.[*].added").value(hasItem(DEFAULT_ADDED.toString())));
     }
 
@@ -2003,9 +2003,9 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].dpAll").value(hasItem(DEFAULT_DP_ALL.intValue())))
             .andExpect(jsonPath("$.[*].trendAll").value(hasItem(DEFAULT_TREND_ALL.intValue())))
             .andExpect(jsonPath("$.[*].volAll").value(hasItem(DEFAULT_VOL_ALL)))
-            .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.intValue())))
-            .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.intValue())))
-            .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.intValue())))
+            .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.doubleValue())))
+            .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.doubleValue())))
+            .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.doubleValue())))
             .andExpect(jsonPath("$.[*].added").value(hasItem(DEFAULT_ADDED.toString())));
     }
 

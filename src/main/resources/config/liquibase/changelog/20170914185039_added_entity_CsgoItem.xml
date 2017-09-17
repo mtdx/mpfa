@@ -131,15 +131,15 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="cfp" type="decimal(10,2)">
+            <column name="cfp" type="double">
                 <constraints nullable="true" />
             </column>
 
-            <column name="iop" type="decimal(10,2)">
+            <column name="iop" type="double">
                 <constraints nullable="true" />
             </column>
 
-            <column name="dcx" type="decimal(10,2)">
+            <column name="dcx" type="double">
                 <constraints nullable="true" />
             </column>
 
