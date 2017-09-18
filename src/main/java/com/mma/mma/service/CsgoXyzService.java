@@ -73,7 +73,7 @@ public class CsgoXyzService {
         HashMap<String, CsgoItem> existingItems = existingItems();
         XyzDTO xyzresp = respEntity.getBody();
 
-         if (!xyzresp.isSuccess()) {
+        if (!xyzresp.isSuccess()) {
             log.error("Failled to fetch csgo.steamlytics.xyz fata {}");
             return;
         }
@@ -92,16 +92,31 @@ public class CsgoXyzService {
             }
             try {
                 Double ioPrice = null;
-                if (ioPriceData.containsKey(markethashname)) {
-                    ioPrice = Double.valueOf(ioPriceData.get(markethashname));
-                    if (ioPrice < 0.25) continue;
+                Double cfprice = null;
+                XyzItem newItem = xyzitems.get(markethashname);
+                if (cfPriceData.containsKey(markethashname)) {
+                    try {
+                        cfprice = Double.valueOf(cfPriceData.get(markethashname));
+                    } catch (Exception ex) {
+                        log.error("Failed to cast to Integer cf price {}", ex.getMessage());
+                        cfprice = null;
+                    }
+                    if (cfprice != null && cfprice < 0.10) continue;
                 }
-                double cfprice = cfPriceData.get(markethashname);
-                if (cfprice < 0.25) continue;
-                mapNewItemData(item, xyzitems.get(markethashname), cfprice, ioPrice);
+                if (ioPriceData.containsKey(markethashname)) {
+                    try {
+                        ioPrice = Double.valueOf(ioPriceData.get(markethashname));
+                    } catch (Exception ex) {
+                        log.error("Failed to cast to Integer ip price {}", ex.getMessage());
+                        ioPrice = null;
+                    }
+                    if (ioPrice != null && ioPrice < 0.10) continue;
+                }
+                mapNewItemData(item, newItem, cfprice, ioPrice);
                 csgoItemService.save(csgoItemMapper.toDto(item));
-            }catch (Exception ex) {
+            } catch (Exception ex) {
                 log.error("Failed to save/map csgo.steamlytics.xyz new item {}", ex.getMessage());
+                log.error("{}", markethashname, xyzitems.size());
             }
         }
         csgoItemService.refreshsearch();
@@ -137,32 +152,50 @@ public class CsgoXyzService {
         item.setOpm(newitem.isOngoing_price_manipulation());
         item.setVol(newitem.getTotal_volume());
 
-        item.setMp7(newitem.get7_days().getMedian_price());
-        item.setAvg7(newitem.get7_days().getAverage_price());
-        item.setLp7(newitem.get7_days().getLowest_price());
-        item.setHp7(newitem.get7_days().getHighest_price());
-        item.setMad7(newitem.get7_days().getMean_absolute_deviation());
-        item.setDp7(newitem.get7_days().getDeviation_percentage().round(new MathContext(2, RoundingMode.HALF_UP)));
-        item.setTrend7(newitem.get7_days().getTrend().round(new MathContext(4, RoundingMode.HALF_UP)));
-        item.setVol7(newitem.get7_days().getVolume());
+        if (newitem.get7_days() != null) {
+            item.setMp7(newitem.get7_days().getMedian_price());
+            item.setAvg7(newitem.get7_days().getAverage_price());
+            item.setLp7(newitem.get7_days().getLowest_price());
+            item.setHp7(newitem.get7_days().getHighest_price());
+            item.setMad7(newitem.get7_days().getMean_absolute_deviation());
+            if (newitem.get7_days().getDeviation_percentage() != null) {
+                item.setDp7(newitem.get7_days().getDeviation_percentage().round(new MathContext(2, RoundingMode.HALF_UP)));
+            }
+            if (newitem.get7_days().getTrend() != null) {
+                item.setTrend7(newitem.get7_days().getTrend().round(new MathContext(4, RoundingMode.HALF_UP)));
+            }
+            item.setVol7(newitem.get7_days().getVolume());
+        }
 
-        item.setMp30(newitem.get30_days().getMedian_price());
-        item.setAvg30(newitem.get30_days().getAverage_price());
-        item.setLp30(newitem.get30_days().getLowest_price());
-        item.setHp30(newitem.get30_days().getHighest_price());
-        item.setMad30(newitem.get30_days().getMean_absolute_deviation());
-        item.setDp30(newitem.get30_days().getDeviation_percentage().round(new MathContext(2, RoundingMode.HALF_UP)));
-        item.setTrend30(newitem.get30_days().getTrend().round(new MathContext(4, RoundingMode.HALF_UP)));
-        item.setVol30(newitem.get30_days().getVolume());
+        if (newitem.get30_days() != null) {
+            item.setMp30(newitem.get30_days().getMedian_price());
+            item.setAvg30(newitem.get30_days().getAverage_price());
+            item.setLp30(newitem.get30_days().getLowest_price());
+            item.setHp30(newitem.get30_days().getHighest_price());
+            item.setMad30(newitem.get30_days().getMean_absolute_deviation());
+            if (newitem.get30_days().getDeviation_percentage() != null) {
+                item.setDp30(newitem.get30_days().getDeviation_percentage().round(new MathContext(2, RoundingMode.HALF_UP)));
+            }
+            if (newitem.get30_days().getTrend() != null) {
+                item.setTrend30(newitem.get30_days().getTrend().round(new MathContext(4, RoundingMode.HALF_UP)));
+            }
+            item.setVol30(newitem.get30_days().getVolume());
+        }
 
-        item.setMpAll(newitem.getAll_time().getMedian_price());
-        item.setAvgAll(newitem.getAll_time().getAverage_price());
-        item.setLpAll(newitem.getAll_time().getLowest_price());
-        item.setHpAll(newitem.getAll_time().getHighest_price());
-        item.setMadAll(newitem.getAll_time().getMean_absolute_deviation());
-        item.setDpAll(newitem.getAll_time().getDeviation_percentage().round(new MathContext(2, RoundingMode.HALF_UP)));
-        item.setTrendAll(newitem.getAll_time().getTrend().round(new MathContext(4, RoundingMode.HALF_UP)));
-        item.setVolAll(newitem.getAll_time().getVolume());
+        if (newitem.getAll_time() != null) {
+            item.setMpAll(newitem.getAll_time().getMedian_price());
+            item.setAvgAll(newitem.getAll_time().getAverage_price());
+            item.setLpAll(newitem.getAll_time().getLowest_price());
+            item.setHpAll(newitem.getAll_time().getHighest_price());
+            item.setMadAll(newitem.getAll_time().getMean_absolute_deviation());
+            if (newitem.getAll_time().getDeviation_percentage() != null) {
+                item.setDpAll(newitem.getAll_time().getDeviation_percentage().round(new MathContext(2, RoundingMode.HALF_UP)));
+            }
+            if (newitem.getAll_time().getTrend() != null) {
+                item.setTrendAll(newitem.getAll_time().getTrend().round(new MathContext(4, RoundingMode.HALF_UP)));
+            }
+            item.setVolAll(newitem.getAll_time().getVolume());
+        }
 
         if (cfPrice != null && cfPrice > 0) {
             item.setCfp(cfPrice);
@@ -170,12 +203,16 @@ public class CsgoXyzService {
         if (ioPrice != null && ioPrice > 0) {
             item.setIop(ioPrice);
         }
-        if (cfPrice != null && cfPrice > 0 && newitem.getSafe_price() != null) {
-            Double sp = newitem.getSafe_price().doubleValue();
-            if (sp > 0) {
-                long diff = Math.round((sp - cfPrice) / sp * 100);
-                item.setDcx((double) diff);
+        try {
+            if (cfPrice != null && cfPrice > 0 && newitem.getSafe_price() != null) {
+                Double sp = newitem.getSafe_price().doubleValue();
+                if (sp > 0) {
+                    long diff = Math.round((sp - cfPrice) / sp * 100);
+                    item.setDcx((double) diff);
+                }
             }
+        } catch (Exception ex) {
+            log.error("Failed to calc diff {}", ex.getMessage());
         }
 
         item.setAdded(newitem.getFirst_seen());
