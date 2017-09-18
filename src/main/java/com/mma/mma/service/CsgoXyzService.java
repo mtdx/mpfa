@@ -80,7 +80,7 @@ public class CsgoXyzService {
 
         CsgoItem item;
         HashMap<String, XyzItem> xyzitems = xyzresp.getItems();
-        Map<String, Double> cfPriceData = cfPriceData(restTemplate, headers);
+        Map<String, Object> cfPriceData = cfPriceData(restTemplate, headers);
         Map<String, String> ioPriceData = ioPriceData(restTemplate, headers);
         Set<String> keySet = xyzitems.keySet();
         for (String markethashname : keySet) {
@@ -96,7 +96,7 @@ public class CsgoXyzService {
                 XyzItem newItem = xyzitems.get(markethashname);
                 if (cfPriceData.containsKey(markethashname)) {
                     try {
-                        cfprice = Double.valueOf(cfPriceData.get(markethashname));
+                        cfprice = Double.valueOf(cfPriceData.get(markethashname).toString());
                     } catch (Exception ex) {
                         log.error("Failed to cast to Integer cf price {}", ex.getMessage());
                         cfprice = null;
@@ -218,11 +218,11 @@ public class CsgoXyzService {
         item.setAdded(newitem.getFirst_seen());
     }
 
-    private Map<String, Double> cfPriceData(RestTemplate restTemplate, HttpHeaders headers) {
+    private Map<String, Object> cfPriceData(RestTemplate restTemplate, HttpHeaders headers) {
         final String CF_API_URL = "https://api.csgofast.com/price/all";
         HttpEntity<String> entityCF = new HttpEntity<>("parameters", headers);
         ResponseEntity<Map> respEntityCF;
-        Map<String, Double> cfresp = new HashMap<>();
+        Map<String, Object> cfresp = new HashMap<>();
         try {
             respEntityCF = restTemplate.exchange(CF_API_URL, HttpMethod.GET, entityCF, Map.class);
             cfresp = respEntityCF.getBody();
