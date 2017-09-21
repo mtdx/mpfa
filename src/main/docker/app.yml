@@ -9,6 +9,7 @@ services:
             - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=mma-elasticsearch:9300
             - XYZ_API_KEY=
             - IO_API_KEY=
+            - OP_API_KEY=
             - POSTGRES_USER=mma
             - POSTGRES_PASSWORD=
         ports:
