@@ -1,10 +1,10 @@
 package com.mma.mma.service.dto;
 
 
-import javax.validation.constraints.NotNull;
+import java.time.Instant;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.Objects;
 
 /**

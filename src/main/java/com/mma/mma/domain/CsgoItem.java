@@ -5,7 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -501,21 +501,17 @@ public class CsgoItem implements Serializable {
         return cfp;
     }
 
-    public void setCfp(Double cfp) {
-        this.cfp = cfp;
-    }
-
     public CsgoItem cfp(Double cfp) {
         this.cfp = cfp;
         return this;
     }
 
-    public Double getIop() {
-        return iop;
+    public void setCfp(Double cfp) {
+        this.cfp = cfp;
     }
 
-    public void setIop(Double iop) {
-        this.iop = iop;
+    public Double getIop() {
+        return iop;
     }
 
     public CsgoItem iop(Double iop) {
@@ -523,17 +519,21 @@ public class CsgoItem implements Serializable {
         return this;
     }
 
-    public Double getDcx() {
-        return dcx;
+    public void setIop(Double iop) {
+        this.iop = iop;
     }
 
-    public void setDcx(Double dcx) {
-        this.dcx = dcx;
+    public Double getDcx() {
+        return dcx;
     }
 
     public CsgoItem dcx(Double dcx) {
         this.dcx = dcx;
         return this;
+    }
+
+    public void setDcx(Double dcx) {
+        this.dcx = dcx;
     }
 
     public Instant getAdded() {

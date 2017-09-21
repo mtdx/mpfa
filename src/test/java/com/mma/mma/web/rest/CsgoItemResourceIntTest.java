@@ -1,14 +1,17 @@
 package com.mma.mma.web.rest;
 
 import com.mma.mma.MmaApp;
+
 import com.mma.mma.domain.CsgoItem;
 import com.mma.mma.repository.CsgoItemRepository;
-import com.mma.mma.repository.search.CsgoItemSearchRepository;
-import com.mma.mma.service.CsgoItemQueryService;
 import com.mma.mma.service.CsgoItemService;
+import com.mma.mma.repository.search.CsgoItemSearchRepository;
 import com.mma.mma.service.dto.CsgoItemDTO;
 import com.mma.mma.service.mapper.CsgoItemMapper;
 import com.mma.mma.web.rest.errors.ExceptionTranslator;
+import com.mma.mma.service.dto.CsgoItemCriteria;
+import com.mma.mma.service.CsgoItemQueryService;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
