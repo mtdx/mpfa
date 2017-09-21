@@ -66,7 +66,7 @@ public class CsgoXyzService {
         try {
             respEntity = restTemplate.exchange(XYZ_API_URL, HttpMethod.GET, entity, XyzDTO.class);
         } catch (Exception ex) {
-            log.error("Failled to fetch csgo.steamlytics.xyz data {}", ex.getMessage());
+            log.error("Failed to fetch csgo.steamlytics.xyz data {}", ex.getMessage());
             return;
         }
 
@@ -74,7 +74,7 @@ public class CsgoXyzService {
         XyzDTO xyzresp = respEntity.getBody();
 
         if (!xyzresp.isSuccess()) {
-            log.error("Failled to fetch csgo.steamlytics.xyz fata {}");
+            log.error("Failed to fetch csgo.steamlytics.xyz fata {}");
             return;
         }
 
@@ -131,7 +131,7 @@ public class CsgoXyzService {
                     ((MappingJackson2HttpMessageConverter) converter)
                         .setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN));
                 } catch (Exception ex) {
-                    log.error("Failled to add text converter", ex.getMessage());
+                    log.error("Failed to add text converter", ex.getMessage());
                 }
             }
         }
@@ -227,7 +227,7 @@ public class CsgoXyzService {
             respEntityCF = restTemplate.exchange(CF_API_URL, HttpMethod.GET, entityCF, Map.class);
             cfresp = respEntityCF.getBody();
         } catch (Exception ex) {
-            log.error("Failled to fetch CF data", ex.getMessage());
+            log.error("Failed to fetch CF data", ex.getMessage());
         }
         return cfresp;
     }
@@ -242,7 +242,7 @@ public class CsgoXyzService {
             respEntityIO = restTemplate.exchange(IO_API_URL, HttpMethod.GET, entityIO, Map.class);
             ioresp = respEntityIO.getBody();
         } catch (Exception ex) {
-            log.error("Failled to fetch CF data", ex.getMessage());
+            log.error("Failed to fetch CF data", ex.getMessage());
         }
         return ioresp;
     }
