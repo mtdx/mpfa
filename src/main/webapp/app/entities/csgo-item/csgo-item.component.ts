@@ -100,6 +100,7 @@ export class CsgoItemComponent implements OnInit, OnDestroy {
         this.predicate = 'id';
         this.reverse = true;
         this.currentSearch = '';
+        this.currentFilter = '';
         this.loadAll();
     }
 

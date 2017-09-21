@@ -2,6 +2,7 @@ package com.mma.mma.service;
 
 import com.mma.mma.domain.CsgoItem;
 import com.mma.mma.service.mapper.CsgoItemMapper;
+import com.mma.mma.service.respdto.OpskinsDTO;
 import com.mma.mma.service.respdto.XyzDTO;
 import com.mma.mma.service.respdto.XyzItem;
 import org.slf4j.Logger;
@@ -51,11 +52,12 @@ public class CsgoXyzService {
      * </p>
      */
     @Async
-    @Scheduled(cron = "0 */11 * * * *") // 11
+    @Scheduled(cron = "0 */1 * * * *") // 11 TODO
     public void updateItems() {
         log.debug("Run scheduled csgo.steamlytics.xyz  update items {}");
 
-        final String XYZ_API_URL = "http://api.csgo.steamlytics.xyz/v2/pricelist?key=" + XYZ_API_KEY;
+//        final String XYZ_API_URL = "http://api.csgo.steamlytics.xyz/v2/pricelist?key=" + XYZ_API_KEY;
+        final String XYZ_API_URL = "https://raw.githubusercontent.com/mtdx/json/master/d5";
 
         RestTemplate restTemplate = restTemplate();
 
@@ -85,7 +87,7 @@ public class CsgoXyzService {
         HashMap<String, XyzItem> xyzitems = xyzresp.getItems();
         Map<String, Object> cfPriceData = cfPriceData(restTemplate, headers);
         Map<String, String> ioPriceData = ioPriceData(restTemplate, headers);
-        Map<String, String> opPriceData = ioPriceData(restTemplate, headers);
+        OpskinsDTO opPriceData = opPriceData(restTemplate, headers);
         Set<String> keySet = xyzitems.keySet();
         for (String markethashname : keySet) {
             if (existingItems.containsKey(markethashname)) {
@@ -103,7 +105,7 @@ public class CsgoXyzService {
                     try {
                         cfPrice = Double.valueOf(cfPriceData.get(markethashname).toString());
                     } catch (Exception ex) {
-                        log.error("Failed to cast to Integer cf price {}", ex.getMessage());
+                        log.error("Failed to cast to Double cf price {}", ex.getMessage());
                         cfPrice = null;
                     }
                     if (cfPrice != null && cfPrice < 0.10) continue;
@@ -112,16 +114,17 @@ public class CsgoXyzService {
                     try {
                         ioPrice = Double.valueOf(ioPriceData.get(markethashname));
                     } catch (Exception ex) {
-                        log.error("Failed to cast to Integer io price {}", ex.getMessage());
+                        log.error("Failed to cast to Double io price {}", ex.getMessage());
                         ioPrice = null;
                     }
                     if (ioPrice != null && ioPrice < 0.10) continue;
                 }
-                if (opPriceData.containsKey(markethashname)) {
+                if (opPriceData != null && opPriceData.getStatus() == 1
+                    && opPriceData.getResponse().containsKey(markethashname)) {
                     try {
-                        opPrice = Double.valueOf(opPriceData.get(markethashname));
+                        opPrice = (double) opPriceData.getResponse().get(markethashname).getPrice() / 100;
                     } catch (Exception ex) {
-                        log.error("Failed to cast to Integer op price {}", ex.getMessage());
+                        log.error("Failed to cast to Double op price {}", ex.getMessage());
                         opPrice = null;
                     }
                     if (opPrice != null && opPrice < 0.5) continue;
@@ -261,13 +264,13 @@ public class CsgoXyzService {
         return ioresp;
     }
 
-    private Map<String, String> opPriceData(RestTemplate restTemplate, HttpHeaders headers) {
-        final String IO_API_URL = "https://api.opskins.com/IPricing/GetAllLowestListPrices/v1/?appid=730&key" + OP_API_KEY;
+    private OpskinsDTO opPriceData(RestTemplate restTemplate, HttpHeaders headers) {
+        final String OP_API_URL = "https://api.opskins.com/IPricing/GetAllLowestListPrices/v1/?appid=730&key=" + OP_API_KEY;
         HttpEntity<String> entityOP = new HttpEntity<>("parameters", headers);
-        ResponseEntity<Map> respEntityOP;
-        Map<String, String> opresp = new HashMap<>();
+        ResponseEntity<OpskinsDTO> respEntityOP;
+        OpskinsDTO opresp = null;
         try {
-            respEntityOP = restTemplate.exchange(IO_API_URL, HttpMethod.GET, entityOP, Map.class);
+            respEntityOP = restTemplate.exchange(OP_API_URL, HttpMethod.GET, entityOP, OpskinsDTO.class);
             opresp = respEntityOP.getBody();
         } catch (Exception ex) {
             log.error("Failed to fetch OPSkins data", ex.getMessage());
