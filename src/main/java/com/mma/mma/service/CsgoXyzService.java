@@ -100,6 +100,7 @@ public class CsgoXyzService {
                 Double ioPrice = null;
                 Double cfPrice = null;
                 Double opPrice = null;
+                Integer opQty = null;
                 XyzItem newItem = xyzitems.get(markethashname);
                 if (cfPriceData.containsKey(markethashname)) {
                     try {
@@ -123,13 +124,15 @@ public class CsgoXyzService {
                     && opPriceData.getResponse().containsKey(markethashname)) {
                     try {
                         opPrice = (double) opPriceData.getResponse().get(markethashname).getPrice() / 100;
+                        opQty = opPriceData.getResponse().get(markethashname).getQuantity();
                     } catch (Exception ex) {
                         log.error("Failed to cast to Double op price {}", ex.getMessage());
                         opPrice = null;
+                        opQty = null;
                     }
                     if (opPrice != null && opPrice < 0.5) continue;
                 }
-                mapNewItemData(item, newItem, cfPrice, ioPrice);
+                mapNewItemData(item, newItem, cfPrice, ioPrice, opPrice, opQty);
                 csgoItemService.save(csgoItemMapper.toDto(item));
             } catch (Exception ex) {
                 log.error("Failed to save/map csgo.steamlytics.xyz new item {}", ex.getMessage());
@@ -164,7 +167,7 @@ public class CsgoXyzService {
         return map;
     }
 
-    private void mapNewItemData(CsgoItem item, XyzItem newitem, Double cfPrice, Double ioPrice) {
+    private void mapNewItemData(CsgoItem item, XyzItem newitem, Double cfPrice, Double ioPrice, Double opPrice, Integer opQty) {
         item.setSp(newitem.getSafe_price());
         item.setOpm(newitem.isOngoing_price_manipulation());
         item.setVol(newitem.getTotal_volume());
@@ -230,6 +233,13 @@ public class CsgoXyzService {
             }
         } catch (Exception ex) {
             log.error("Failed to calc diff {}", ex.getMessage());
+        }
+
+        if (opPrice != null && opPrice > 0)  {
+            item.setOplp(opPrice);
+        }
+        if (opQty != null && opQty > 0)  {
+            item.setOpq(opQty);
         }
 
         item.setAdded(newitem.getFirst_seen());
