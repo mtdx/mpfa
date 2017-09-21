@@ -25,6 +25,7 @@ export class CsgoItemComponent implements OnInit, OnDestroy {
     reverse: any;
     totalItems: number;
     currentSearch: string;
+    currentFilter: string;
 
     constructor(
         private csgoItemService: CsgoItemService,
@@ -43,6 +44,7 @@ export class CsgoItemComponent implements OnInit, OnDestroy {
         this.predicate = 'id';
         this.reverse = true;
         this.currentSearch = activatedRoute.snapshot.params['search'] ? activatedRoute.snapshot.params['search'] : '';
+        this.currentFilter = activatedRoute.snapshot.params['filter'] ? activatedRoute.snapshot.params['filter'] : '';
     }
 
     loadAll() {
@@ -53,6 +55,16 @@ export class CsgoItemComponent implements OnInit, OnDestroy {
                 size: this.itemsPerPage,
                 sort: this.sort()
             }).subscribe(
+                (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+                (res: ResponseWrapper) => this.onError(res.json)
+            );
+            return;
+        } else if (this.currentFilter) {
+            this.csgoItemService.filter({
+                page: this.page,
+                size: this.itemsPerPage,
+                sort: this.sort()
+            }, this.currentFilter).subscribe(
                 (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
                 (res: ResponseWrapper) => this.onError(res.json)
             );
@@ -105,6 +117,21 @@ export class CsgoItemComponent implements OnInit, OnDestroy {
         this.currentSearch = query;
         this.loadAll();
     }
+
+    filter(query) {
+        if (!query) {
+            return this.clear();
+        }
+        this.csgoItems = [];
+        this.links = {
+            last: 0
+        };
+        this.page = 0;
+        this.reverse = false;
+        this.currentFilter = query;
+        this.loadAll();
+    }
+
     ngOnInit() {
         this.loadAll();
         this.principal.identity().then((account) => {

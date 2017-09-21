@@ -25,6 +25,22 @@
         </div>
     </div>
     <br/>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="filterForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentFilter" id="currentFilter" name="currentFilter" placeholder="Filter (eg. sp.equals=300&opm.equals=true)">
+                    <button class="input-group-addon btn btn-info" (click)="filter(currentFilter)">
+                        <span class="fa fa-filter"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentFilter">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
     <div class="table-responsive" *ngIf="csgoItems">
         <table class="table table-striped">
             <thead>
