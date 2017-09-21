@@ -30,6 +30,9 @@ public class CsgoXyzService {
     @Value("${IO_API_KEY}")
     private String IO_API_KEY;
 
+    @Value("${OP_API_KEY}")
+    private String OP_API_KEY;
+
     private final Logger log = LoggerFactory.getLogger(CsgoXyzService.class);
 
     private final CsgoItemService csgoItemService;
@@ -82,6 +85,7 @@ public class CsgoXyzService {
         HashMap<String, XyzItem> xyzitems = xyzresp.getItems();
         Map<String, Object> cfPriceData = cfPriceData(restTemplate, headers);
         Map<String, String> ioPriceData = ioPriceData(restTemplate, headers);
+        Map<String, String> opPriceData = ioPriceData(restTemplate, headers);
         Set<String> keySet = xyzitems.keySet();
         for (String markethashname : keySet) {
             if (existingItems.containsKey(markethashname)) {
@@ -92,27 +96,37 @@ public class CsgoXyzService {
             }
             try {
                 Double ioPrice = null;
-                Double cfprice = null;
+                Double cfPrice = null;
+                Double opPrice = null;
                 XyzItem newItem = xyzitems.get(markethashname);
                 if (cfPriceData.containsKey(markethashname)) {
                     try {
-                        cfprice = Double.valueOf(cfPriceData.get(markethashname).toString());
+                        cfPrice = Double.valueOf(cfPriceData.get(markethashname).toString());
                     } catch (Exception ex) {
                         log.error("Failed to cast to Integer cf price {}", ex.getMessage());
-                        cfprice = null;
+                        cfPrice = null;
                     }
-                    if (cfprice != null && cfprice < 0.10) continue;
+                    if (cfPrice != null && cfPrice < 0.10) continue;
                 }
                 if (ioPriceData.containsKey(markethashname)) {
                     try {
                         ioPrice = Double.valueOf(ioPriceData.get(markethashname));
                     } catch (Exception ex) {
-                        log.error("Failed to cast to Integer ip price {}", ex.getMessage());
+                        log.error("Failed to cast to Integer io price {}", ex.getMessage());
                         ioPrice = null;
                     }
                     if (ioPrice != null && ioPrice < 0.10) continue;
                 }
-                mapNewItemData(item, newItem, cfprice, ioPrice);
+                if (opPriceData.containsKey(markethashname)) {
+                    try {
+                        opPrice = Double.valueOf(opPriceData.get(markethashname));
+                    } catch (Exception ex) {
+                        log.error("Failed to cast to Integer op price {}", ex.getMessage());
+                        opPrice = null;
+                    }
+                    if (opPrice != null && opPrice < 0.5) continue;
+                }
+                mapNewItemData(item, newItem, cfPrice, ioPrice);
                 csgoItemService.save(csgoItemMapper.toDto(item));
             } catch (Exception ex) {
                 log.error("Failed to save/map csgo.steamlytics.xyz new item {}", ex.getMessage());
@@ -245,5 +259,19 @@ public class CsgoXyzService {
             log.error("Failed to fetch CF data", ex.getMessage());
         }
         return ioresp;
+    }
+
+    private Map<String, String> opPriceData(RestTemplate restTemplate, HttpHeaders headers) {
+        final String IO_API_URL = "https://api.opskins.com/IPricing/GetAllLowestListPrices/v1/?appid=730&key" + OP_API_KEY;
+        HttpEntity<String> entityOP = new HttpEntity<>("parameters", headers);
+        ResponseEntity<Map> respEntityOP;
+        Map<String, String> opresp = new HashMap<>();
+        try {
+            respEntityOP = restTemplate.exchange(IO_API_URL, HttpMethod.GET, entityOP, Map.class);
+            opresp = respEntityOP.getBody();
+        } catch (Exception ex) {
+            log.error("Failed to fetch OPSkins data", ex.getMessage());
+        }
+        return opresp;
     }
 }
