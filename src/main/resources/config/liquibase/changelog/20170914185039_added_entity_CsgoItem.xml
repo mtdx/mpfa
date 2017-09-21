@@ -145,6 +145,14 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="oplp" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="opq" type="integer">
+                <constraints nullable="true" />
+            </column>
+
             <column name="added" type="timestamp">
                 <constraints nullable="true" />
             </column>

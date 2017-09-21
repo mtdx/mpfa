@@ -176,6 +176,12 @@ public class CsgoItemQueryService extends QueryService<CsgoItem> {
             if (criteria.getDcx() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDcx(), CsgoItem_.dcx));
             }
+            if (criteria.getOplp() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getOplp(), CsgoItem_.oplp));
+            }
+            if (criteria.getOpq() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getOpq(), CsgoItem_.opq));
+            }
             if (criteria.getAdded() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getAdded(), CsgoItem_.added));
             }

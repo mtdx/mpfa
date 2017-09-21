@@ -130,6 +130,14 @@
             "fieldType": "Double"
         },
         {
+            "fieldName": "oplp",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "opq",
+            "fieldType": "Integer"
+        },
+        {
             "fieldName": "added",
             "fieldType": "Instant"
         }

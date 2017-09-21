@@ -55,6 +55,8 @@
             <th jhiSortBy="cfp"><span>Cfp</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="iop"><span>Iop</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="dcx"><span>Dcx</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="oplp"><span>Oplp</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="opq"><span>Opq</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="added"><span>Added</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
@@ -71,6 +73,8 @@
                 <td>{{csgoItem.cfp | currency:'USD':true}}</td>
                 <td>{{csgoItem.iop | currency:'USD':true}}</td>
                 <td>{{csgoItem.dcx}}%</td>
+                <td>{{csgoItem.oplp | currency:'USD':true}}%</td>
+                <td>{{csgoItem.opq}}</td>
                 <td>{{csgoItem.added | date: 'dd/MM/yyyy'}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

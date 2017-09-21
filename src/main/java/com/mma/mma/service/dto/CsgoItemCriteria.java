@@ -90,6 +90,10 @@ public class CsgoItemCriteria implements Serializable {
 
     private DoubleFilter dcx;
 
+    private DoubleFilter oplp;
+
+    private IntegerFilter opq;
+
     private InstantFilter added;
 
     public CsgoItemCriteria() {
@@ -351,6 +355,22 @@ public class CsgoItemCriteria implements Serializable {
         this.dcx = dcx;
     }
 
+    public DoubleFilter getOplp() {
+        return oplp;
+    }
+
+    public void setOplp(DoubleFilter oplp) {
+        this.oplp = oplp;
+    }
+
+    public IntegerFilter getOpq() {
+        return opq;
+    }
+
+    public void setOpq(IntegerFilter opq) {
+        this.opq = opq;
+    }
+
     public InstantFilter getAdded() {
         return added;
     }
@@ -394,6 +414,8 @@ public class CsgoItemCriteria implements Serializable {
                 (cfp != null ? "cfp=" + cfp + ", " : "") +
                 (iop != null ? "iop=" + iop + ", " : "") +
                 (dcx != null ? "dcx=" + dcx + ", " : "") +
+                (oplp != null ? "oplp=" + oplp + ", " : "") +
+                (opq != null ? "opq=" + opq + ", " : "") +
                 (added != null ? "added=" + added + ", " : "") +
             "}";
     }

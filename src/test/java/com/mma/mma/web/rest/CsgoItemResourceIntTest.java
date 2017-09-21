@@ -139,6 +139,12 @@ public class CsgoItemResourceIntTest {
     private static final Double DEFAULT_DCX = 1D;
     private static final Double UPDATED_DCX = 2D;
 
+    private static final Double DEFAULT_OPLP = 1D;
+    private static final Double UPDATED_OPLP = 2D;
+
+    private static final Integer DEFAULT_OPQ = 1;
+    private static final Integer UPDATED_OPQ = 2;
+
     private static final Instant DEFAULT_ADDED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_ADDED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -222,6 +228,8 @@ public class CsgoItemResourceIntTest {
             .cfp(DEFAULT_CFP)
             .iop(DEFAULT_IOP)
             .dcx(DEFAULT_DCX)
+            .oplp(DEFAULT_OPLP)
+            .opq(DEFAULT_OPQ)
             .added(DEFAULT_ADDED);
         return csgoItem;
     }
@@ -279,6 +287,8 @@ public class CsgoItemResourceIntTest {
         assertThat(testCsgoItem.getCfp()).isEqualTo(DEFAULT_CFP);
         assertThat(testCsgoItem.getIop()).isEqualTo(DEFAULT_IOP);
         assertThat(testCsgoItem.getDcx()).isEqualTo(DEFAULT_DCX);
+        assertThat(testCsgoItem.getOplp()).isEqualTo(DEFAULT_OPLP);
+        assertThat(testCsgoItem.getOpq()).isEqualTo(DEFAULT_OPQ);
         assertThat(testCsgoItem.getAdded()).isEqualTo(DEFAULT_ADDED);
 
         // Validate the CsgoItem in Elasticsearch
@@ -367,6 +377,8 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.doubleValue())))
             .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.doubleValue())))
             .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.doubleValue())))
+            .andExpect(jsonPath("$.[*].oplp").value(hasItem(DEFAULT_OPLP.doubleValue())))
+            .andExpect(jsonPath("$.[*].opq").value(hasItem(DEFAULT_OPQ)))
             .andExpect(jsonPath("$.[*].added").value(hasItem(DEFAULT_ADDED.toString())));
     }
 
@@ -412,6 +424,8 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.cfp").value(DEFAULT_CFP.doubleValue()))
             .andExpect(jsonPath("$.iop").value(DEFAULT_IOP.doubleValue()))
             .andExpect(jsonPath("$.dcx").value(DEFAULT_DCX.doubleValue()))
+            .andExpect(jsonPath("$.oplp").value(DEFAULT_OPLP.doubleValue()))
+            .andExpect(jsonPath("$.opq").value(DEFAULT_OPQ))
             .andExpect(jsonPath("$.added").value(DEFAULT_ADDED.toString()));
     }
 
@@ -1734,6 +1748,111 @@ public class CsgoItemResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllCsgoItemsByOplpIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where oplp equals to DEFAULT_OPLP
+        defaultCsgoItemShouldBeFound("oplp.equals=" + DEFAULT_OPLP);
+
+        // Get all the csgoItemList where oplp equals to UPDATED_OPLP
+        defaultCsgoItemShouldNotBeFound("oplp.equals=" + UPDATED_OPLP);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByOplpIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where oplp in DEFAULT_OPLP or UPDATED_OPLP
+        defaultCsgoItemShouldBeFound("oplp.in=" + DEFAULT_OPLP + "," + UPDATED_OPLP);
+
+        // Get all the csgoItemList where oplp equals to UPDATED_OPLP
+        defaultCsgoItemShouldNotBeFound("oplp.in=" + UPDATED_OPLP);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByOplpIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where oplp is not null
+        defaultCsgoItemShouldBeFound("oplp.specified=true");
+
+        // Get all the csgoItemList where oplp is null
+        defaultCsgoItemShouldNotBeFound("oplp.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByOpqIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where opq equals to DEFAULT_OPQ
+        defaultCsgoItemShouldBeFound("opq.equals=" + DEFAULT_OPQ);
+
+        // Get all the csgoItemList where opq equals to UPDATED_OPQ
+        defaultCsgoItemShouldNotBeFound("opq.equals=" + UPDATED_OPQ);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByOpqIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where opq in DEFAULT_OPQ or UPDATED_OPQ
+        defaultCsgoItemShouldBeFound("opq.in=" + DEFAULT_OPQ + "," + UPDATED_OPQ);
+
+        // Get all the csgoItemList where opq equals to UPDATED_OPQ
+        defaultCsgoItemShouldNotBeFound("opq.in=" + UPDATED_OPQ);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByOpqIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where opq is not null
+        defaultCsgoItemShouldBeFound("opq.specified=true");
+
+        // Get all the csgoItemList where opq is null
+        defaultCsgoItemShouldNotBeFound("opq.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByOpqIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where opq greater than or equals to DEFAULT_OPQ
+        defaultCsgoItemShouldBeFound("opq.greaterOrEqualThan=" + DEFAULT_OPQ);
+
+        // Get all the csgoItemList where opq greater than or equals to UPDATED_OPQ
+        defaultCsgoItemShouldNotBeFound("opq.greaterOrEqualThan=" + UPDATED_OPQ);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByOpqIsLessThanSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where opq less than or equals to DEFAULT_OPQ
+        defaultCsgoItemShouldNotBeFound("opq.lessThan=" + DEFAULT_OPQ);
+
+        // Get all the csgoItemList where opq less than or equals to UPDATED_OPQ
+        defaultCsgoItemShouldBeFound("opq.lessThan=" + UPDATED_OPQ);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllCsgoItemsByAddedIsEqualToSomething() throws Exception {
         // Initialize the database
         csgoItemRepository.saveAndFlush(csgoItem);
@@ -1810,6 +1929,8 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.doubleValue())))
             .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.doubleValue())))
             .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.doubleValue())))
+            .andExpect(jsonPath("$.[*].oplp").value(hasItem(DEFAULT_OPLP.doubleValue())))
+            .andExpect(jsonPath("$.[*].opq").value(hasItem(DEFAULT_OPQ)))
             .andExpect(jsonPath("$.[*].added").value(hasItem(DEFAULT_ADDED.toString())));
     }
 
@@ -1875,6 +1996,8 @@ public class CsgoItemResourceIntTest {
             .cfp(UPDATED_CFP)
             .iop(UPDATED_IOP)
             .dcx(UPDATED_DCX)
+            .oplp(UPDATED_OPLP)
+            .opq(UPDATED_OPQ)
             .added(UPDATED_ADDED);
         CsgoItemDTO csgoItemDTO = csgoItemMapper.toDto(updatedCsgoItem);
 
@@ -1918,6 +2041,8 @@ public class CsgoItemResourceIntTest {
         assertThat(testCsgoItem.getCfp()).isEqualTo(UPDATED_CFP);
         assertThat(testCsgoItem.getIop()).isEqualTo(UPDATED_IOP);
         assertThat(testCsgoItem.getDcx()).isEqualTo(UPDATED_DCX);
+        assertThat(testCsgoItem.getOplp()).isEqualTo(UPDATED_OPLP);
+        assertThat(testCsgoItem.getOpq()).isEqualTo(UPDATED_OPQ);
         assertThat(testCsgoItem.getAdded()).isEqualTo(UPDATED_ADDED);
 
         // Validate the CsgoItem in Elasticsearch
@@ -2009,6 +2134,8 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.doubleValue())))
             .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.doubleValue())))
             .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.doubleValue())))
+            .andExpect(jsonPath("$.[*].oplp").value(hasItem(DEFAULT_OPLP.doubleValue())))
+            .andExpect(jsonPath("$.[*].opq").value(hasItem(DEFAULT_OPQ)))
             .andExpect(jsonPath("$.[*].added").value(hasItem(DEFAULT_ADDED.toString())));
     }
 
