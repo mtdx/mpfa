@@ -195,11 +195,15 @@ ui bootstrap tweaks
     padding-top: 20px;
 }
 
-i.opm.fa-circle.false {
-    color: gray;
+i.opm.fa-circle.false, i.opm.fa-circle, , i.d.fa-circle {
+    color: grey;
 }
 
 i.opm.fa-circle.true {
+    color: red;
+}
+
+i.d.fa-circle.true {
     color: green;
 }
 
