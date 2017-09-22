@@ -4,6 +4,7 @@ import com.mma.mma.domain.CsgoItem;
 import com.mma.mma.repository.CsgoItemRepository;
 import com.mma.mma.repository.search.CsgoItemSearchRepository;
 import com.mma.mma.service.dto.CsgoItemDTO;
+import com.mma.mma.service.dto.CsgoItemPriceDTO;
 import com.mma.mma.service.mapper.CsgoItemMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -74,6 +77,22 @@ public class CsgoItemService {
     public List<CsgoItem> findAll() {
         log.debug("Request to get all CsgoItems");
         return csgoItemRepository.findAll();
+    }
+
+    /**
+     *  Get all the csgoItems.
+     *
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public HashMap<String, BigDecimal> findAllForDeposit() {
+        log.debug("Request to get all CsgoItems for deposit");
+        List<CsgoItem> items = csgoItemRepository.findAllForDeposit();
+        HashMap<String, BigDecimal> prices = new HashMap<>();
+        for (CsgoItem item : items) {
+            prices.put(item.getName(), item.getSp());
+        }
+        return prices;
     }
 
     /**

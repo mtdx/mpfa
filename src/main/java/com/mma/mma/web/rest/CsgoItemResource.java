@@ -1,6 +1,7 @@
 package com.mma.mma.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.mma.mma.domain.CsgoItem;
 import com.mma.mma.service.CsgoItemService;
 import com.mma.mma.web.rest.util.HeaderUtil;
 import com.mma.mma.web.rest.util.PaginationUtil;
@@ -19,9 +20,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
@@ -153,4 +156,17 @@ public class CsgoItemResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    /**
+     * GET  /csgo-items : get all the csgoItems.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of csgoItems in body
+     */
+    @GetMapping("/csgo-deposit-items")
+    @Timed
+    public ResponseEntity<HashMap<String, BigDecimal>> getAllDepositCsgoItems() {
+        log.debug("REST request to get All CsgoItems for deposit: {}");
+        HashMap<String, BigDecimal> items = csgoItemService.findAllForDeposit();
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(items, headers, HttpStatus.OK);
+    }
 }
