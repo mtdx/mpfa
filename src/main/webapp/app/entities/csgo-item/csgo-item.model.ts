@@ -36,8 +36,10 @@ export class CsgoItem implements BaseEntity {
         public dcx?: number,
         public oplp?: number,
         public opq?: number,
+        public d?: boolean,
         public added?: any,
     ) {
         this.opm = false;
+        this.d = false;
     }
 }

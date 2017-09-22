@@ -153,6 +153,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="d" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
             <column name="added" type="timestamp">
                 <constraints nullable="true" />
             </column>

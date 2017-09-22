@@ -94,6 +94,8 @@ public class CsgoItemCriteria implements Serializable {
 
     private IntegerFilter opq;
 
+    private BooleanFilter d;
+
     private InstantFilter added;
 
     public CsgoItemCriteria() {
@@ -371,6 +373,14 @@ public class CsgoItemCriteria implements Serializable {
         this.opq = opq;
     }
 
+    public BooleanFilter getD() {
+        return d;
+    }
+
+    public void setD(BooleanFilter d) {
+        this.d = d;
+    }
+
     public InstantFilter getAdded() {
         return added;
     }
@@ -416,6 +426,7 @@ public class CsgoItemCriteria implements Serializable {
                 (dcx != null ? "dcx=" + dcx + ", " : "") +
                 (oplp != null ? "oplp=" + oplp + ", " : "") +
                 (opq != null ? "opq=" + opq + ", " : "") +
+                (d != null ? "d=" + d + ", " : "") +
                 (added != null ? "added=" + added + ", " : "") +
             "}";
     }

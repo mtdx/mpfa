@@ -81,6 +81,8 @@ public class CsgoItemDTO implements Serializable {
 
     private Integer opq;
 
+    private Boolean d;
+
     private Instant added;
 
     public Long getId() {
@@ -355,6 +357,14 @@ public class CsgoItemDTO implements Serializable {
         this.opq = opq;
     }
 
+    public Boolean isD() {
+        return d;
+    }
+
+    public void setD(Boolean d) {
+        this.d = d;
+    }
+
     public Instant getAdded() {
         return added;
     }
@@ -421,6 +431,7 @@ public class CsgoItemDTO implements Serializable {
             ", dcx='" + getDcx() + "'" +
             ", oplp='" + getOplp() + "'" +
             ", opq='" + getOpq() + "'" +
+            ", d='" + isD() + "'" +
             ", added='" + getAdded() + "'" +
             "}";
     }

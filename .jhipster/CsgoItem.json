@@ -138,6 +138,10 @@
             "fieldType": "Integer"
         },
         {
+            "fieldName": "d",
+            "fieldType": "Boolean"
+        },
+        {
             "fieldName": "added",
             "fieldType": "Instant"
         }

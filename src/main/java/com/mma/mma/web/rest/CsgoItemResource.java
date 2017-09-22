@@ -62,19 +62,19 @@ public class CsgoItemResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new csgoItemDTO, or with status 400 (Bad Request) if the csgoItem has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/csgo-items")
-    @Timed
-    public ResponseEntity<CsgoItemDTO> createCsgoItem(@Valid @RequestBody CsgoItemDTO csgoItemDTO) throws URISyntaxException {
-        log.debug("REST request to save CsgoItem : {}", csgoItemDTO);
-        if (csgoItemDTO.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new csgoItem cannot already have an ID")).body(null);
-        }
+//    @PostMapping("/csgo-items")
+//    @Timed
+//    public ResponseEntity<CsgoItemDTO> createCsgoItem(@Valid @RequestBody CsgoItemDTO csgoItemDTO) throws URISyntaxException {
+//        log.debug("REST request to save CsgoItem : {}", csgoItemDTO);
+//        if (csgoItemDTO.getId() != null) {
+//            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new csgoItem cannot already have an ID")).body(null);
+//        }
 //        CsgoItemDTO result = csgoItemService.save(csgoItemDTO);
-        CsgoItemDTO result = csgoItemDTO;
-        return ResponseEntity.created(new URI("/api/csgo-items/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
-    }
+//        CsgoItemDTO result = csgoItemDTO;
+//        return ResponseEntity.created(new URI("/api/csgo-items/" + result.getId()))
+//            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+//            .body(result);
+//    }
 
     /**
      * PUT  /csgo-items : Updates an existing csgoItem.
@@ -85,19 +85,19 @@ public class CsgoItemResource {
      * or with status 500 (Internal Server Error) if the csgoItemDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/csgo-items")
-    @Timed
-    public ResponseEntity<CsgoItemDTO> updateCsgoItem(@Valid @RequestBody CsgoItemDTO csgoItemDTO) throws URISyntaxException {
-        log.debug("REST request to update CsgoItem : {}", csgoItemDTO);
-        if (csgoItemDTO.getId() == null) {
-            return createCsgoItem(csgoItemDTO);
-        }
+//    @PutMapping("/csgo-items")
+//    @Timed
+//    public ResponseEntity<CsgoItemDTO> updateCsgoItem(@Valid @RequestBody CsgoItemDTO csgoItemDTO) throws URISyntaxException {
+//        log.debug("REST request to update CsgoItem : {}", csgoItemDTO);
+//        if (csgoItemDTO.getId() == null) {
+//            return createCsgoItem(csgoItemDTO);
+//        }
 //        CsgoItemDTO result = csgoItemService.save(csgoItemDTO);
-        CsgoItemDTO result = csgoItemDTO;
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, csgoItemDTO.getId().toString()))
-            .body(result);
-    }
+//        CsgoItemDTO result = csgoItemDTO;
+//        return ResponseEntity.ok()
+//            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, csgoItemDTO.getId().toString()))
+//            .body(result);
+//    }
 
     /**
      * GET  /csgo-items : get all the csgoItems.
@@ -135,13 +135,13 @@ public class CsgoItemResource {
      * @param id the id of the csgoItemDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/csgo-items/{id}")
-    @Timed
-    public ResponseEntity<Void> deleteCsgoItem(@PathVariable Long id) {
-        log.debug("REST request to delete CsgoItem : {}", id);
+//    @DeleteMapping("/csgo-items/{id}")
+//    @Timed
+//    public ResponseEntity<Void> deleteCsgoItem(@PathVariable Long id) {
+//        log.debug("REST request to delete CsgoItem : {}", id);
 //        csgoItemService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-    }
+//        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+//    }
 
     /**
      * SEARCH  /_search/csgo-items?query=:query : search for the csgoItem corresponding

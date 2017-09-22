@@ -145,6 +145,9 @@ public class CsgoItemResourceIntTest {
     private static final Integer DEFAULT_OPQ = 1;
     private static final Integer UPDATED_OPQ = 2;
 
+    private static final Boolean DEFAULT_D = false;
+    private static final Boolean UPDATED_D = true;
+
     private static final Instant DEFAULT_ADDED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_ADDED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -230,6 +233,7 @@ public class CsgoItemResourceIntTest {
             .dcx(DEFAULT_DCX)
             .oplp(DEFAULT_OPLP)
             .opq(DEFAULT_OPQ)
+            .d(DEFAULT_D)
             .added(DEFAULT_ADDED);
         return csgoItem;
     }
@@ -289,6 +293,7 @@ public class CsgoItemResourceIntTest {
         assertThat(testCsgoItem.getDcx()).isEqualTo(DEFAULT_DCX);
         assertThat(testCsgoItem.getOplp()).isEqualTo(DEFAULT_OPLP);
         assertThat(testCsgoItem.getOpq()).isEqualTo(DEFAULT_OPQ);
+        assertThat(testCsgoItem.isD()).isEqualTo(DEFAULT_D);
         assertThat(testCsgoItem.getAdded()).isEqualTo(DEFAULT_ADDED);
 
         // Validate the CsgoItem in Elasticsearch
@@ -379,6 +384,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.doubleValue())))
             .andExpect(jsonPath("$.[*].oplp").value(hasItem(DEFAULT_OPLP.doubleValue())))
             .andExpect(jsonPath("$.[*].opq").value(hasItem(DEFAULT_OPQ)))
+            .andExpect(jsonPath("$.[*].d").value(hasItem(DEFAULT_D.booleanValue())))
             .andExpect(jsonPath("$.[*].added").value(hasItem(DEFAULT_ADDED.toString())));
     }
 
@@ -426,6 +432,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.dcx").value(DEFAULT_DCX.doubleValue()))
             .andExpect(jsonPath("$.oplp").value(DEFAULT_OPLP.doubleValue()))
             .andExpect(jsonPath("$.opq").value(DEFAULT_OPQ))
+            .andExpect(jsonPath("$.d").value(DEFAULT_D.booleanValue()))
             .andExpect(jsonPath("$.added").value(DEFAULT_ADDED.toString()));
     }
 
@@ -1853,6 +1860,45 @@ public class CsgoItemResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllCsgoItemsByDIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where d equals to DEFAULT_D
+        defaultCsgoItemShouldBeFound("d.equals=" + DEFAULT_D);
+
+        // Get all the csgoItemList where d equals to UPDATED_D
+        defaultCsgoItemShouldNotBeFound("d.equals=" + UPDATED_D);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where d in DEFAULT_D or UPDATED_D
+        defaultCsgoItemShouldBeFound("d.in=" + DEFAULT_D + "," + UPDATED_D);
+
+        // Get all the csgoItemList where d equals to UPDATED_D
+        defaultCsgoItemShouldNotBeFound("d.in=" + UPDATED_D);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where d is not null
+        defaultCsgoItemShouldBeFound("d.specified=true");
+
+        // Get all the csgoItemList where d is null
+        defaultCsgoItemShouldNotBeFound("d.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllCsgoItemsByAddedIsEqualToSomething() throws Exception {
         // Initialize the database
         csgoItemRepository.saveAndFlush(csgoItem);
@@ -1931,6 +1977,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.doubleValue())))
             .andExpect(jsonPath("$.[*].oplp").value(hasItem(DEFAULT_OPLP.doubleValue())))
             .andExpect(jsonPath("$.[*].opq").value(hasItem(DEFAULT_OPQ)))
+            .andExpect(jsonPath("$.[*].d").value(hasItem(DEFAULT_D.booleanValue())))
             .andExpect(jsonPath("$.[*].added").value(hasItem(DEFAULT_ADDED.toString())));
     }
 
@@ -1998,6 +2045,7 @@ public class CsgoItemResourceIntTest {
             .dcx(UPDATED_DCX)
             .oplp(UPDATED_OPLP)
             .opq(UPDATED_OPQ)
+            .d(UPDATED_D)
             .added(UPDATED_ADDED);
         CsgoItemDTO csgoItemDTO = csgoItemMapper.toDto(updatedCsgoItem);
 
@@ -2043,6 +2091,7 @@ public class CsgoItemResourceIntTest {
         assertThat(testCsgoItem.getDcx()).isEqualTo(UPDATED_DCX);
         assertThat(testCsgoItem.getOplp()).isEqualTo(UPDATED_OPLP);
         assertThat(testCsgoItem.getOpq()).isEqualTo(UPDATED_OPQ);
+        assertThat(testCsgoItem.isD()).isEqualTo(UPDATED_D);
         assertThat(testCsgoItem.getAdded()).isEqualTo(UPDATED_ADDED);
 
         // Validate the CsgoItem in Elasticsearch
@@ -2136,6 +2185,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.doubleValue())))
             .andExpect(jsonPath("$.[*].oplp").value(hasItem(DEFAULT_OPLP.doubleValue())))
             .andExpect(jsonPath("$.[*].opq").value(hasItem(DEFAULT_OPQ)))
+            .andExpect(jsonPath("$.[*].d").value(hasItem(DEFAULT_D.booleanValue())))
             .andExpect(jsonPath("$.[*].added").value(hasItem(DEFAULT_ADDED.toString())));
     }
 

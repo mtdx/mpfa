@@ -127,6 +127,9 @@ public class CsgoItem implements Serializable {
     @Column(name = "opq")
     private Integer opq;
 
+    @Column(name = "d")
+    private Boolean d;
+
     @Column(name = "added")
     private Instant added;
 
@@ -568,6 +571,19 @@ public class CsgoItem implements Serializable {
         this.opq = opq;
     }
 
+    public Boolean isD() {
+        return d;
+    }
+
+    public CsgoItem d(Boolean d) {
+        this.d = d;
+        return this;
+    }
+
+    public void setD(Boolean d) {
+        this.d = d;
+    }
+
     public Instant getAdded() {
         return added;
     }
@@ -639,6 +655,7 @@ public class CsgoItem implements Serializable {
             ", dcx='" + getDcx() + "'" +
             ", oplp='" + getOplp() + "'" +
             ", opq='" + getOpq() + "'" +
+            ", d='" + isD() + "'" +
             ", added='" + getAdded() + "'" +
             "}";
     }
