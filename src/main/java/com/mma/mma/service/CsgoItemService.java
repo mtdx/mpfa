@@ -4,7 +4,6 @@ import com.mma.mma.domain.CsgoItem;
 import com.mma.mma.repository.CsgoItemRepository;
 import com.mma.mma.repository.search.CsgoItemSearchRepository;
 import com.mma.mma.service.dto.CsgoItemDTO;
-import com.mma.mma.service.dto.CsgoItemPriceDTO;
 import com.mma.mma.service.mapper.CsgoItemMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
