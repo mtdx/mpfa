@@ -10,6 +10,7 @@ services:
             - XYZ_API_KEY=
             - IO_API_KEY=
             - OP_API_KEY=
+            - NS_API_KEY=
             - POSTGRES_USER=mma
             - POSTGRES_PASSWORD=
         ports:

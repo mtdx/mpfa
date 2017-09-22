@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -45,6 +46,9 @@ public class CsgoItemResource {
     private final CsgoItemService csgoItemService;
 
     private final CsgoItemQueryService csgoItemQueryService;
+
+    @Value("${NS_API_KEY}")
+    private String NS_API_KEY;
 
     public CsgoItemResource(CsgoItemService csgoItemService, CsgoItemQueryService csgoItemQueryService) {
         this.csgoItemService = csgoItemService;
@@ -157,14 +161,18 @@ public class CsgoItemResource {
     }
 
     /**
-     * GET  /csgo-items : get all the csgoItems.
+     * GET  /csgo-items : get all the deposit csgoItems.
      *
-     * @return the ResponseEntity with status 200 (OK) and the list of csgoItems in body
+     * @return the prices list with status 200 (OK) and 400 if missing api key
      */
     @GetMapping("/csgo-deposit-items")
     @Timed
-    public ResponseEntity<HashMap<String, BigDecimal>> getAllDepositCsgoItems() {
+    public ResponseEntity<HashMap<String, BigDecimal>> getAllDepositCsgoItems(@RequestParam String apiKey) {
         log.debug("REST request to get All CsgoItems for deposit: {}");
+        if (!apiKey.equals(NS_API_KEY)) {
+            log.error("REST request to get All CsgoItems for deposit: {}");
+            return ResponseEntity.badRequest().body(null);
+        }
         HashMap<String, BigDecimal> items = csgoItemService.findAllForDeposit();
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<>(items, headers, HttpStatus.OK);
