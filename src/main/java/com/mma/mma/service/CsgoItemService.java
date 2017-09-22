@@ -89,15 +89,23 @@ public class CsgoItemService {
         List<CsgoItem> items = csgoItemRepository.findAllForDeposit();
         HashMap<String, BigDecimal> prices = new HashMap<>();
         for (CsgoItem item : items) {
-            if (item.getSp() != null && item.getDcx() != null && item.getSp().doubleValue() >= 20
-                && (item.getDcx() <= -50 || item.getDcx() >= 50)) {
-                continue;
+            try {
+                if (item.getSp() != null && item.getDcx() != null && item.getSp().doubleValue() >= 20
+                    && (item.getDcx() <= -50 || item.getDcx() >= 50)) {
+                    continue;
+                }
+                if (nameBlacklisted(item.getName())) {
+                    continue;
+                }
+                prices.put(item.getName(), item.getSp());
+                item.setD(true);
+                csgoItemRepository.save(item);
+                csgoItemSearchRepository.save(item);
+            }catch (Exception ex) {
+                log.error("Error adding item to deposit list {}", ex.getMessage());
             }
-            if (nameBlacklisted(item.getName())) {
-                continue;
-            }
-            prices.put(item.getName(), item.getSp());
         }
+        refreshsearch();
         return prices;
     }
 
