@@ -153,7 +153,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="d" type="boolean">
+            <column name="d" type="boolean" defaultValue="false">
                 <constraints nullable="true" />
             </column>
 
@@ -164,7 +164,7 @@
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="csgo_item" columnName="added" columnDataType="datetime"/>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>
