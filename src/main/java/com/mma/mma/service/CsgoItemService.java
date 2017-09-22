@@ -79,11 +79,10 @@ public class CsgoItemService {
     }
 
     /**
-     *  Get all the csgoItems.
+     *  Get all the csgoItems for deposit list.
      *
      *  @return the list of entities
      */
-    @Transactional(readOnly = true)
     public HashMap<String, BigDecimal> findAllForDeposit() {
         log.debug("Request to get all CsgoItems for deposit");
         List<CsgoItem> items = csgoItemRepository.findAllForDeposit();
