@@ -15,6 +15,10 @@ import java.util.List;
 @Repository
 public interface CsgoItemRepository extends JpaRepository<CsgoItem, Long>, JpaSpecificationExecutor<CsgoItem> {
 
-    @Query("select csgoItem from CsgoItem csgoItem where csgoItem.sp = 200")
+    @Query("select csgoItem from CsgoItem csgoItem where " +
+        "csgoItem.sp > 0.50 and " +
+        "csgoItem.opm = false and " +
+        "csgoItem.vol >= 100 and " +
+        "csgoItem.vol30 >= 10")
     List<CsgoItem> findAllForDeposit();
 }

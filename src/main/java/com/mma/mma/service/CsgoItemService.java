@@ -90,6 +90,13 @@ public class CsgoItemService {
         List<CsgoItem> items = csgoItemRepository.findAllForDeposit();
         HashMap<String, BigDecimal> prices = new HashMap<>();
         for (CsgoItem item : items) {
+            if (item.getSp() != null && item.getDcx() != null && item.getSp().doubleValue() >= 20
+                && (item.getDcx() <= -50 || item.getDcx() >= 50)) {
+                continue;
+            }
+            if (nameBlacklisted(item.getName())) {
+                continue;
+            }
             prices.put(item.getName(), item.getSp());
         }
         return prices;
@@ -142,5 +149,11 @@ public class CsgoItemService {
     public void refreshsearch() {
         log.debug("Refresh/Reindex CsgoItems elastic search {}");
         csgoItemSearchRepository.refresh();
+    }
+
+    private boolean nameBlacklisted(String marketName) {
+        String name = marketName.toLowerCase();
+        return name.contains("music") || name.contains("sticker") || name.contains("graffiti")
+            || (!name.contains("case hardened") && !name.contains("case key") && name.contains("case"));
     }
 }
