@@ -100,12 +100,10 @@ public class CsgoItemService {
                 prices.put(item.getName(), item.getSp());
                 item.setD(true);
                 csgoItemRepository.save(item);
-                csgoItemSearchRepository.save(item);
             }catch (Exception ex) {
                 log.error("Error adding item to deposit list {}", ex.getMessage());
             }
         }
-        refreshsearch();
         return prices;
     }
 
