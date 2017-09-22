@@ -94,6 +94,7 @@ public class CsgoXyzService {
             } else {
                 item = new CsgoItem();
                 item.setName(markethashname);
+                item.setD(false);
             }
             try {
                 Double ioPrice = null;
