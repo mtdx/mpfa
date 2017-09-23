@@ -101,6 +101,7 @@ public class CsgoXyzService {
                 Double cfPrice = null;
                 Double opPrice = null;
                 Integer opQty = null;
+                item.setCfp(null);
                 XyzItem newItem = xyzitems.get(markethashname);
                 if (cfPriceData.containsKey(markethashname)) {
                     try {
@@ -221,9 +222,16 @@ public class CsgoXyzService {
             item.setIop(ioPrice);
         }
         try {
-            if (cfPrice != null && cfPrice > 0 && newitem.getSafe_price() != null) {
-                Double sp = newitem.getSafe_price().doubleValue();
-                if (sp > 0) {
+            if (cfPrice != null && cfPrice > 0) {
+                Double sp =  null;
+                if (newitem.get7_days() != null && newitem.get7_days().getAverage_price() != null) {
+                    sp = newitem.get7_days().getAverage_price().doubleValue();
+                } else if (newitem.get30_days() != null && newitem.get30_days().getAverage_price() != null) {
+                    sp = newitem.get30_days().getAverage_price().doubleValue();
+                } else if (newitem.getAll_time() != null && newitem.getAll_time().getAverage_price() != null) {
+                    sp = newitem.getAll_time().getAverage_price().doubleValue();
+                }
+                if (sp != null && sp > 0) {
                     long diff = Math.round((sp - cfPrice) / sp * 100);
                     item.setDcx((double) diff);
                 }
@@ -232,10 +240,10 @@ public class CsgoXyzService {
             log.error("Failed to calc diff {}", ex.getMessage());
         }
 
-        if (opPrice != null && opPrice > 0)  {
+        if (opPrice != null && opPrice > 0) {
             item.setOplp(opPrice);
         }
-        if (opQty != null && opQty > 0)  {
+        if (opQty != null && opQty > 0) {
             item.setOpq(opQty);
         }
 
