@@ -1,9 +1,10 @@
 package com.mma.mma.repository;
 
 import com.mma.mma.domain.CsgoItem;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import org.springframework.data.jpa.repository.*;
 
 import java.util.List;
 
@@ -15,10 +16,11 @@ import java.util.List;
 @Repository
 public interface CsgoItemRepository extends JpaRepository<CsgoItem, Long>, JpaSpecificationExecutor<CsgoItem> {
 
-    @Query("select csgoItem from CsgoItem csgoItem where " +
-        "csgoItem.sp > 0 and " +
-        "csgoItem.opm = false and " +
-        "csgoItem.vol >= 50 and " +
-        "csgoItem.vol30 >= 5")
+//    @Query("select csgoItem from CsgoItem csgoItem where " +
+//        "csgoItem.sp > 0 and " +
+//        "csgoItem.opm = false and " +
+//        "csgoItem.vol >= 50 and " +
+//        "csgoItem.vol30 >= 5")
+    @Query("select csgoItem from CsgoItem csgoItem")
     List<CsgoItem> findAllForDeposit();
 }
