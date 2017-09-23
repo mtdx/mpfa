@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing CsgoItem.
@@ -55,10 +55,10 @@ public class CsgoItemService {
     }
 
     /**
-     *  Get all the csgoItems.
+     * Get all the csgoItems.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<CsgoItemDTO> findAll(Pageable pageable) {
@@ -68,9 +68,9 @@ public class CsgoItemService {
     }
 
     /**
-     *  Get all the csgoItems.
+     * Get all the csgoItems.
      *
-     *  @return the list of entities
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public List<CsgoItem> findAll() {
@@ -79,9 +79,9 @@ public class CsgoItemService {
     }
 
     /**
-     *  Get all the csgoItems for deposit list.
+     * Get all the csgoItems for deposit list.
      *
-     *  @return the list of entities
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public HashMap<String, BigDecimal> findAllForDeposit() {
@@ -97,8 +97,18 @@ public class CsgoItemService {
                 if (nameBlacklisted(item.getName())) {
                     continue;
                 }
-                prices.put(item.getName(), item.getAvg7());
-            }catch (Exception ex) {
+                BigDecimal sp = null;
+                if (item.getAvg7() != null) {
+                    sp = item.getAvg7();
+                } else if (item.getAvg30() != null) {
+                    sp = item.getAvg30();
+                } else if (item.getAvgAll() != null) {
+                    sp = item.getAvgAll();
+                }
+                if (sp != null) {
+                    prices.put(item.getName(), item.getAvg7());
+                }
+            } catch (Exception ex) {
                 log.error("Error adding item to deposit list {}", ex.getMessage());
             }
         }
@@ -106,10 +116,10 @@ public class CsgoItemService {
     }
 
     /**
-     *  Get one csgoItem by id.
+     * Get one csgoItem by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Transactional(readOnly = true)
     public CsgoItemDTO findOne(Long id) {
@@ -119,9 +129,9 @@ public class CsgoItemService {
     }
 
     /**
-     *  Delete the  csgoItem by id.
+     * Delete the  csgoItem by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     public void delete(Long id) {
         log.debug("Request to delete CsgoItem : {}", id);
@@ -130,8 +140,7 @@ public class CsgoItemService {
     }
 
     /**
-     *  Delete the all csgo items
-     *
+     * Delete the all csgo items
      */
     public void deleteAll() {
         log.debug("Request to delete all CsgoItems : {}");
@@ -142,9 +151,9 @@ public class CsgoItemService {
     /**
      * Search for the csgoItem corresponding to the query.
      *
-     *  @param query the query of the search
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param query    the query of the search
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<CsgoItemDTO> search(String query, Pageable pageable) {
@@ -156,7 +165,6 @@ public class CsgoItemService {
 
     /**
      * Refresh/Reindex elastic search
-     *
      */
     @Transactional(readOnly = true)
     public void refreshsearch() {
