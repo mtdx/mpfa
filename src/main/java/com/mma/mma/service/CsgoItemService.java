@@ -83,22 +83,21 @@ public class CsgoItemService {
      *
      *  @return the list of entities
      */
+    @Transactional(readOnly = true)
     public HashMap<String, BigDecimal> findAllForDeposit() {
         log.debug("Request to get all CsgoItems for deposit");
         List<CsgoItem> items = csgoItemRepository.findAllForDeposit();
         HashMap<String, BigDecimal> prices = new HashMap<>();
         for (CsgoItem item : items) {
             try {
-                if (item.getSp() != null && item.getDcx() != null && item.getSp().doubleValue() >= 20
-                    && (item.getDcx() <= -50 || item.getDcx() >= 50)) {
+                if (item.getCfp() != null && item.getAvg7() != null && item.getDcx() != null
+                    && item.getAvg7().doubleValue() >= 20 && (item.getDcx() < -25 || item.getDcx() > 25)) {
                     continue;
                 }
                 if (nameBlacklisted(item.getName())) {
                     continue;
                 }
-                prices.put(item.getName(), item.getSp());
-                item.setD(true);
-                csgoItemRepository.save(item);
+                prices.put(item.getName(), item.getAvg7());
             }catch (Exception ex) {
                 log.error("Error adding item to deposit list {}", ex.getMessage());
             }
@@ -128,6 +127,16 @@ public class CsgoItemService {
         log.debug("Request to delete CsgoItem : {}", id);
         csgoItemRepository.delete(id);
         csgoItemSearchRepository.delete(id);
+    }
+
+    /**
+     *  Delete the all csgo items
+     *
+     */
+    public void deleteAll() {
+        log.debug("Request to delete all CsgoItems : {}");
+        csgoItemRepository.deleteAll();
+        csgoItemSearchRepository.deleteAll();
     }
 
     /**
