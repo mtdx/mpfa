@@ -109,7 +109,6 @@ public class CsgoXyzService {
                         log.error("Failed to cast to Double cf price {}", ex.getMessage());
                         cfPrice = null;
                     }
-                    if (cfPrice != null && cfPrice < 0.10) continue;
                 }
                 if (ioPriceData.containsKey(markethashname)) {
                     try {
@@ -118,7 +117,6 @@ public class CsgoXyzService {
                         log.error("Failed to cast to Double io price {}", ex.getMessage());
                         ioPrice = null;
                     }
-                    if (ioPrice != null && ioPrice < 0.10) continue;
                 }
                 if (opPriceData != null && opPriceData.getStatus() == 1
                     && opPriceData.getResponse().containsKey(markethashname)) {
@@ -130,7 +128,6 @@ public class CsgoXyzService {
                         opPrice = null;
                         opQty = null;
                     }
-                    if (opPrice != null && opPrice < 0.5) continue;
                 }
                 mapNewItemData(item, newItem, cfPrice, ioPrice, opPrice, opQty);
                 csgoItemService.save(csgoItemMapper.toDto(item));
