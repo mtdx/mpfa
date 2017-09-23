@@ -167,13 +167,13 @@ public class CsgoItemResource {
      */
     @GetMapping("/csgo-deposit-items")
     @Timed
-    public ResponseEntity<HashMap<String, BigDecimal>> getAllDepositCsgoItems(@RequestParam String apiKey) {
+    public ResponseEntity<HashMap<String, Double>> getAllDepositCsgoItems(@RequestParam String apiKey) {
         log.debug("REST request to get All CsgoItems for deposit: {}");
         if (!apiKey.equals(NS_API_KEY)) {
             log.error("REST request to get All CsgoItems for deposit: {}");
             return ResponseEntity.badRequest().body(null);
         }
-        HashMap<String, BigDecimal> items = csgoItemService.findAllForDeposit();
+        HashMap<String, Double> items = csgoItemService.findAllForDeposit();
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<>(items, headers, HttpStatus.OK);
     }

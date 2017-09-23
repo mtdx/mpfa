@@ -84,14 +84,13 @@ public class CsgoItemService {
      * @return the list of entities
      */
     @Transactional(readOnly = true)
-    public HashMap<String, BigDecimal> findAllForDeposit() {
+    public HashMap<String, Double> findAllForDeposit() {
         log.debug("Request to get all CsgoItems for deposit");
         List<CsgoItem> items = csgoItemRepository.findAllForDeposit();
-        HashMap<String, BigDecimal> prices = new HashMap<>();
+        HashMap<String, Double> prices = new HashMap<>();
         for (CsgoItem item : items) {
             try {
-                if (item.getCfp() != null && item.getAvg7() != null && item.getDcx() != null
-                    && item.getAvg7().doubleValue() >= 20 && (item.getDcx() < -25 || item.getDcx() > 25)) {
+                if (item.getCfp() == null || item.getDcx() == null) {
                     continue;
                 }
                 if (nameBlacklisted(item.getName())) {
@@ -106,7 +105,10 @@ public class CsgoItemService {
                     sp = item.getAvgAll();
                 }
                 if (sp != null) {
-                    prices.put(item.getName(), item.getAvg7());
+                    if (sp.doubleValue() >= 20 && (item.getDcx() < -25 || item.getDcx() > 25)) {
+                        continue;
+                    }
+                    prices.put(item.getName(), item.getAvg7().doubleValue());
                 }
             } catch (Exception ex) {
                 log.error("Error adding item to deposit list {}", ex.getMessage());
