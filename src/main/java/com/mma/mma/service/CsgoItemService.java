@@ -105,7 +105,7 @@ public class CsgoItemService {
                     sp = item.getAvgAll();
                 }
                 if (sp != null) {
-                    if (sp.doubleValue() >= 5 && (item.getDcx() < -25 || item.getDcx() > 25)) {
+                    if (item.getDcx() < -25 || item.getDcx() > 25) {
                         continue;
                     }
                     prices.put(item.getName(), sp.doubleValue());
