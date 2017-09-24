@@ -46,7 +46,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="avg7"><span>Avg7</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="sp"><span>Sp</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="opm"><span>Opm</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="vol7"><span>Vol7</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="vol30"><span>Vol30</span> <span class="fa fa-sort"></span></th>
@@ -64,7 +64,7 @@
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let csgoItem of csgoItems ;trackBy: trackId">
                 <td><a [routerLink]="['../csgo-item', csgoItem.id ]">{{csgoItem.name}}</a></td>
-                <td>{{csgoItem.avg7 | currency:'USD':true}}</td>
+                <td>{{csgoItem.sp | currency:'USD':true}}</td>
                 <td><i class="fa fa-circle opm {{csgoItem.opm}}" aria-hidden="true"></i></td>
                 <td>{{csgoItem.vol7}}</td>
                 <td>{{csgoItem.vol30}}</td>

@@ -96,16 +96,9 @@ public class CsgoItemService {
                 if (nameBlacklisted(item.getName())) {
                     continue;
                 }
-                BigDecimal sp = null;
-                if (item.getMp7() != null) {
-                    sp = item.getMp7();
-                } else if (item.getMp30() != null) {
-                    sp = item.getMp30();
-                } else if (item.getMpAll() != null) {
-                    sp = item.getMpAll();
-                }
-                if (sp != null) {
-                    if (item.getDcx() < -25 || item.getDcx() > 25) {
+                BigDecimal sp = item.getSp();
+                if (sp != null && sp.doubleValue() > 0) {
+                    if (sp.doubleValue() > 5 && (item.getDcx() < -25 || item.getDcx() > 25)) {
                         continue;
                     }
                     prices.put(item.getName(), sp.doubleValue());
