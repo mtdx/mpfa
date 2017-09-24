@@ -224,12 +224,12 @@ public class CsgoXyzService {
         try {
             if (cfPrice != null && cfPrice > 0) {
                 Double sp =  null;
-                if (newitem.get7_days() != null && newitem.get7_days().getAverage_price() != null) {
-                    sp = newitem.get7_days().getAverage_price().doubleValue();
-                } else if (newitem.get30_days() != null && newitem.get30_days().getAverage_price() != null) {
-                    sp = newitem.get30_days().getAverage_price().doubleValue();
-                } else if (newitem.getAll_time() != null && newitem.getAll_time().getAverage_price() != null) {
-                    sp = newitem.getAll_time().getAverage_price().doubleValue();
+                if (newitem.get7_days() != null && newitem.get7_days().getMedian_price() != null) {
+                    sp = newitem.get7_days().getMedian_price().doubleValue();
+                } else if (newitem.get30_days() != null && newitem.get30_days().getMedian_price() != null) {
+                    sp = newitem.get30_days().getMedian_price().doubleValue();
+                } else if (newitem.getAll_time() != null && newitem.getAll_time().getMedian_price() != null) {
+                    sp = newitem.getAll_time().getMedian_price().doubleValue();
                 }
                 if (sp != null && sp > 0) {
                     long diff = Math.round((sp - cfPrice) / sp * 100);

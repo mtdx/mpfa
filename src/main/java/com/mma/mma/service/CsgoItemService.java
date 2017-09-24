@@ -97,12 +97,12 @@ public class CsgoItemService {
                     continue;
                 }
                 BigDecimal sp = null;
-                if (item.getAvg7() != null) {
-                    sp = item.getAvg7();
-                } else if (item.getAvg30() != null) {
-                    sp = item.getAvg30();
-                } else if (item.getAvgAll() != null) {
-                    sp = item.getAvgAll();
+                if (item.getMp7() != null) {
+                    sp = item.getMp7();
+                } else if (item.getMp30() != null) {
+                    sp = item.getMp30();
+                } else if (item.getMpAll() != null) {
+                    sp = item.getMpAll();
                 }
                 if (sp != null) {
                     if (item.getDcx() < -25 || item.getDcx() > 25) {
