@@ -108,7 +108,7 @@ public class CsgoItemService {
                     if (sp.doubleValue() >= 20 && (item.getDcx() < -25 || item.getDcx() > 25)) {
                         continue;
                     }
-                    prices.put(item.getName(), item.getAvg7().doubleValue());
+                    prices.put(item.getName(), sp.doubleValue());
                 }
             } catch (Exception ex) {
                 log.error("Error adding item to deposit list {}", ex.getMessage());
