@@ -130,6 +130,10 @@
             "fieldType": "Double"
         },
         {
+            "fieldName": "dopx",
+            "fieldType": "Double"
+        },
+        {
             "fieldName": "oplp",
             "fieldType": "Double"
         },

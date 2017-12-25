@@ -34,6 +34,7 @@ export class CsgoItem implements BaseEntity {
         public cfp?: number,
         public iop?: number,
         public dcx?: number,
+        public dopx?: number,
         public oplp?: number,
         public opq?: number,
         public d?: boolean,

@@ -139,6 +139,9 @@ public class CsgoItemResourceIntTest {
     private static final Double DEFAULT_DCX = 1D;
     private static final Double UPDATED_DCX = 2D;
 
+    private static final Double DEFAULT_DOPX = 1D;
+    private static final Double UPDATED_DOPX = 2D;
+
     private static final Double DEFAULT_OPLP = 1D;
     private static final Double UPDATED_OPLP = 2D;
 
@@ -231,6 +234,7 @@ public class CsgoItemResourceIntTest {
             .cfp(DEFAULT_CFP)
             .iop(DEFAULT_IOP)
             .dcx(DEFAULT_DCX)
+            .dopx(DEFAULT_DOPX)
             .oplp(DEFAULT_OPLP)
             .opq(DEFAULT_OPQ)
             .d(DEFAULT_D)
@@ -291,6 +295,7 @@ public class CsgoItemResourceIntTest {
         assertThat(testCsgoItem.getCfp()).isEqualTo(DEFAULT_CFP);
         assertThat(testCsgoItem.getIop()).isEqualTo(DEFAULT_IOP);
         assertThat(testCsgoItem.getDcx()).isEqualTo(DEFAULT_DCX);
+        assertThat(testCsgoItem.getDopx()).isEqualTo(DEFAULT_DOPX);
         assertThat(testCsgoItem.getOplp()).isEqualTo(DEFAULT_OPLP);
         assertThat(testCsgoItem.getOpq()).isEqualTo(DEFAULT_OPQ);
         assertThat(testCsgoItem.isD()).isEqualTo(DEFAULT_D);
@@ -382,6 +387,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.doubleValue())))
             .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.doubleValue())))
             .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.doubleValue())))
+            .andExpect(jsonPath("$.[*].dopx").value(hasItem(DEFAULT_DOPX.doubleValue())))
             .andExpect(jsonPath("$.[*].oplp").value(hasItem(DEFAULT_OPLP.doubleValue())))
             .andExpect(jsonPath("$.[*].opq").value(hasItem(DEFAULT_OPQ)))
             .andExpect(jsonPath("$.[*].d").value(hasItem(DEFAULT_D.booleanValue())))
@@ -430,6 +436,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.cfp").value(DEFAULT_CFP.doubleValue()))
             .andExpect(jsonPath("$.iop").value(DEFAULT_IOP.doubleValue()))
             .andExpect(jsonPath("$.dcx").value(DEFAULT_DCX.doubleValue()))
+            .andExpect(jsonPath("$.dopx").value(DEFAULT_DOPX.doubleValue()))
             .andExpect(jsonPath("$.oplp").value(DEFAULT_OPLP.doubleValue()))
             .andExpect(jsonPath("$.opq").value(DEFAULT_OPQ))
             .andExpect(jsonPath("$.d").value(DEFAULT_D.booleanValue()))
@@ -1755,6 +1762,45 @@ public class CsgoItemResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllCsgoItemsByDopxIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dopx equals to DEFAULT_DOPX
+        defaultCsgoItemShouldBeFound("dopx.equals=" + DEFAULT_DOPX);
+
+        // Get all the csgoItemList where dopx equals to UPDATED_DOPX
+        defaultCsgoItemShouldNotBeFound("dopx.equals=" + UPDATED_DOPX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDopxIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dopx in DEFAULT_DOPX or UPDATED_DOPX
+        defaultCsgoItemShouldBeFound("dopx.in=" + DEFAULT_DOPX + "," + UPDATED_DOPX);
+
+        // Get all the csgoItemList where dopx equals to UPDATED_DOPX
+        defaultCsgoItemShouldNotBeFound("dopx.in=" + UPDATED_DOPX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByDopxIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where dopx is not null
+        defaultCsgoItemShouldBeFound("dopx.specified=true");
+
+        // Get all the csgoItemList where dopx is null
+        defaultCsgoItemShouldNotBeFound("dopx.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllCsgoItemsByOplpIsEqualToSomething() throws Exception {
         // Initialize the database
         csgoItemRepository.saveAndFlush(csgoItem);
@@ -1975,6 +2021,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.doubleValue())))
             .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.doubleValue())))
             .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.doubleValue())))
+            .andExpect(jsonPath("$.[*].dopx").value(hasItem(DEFAULT_DOPX.doubleValue())))
             .andExpect(jsonPath("$.[*].oplp").value(hasItem(DEFAULT_OPLP.doubleValue())))
             .andExpect(jsonPath("$.[*].opq").value(hasItem(DEFAULT_OPQ)))
             .andExpect(jsonPath("$.[*].d").value(hasItem(DEFAULT_D.booleanValue())))
@@ -2043,6 +2090,7 @@ public class CsgoItemResourceIntTest {
             .cfp(UPDATED_CFP)
             .iop(UPDATED_IOP)
             .dcx(UPDATED_DCX)
+            .dopx(UPDATED_DOPX)
             .oplp(UPDATED_OPLP)
             .opq(UPDATED_OPQ)
             .d(UPDATED_D)
@@ -2089,6 +2137,7 @@ public class CsgoItemResourceIntTest {
         assertThat(testCsgoItem.getCfp()).isEqualTo(UPDATED_CFP);
         assertThat(testCsgoItem.getIop()).isEqualTo(UPDATED_IOP);
         assertThat(testCsgoItem.getDcx()).isEqualTo(UPDATED_DCX);
+        assertThat(testCsgoItem.getDopx()).isEqualTo(UPDATED_DOPX);
         assertThat(testCsgoItem.getOplp()).isEqualTo(UPDATED_OPLP);
         assertThat(testCsgoItem.getOpq()).isEqualTo(UPDATED_OPQ);
         assertThat(testCsgoItem.isD()).isEqualTo(UPDATED_D);
@@ -2183,6 +2232,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.doubleValue())))
             .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.doubleValue())))
             .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.doubleValue())))
+            .andExpect(jsonPath("$.[*].dopx").value(hasItem(DEFAULT_DOPX.doubleValue())))
             .andExpect(jsonPath("$.[*].oplp").value(hasItem(DEFAULT_OPLP.doubleValue())))
             .andExpect(jsonPath("$.[*].opq").value(hasItem(DEFAULT_OPQ)))
             .andExpect(jsonPath("$.[*].d").value(hasItem(DEFAULT_D.booleanValue())))

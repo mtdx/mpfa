@@ -77,6 +77,8 @@ public class CsgoItemDTO implements Serializable {
 
     private Double dcx;
 
+    private Double dopx;
+
     private Double oplp;
 
     private Integer opq;
@@ -341,6 +343,14 @@ public class CsgoItemDTO implements Serializable {
         this.dcx = dcx;
     }
 
+    public Double getDopx() {
+        return dopx;
+    }
+
+    public void setDopx(Double dopx) {
+        this.dopx = dopx;
+    }
+
     public Double getOplp() {
         return oplp;
     }
@@ -429,6 +439,7 @@ public class CsgoItemDTO implements Serializable {
             ", cfp='" + getCfp() + "'" +
             ", iop='" + getIop() + "'" +
             ", dcx='" + getDcx() + "'" +
+            ", dopx='" + getDopx() + "'" +
             ", oplp='" + getOplp() + "'" +
             ", opq='" + getOpq() + "'" +
             ", d='" + isD() + "'" +

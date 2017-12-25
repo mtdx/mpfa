@@ -121,6 +121,9 @@ public class CsgoItem implements Serializable {
     @Column(name = "dcx")
     private Double dcx;
 
+    @Column(name = "dopx")
+    private Double dopx;
+
     @Column(name = "oplp")
     private Double oplp;
 
@@ -545,6 +548,19 @@ public class CsgoItem implements Serializable {
         this.dcx = dcx;
     }
 
+    public Double getDopx() {
+        return dopx;
+    }
+
+    public CsgoItem dopx(Double dopx) {
+        this.dopx = dopx;
+        return this;
+    }
+
+    public void setDopx(Double dopx) {
+        this.dopx = dopx;
+    }
+
     public Double getOplp() {
         return oplp;
     }
@@ -653,6 +669,7 @@ public class CsgoItem implements Serializable {
             ", cfp='" + getCfp() + "'" +
             ", iop='" + getIop() + "'" +
             ", dcx='" + getDcx() + "'" +
+            ", dopx='" + getDopx() + "'" +
             ", oplp='" + getOplp() + "'" +
             ", opq='" + getOpq() + "'" +
             ", d='" + isD() + "'" +
