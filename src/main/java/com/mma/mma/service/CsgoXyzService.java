@@ -235,6 +235,20 @@ public class CsgoXyzService {
         } catch (Exception ex) {
             log.error("Failed to calc diff {}", ex.getMessage());
         }
+        try {
+            if (opPrice != null && opPrice > 0) {
+                Double sp =  null;
+                if (newitem.getSafe_price() != null) {
+                    sp = newitem.getSafe_price().doubleValue();
+                }
+                if (sp != null && sp > 0) {
+                    long diff = Math.round((sp - opPrice) / sp * 100);
+                    item.setDopx((double) diff);
+                }
+            }
+        } catch (Exception ex) {
+            log.error("Failed to calc dopx diff {}", ex.getMessage());
+        }
 
         if (opPrice != null && opPrice > 0) {
             item.setOplp(opPrice);
