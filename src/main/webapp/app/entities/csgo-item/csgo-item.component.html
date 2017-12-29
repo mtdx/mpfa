@@ -76,8 +76,8 @@
                 <td>{{csgoItem.iop | currency:'USD':true}}</td>
                 <td>{{csgoItem.oplp | currency:'USD':true}}</td>
                 <td>{{csgoItem.opq}}</td>
-                <td>{{csgoItem.dcx}}%</td>
-                <td>{{csgoItem.dopx}}%</td>
+                <td>{{csgoItem.dcx != null ? csgoItem.dcx + '%' : ''}}</td>
+                <td>{{csgoItem.dopx != null ? csgoItem.dopx + '%' : ''}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <a href="https://opskins.com/?app=730_2&loc=shop_search&search_item={{csgoItem.name}}&sort=lh" target="_blank">
