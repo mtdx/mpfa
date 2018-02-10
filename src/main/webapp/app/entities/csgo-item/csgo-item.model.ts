@@ -6,6 +6,7 @@ export class CsgoItem implements BaseEntity {
         public name?: string,
         public sp?: number,
         public opm?: boolean,
+        public rank?: number,
         public vol?: number,
         public mp7?: number,
         public avg7?: number,

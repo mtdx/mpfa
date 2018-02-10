@@ -37,6 +37,9 @@ public class CsgoItem implements Serializable {
     @Column(name = "opm")
     private Boolean opm;
 
+    @Column(name = "rank")
+    private Integer rank;
+
     @Column(name = "vol")
     private Integer vol;
 
@@ -182,6 +185,19 @@ public class CsgoItem implements Serializable {
 
     public void setOpm(Boolean opm) {
         this.opm = opm;
+    }
+
+    public Integer getRank() {
+        return rank;
+    }
+
+    public CsgoItem rank(Integer rank) {
+        this.rank = rank;
+        return this;
+    }
+
+    public void setRank(Integer rank) {
+        this.rank = rank;
     }
 
     public Integer getVol() {
@@ -641,6 +657,7 @@ public class CsgoItem implements Serializable {
             ", name='" + getName() + "'" +
             ", sp='" + getSp() + "'" +
             ", opm='" + isOpm() + "'" +
+            ", rank='" + getRank() + "'" +
             ", vol='" + getVol() + "'" +
             ", mp7='" + getMp7() + "'" +
             ", avg7='" + getAvg7() + "'" +

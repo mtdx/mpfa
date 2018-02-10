@@ -46,10 +46,10 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="rank"><span>Rank</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="sp"><span>Sp</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="cfp"><span>Cfp</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="avg30"><span>Avg30</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="avgAll"><span>AvgAll</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="oplp"><span>Oplp</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="dcx"><span>Dcx</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="dopx"><span>Dopx</span> <span class="fa fa-sort"></span></th>
@@ -63,10 +63,10 @@
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let csgoItem of csgoItems ;trackBy: trackId">
                 <td><a [routerLink]="['../csgo-item', csgoItem.id ]">{{csgoItem.name}}</a></td>
+                <td>{{csgoItem.rank}}</td>
                 <td><span class="opm {{csgoItem.opm}}">{{csgoItem.sp | currency:'USD':true}}</span></td>
                 <td>{{csgoItem.cfp | currency:'USD':true}}</td>
                 <td>{{csgoItem.avg30 | currency:'USD':true}}</td>
-                <td>{{csgoItem.avgAll | currency:'USD':true}}</td>
                 <td>{{csgoItem.oplp | currency:'USD':true}}</td>
                 <td>{{csgoItem.dcx != null ? csgoItem.dcx + '%' : ''}}</td>
                 <td>{{csgoItem.dopx != null ? csgoItem.dopx + '%' : ''}}</td>

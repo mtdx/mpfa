@@ -250,6 +250,27 @@ public class CsgoXyzService {
             log.error("Failed to calc dopx diff {}", ex.getMessage());
         }
 
+        try {
+            Double sp =  null;
+            Integer vol30 = null;
+            Integer opq = null;
+            if (newitem.getSafe_price() != null && newitem.getSafe_price().doubleValue() > 0) {
+                sp = newitem.getSafe_price().doubleValue();
+            }
+            if (newitem.get30_days() != null && newitem.get30_days().getVolume() > 0) {
+                vol30 = newitem.get30_days().getVolume();
+            }
+            if (opQty != null && opQty > 0) {
+                opq = opQty;
+            }
+            if (sp != null && vol30 != null && opq != null) {
+                int rank = (int)(sp * vol30 * opq);
+                item.setRank(rank);
+            }
+        } catch (Exception ex) {
+            log.error("Failed to calc rank {}", ex.getMessage());
+        }
+
         if (opPrice != null && opPrice > 0) {
             item.setOplp(opPrice);
         }

@@ -18,6 +18,10 @@
             "fieldType": "Boolean"
         },
         {
+            "fieldName": "rank",
+            "fieldType": "Integer"
+        },
+        {
             "fieldName": "vol",
             "fieldType": "Integer"
         },

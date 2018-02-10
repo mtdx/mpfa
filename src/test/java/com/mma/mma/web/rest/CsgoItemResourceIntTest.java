@@ -55,6 +55,9 @@ public class CsgoItemResourceIntTest {
     private static final Boolean DEFAULT_OPM = false;
     private static final Boolean UPDATED_OPM = true;
 
+    private static final Integer DEFAULT_RANK = 1;
+    private static final Integer UPDATED_RANK = 2;
+
     private static final Integer DEFAULT_VOL = 1;
     private static final Integer UPDATED_VOL = 2;
 
@@ -206,6 +209,7 @@ public class CsgoItemResourceIntTest {
             .name(DEFAULT_NAME)
             .sp(DEFAULT_SP)
             .opm(DEFAULT_OPM)
+            .rank(DEFAULT_RANK)
             .vol(DEFAULT_VOL)
             .mp7(DEFAULT_MP_7)
             .avg7(DEFAULT_AVG_7)
@@ -267,6 +271,7 @@ public class CsgoItemResourceIntTest {
         assertThat(testCsgoItem.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCsgoItem.getSp()).isEqualTo(DEFAULT_SP);
         assertThat(testCsgoItem.isOpm()).isEqualTo(DEFAULT_OPM);
+        assertThat(testCsgoItem.getRank()).isEqualTo(DEFAULT_RANK);
         assertThat(testCsgoItem.getVol()).isEqualTo(DEFAULT_VOL);
         assertThat(testCsgoItem.getMp7()).isEqualTo(DEFAULT_MP_7);
         assertThat(testCsgoItem.getAvg7()).isEqualTo(DEFAULT_AVG_7);
@@ -359,6 +364,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].sp").value(hasItem(DEFAULT_SP.intValue())))
             .andExpect(jsonPath("$.[*].opm").value(hasItem(DEFAULT_OPM.booleanValue())))
+            .andExpect(jsonPath("$.[*].rank").value(hasItem(DEFAULT_RANK)))
             .andExpect(jsonPath("$.[*].vol").value(hasItem(DEFAULT_VOL)))
             .andExpect(jsonPath("$.[*].mp7").value(hasItem(DEFAULT_MP_7.intValue())))
             .andExpect(jsonPath("$.[*].avg7").value(hasItem(DEFAULT_AVG_7.intValue())))
@@ -408,6 +414,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.sp").value(DEFAULT_SP.intValue()))
             .andExpect(jsonPath("$.opm").value(DEFAULT_OPM.booleanValue()))
+            .andExpect(jsonPath("$.rank").value(DEFAULT_RANK))
             .andExpect(jsonPath("$.vol").value(DEFAULT_VOL))
             .andExpect(jsonPath("$.mp7").value(DEFAULT_MP_7.intValue()))
             .andExpect(jsonPath("$.avg7").value(DEFAULT_AVG_7.intValue()))
@@ -559,6 +566,72 @@ public class CsgoItemResourceIntTest {
         // Get all the csgoItemList where opm is null
         defaultCsgoItemShouldNotBeFound("opm.specified=false");
     }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByRankIsEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where rank equals to DEFAULT_RANK
+        defaultCsgoItemShouldBeFound("rank.equals=" + DEFAULT_RANK);
+
+        // Get all the csgoItemList where rank equals to UPDATED_RANK
+        defaultCsgoItemShouldNotBeFound("rank.equals=" + UPDATED_RANK);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByRankIsInShouldWork() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where rank in DEFAULT_RANK or UPDATED_RANK
+        defaultCsgoItemShouldBeFound("rank.in=" + DEFAULT_RANK + "," + UPDATED_RANK);
+
+        // Get all the csgoItemList where rank equals to UPDATED_RANK
+        defaultCsgoItemShouldNotBeFound("rank.in=" + UPDATED_RANK);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByRankIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where rank is not null
+        defaultCsgoItemShouldBeFound("rank.specified=true");
+
+        // Get all the csgoItemList where rank is null
+        defaultCsgoItemShouldNotBeFound("rank.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByRankIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where rank greater than or equals to DEFAULT_RANK
+        defaultCsgoItemShouldBeFound("rank.greaterOrEqualThan=" + DEFAULT_RANK);
+
+        // Get all the csgoItemList where rank greater than or equals to UPDATED_RANK
+        defaultCsgoItemShouldNotBeFound("rank.greaterOrEqualThan=" + UPDATED_RANK);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCsgoItemsByRankIsLessThanSomething() throws Exception {
+        // Initialize the database
+        csgoItemRepository.saveAndFlush(csgoItem);
+
+        // Get all the csgoItemList where rank less than or equals to DEFAULT_RANK
+        defaultCsgoItemShouldNotBeFound("rank.lessThan=" + DEFAULT_RANK);
+
+        // Get all the csgoItemList where rank less than or equals to UPDATED_RANK
+        defaultCsgoItemShouldBeFound("rank.lessThan=" + UPDATED_RANK);
+    }
+
 
     @Test
     @Transactional
@@ -1993,6 +2066,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].sp").value(hasItem(DEFAULT_SP.intValue())))
             .andExpect(jsonPath("$.[*].opm").value(hasItem(DEFAULT_OPM.booleanValue())))
+            .andExpect(jsonPath("$.[*].rank").value(hasItem(DEFAULT_RANK)))
             .andExpect(jsonPath("$.[*].vol").value(hasItem(DEFAULT_VOL)))
             .andExpect(jsonPath("$.[*].mp7").value(hasItem(DEFAULT_MP_7.intValue())))
             .andExpect(jsonPath("$.[*].avg7").value(hasItem(DEFAULT_AVG_7.intValue())))
@@ -2062,6 +2136,7 @@ public class CsgoItemResourceIntTest {
             .name(UPDATED_NAME)
             .sp(UPDATED_SP)
             .opm(UPDATED_OPM)
+            .rank(UPDATED_RANK)
             .vol(UPDATED_VOL)
             .mp7(UPDATED_MP_7)
             .avg7(UPDATED_AVG_7)
@@ -2109,6 +2184,7 @@ public class CsgoItemResourceIntTest {
         assertThat(testCsgoItem.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCsgoItem.getSp()).isEqualTo(UPDATED_SP);
         assertThat(testCsgoItem.isOpm()).isEqualTo(UPDATED_OPM);
+        assertThat(testCsgoItem.getRank()).isEqualTo(UPDATED_RANK);
         assertThat(testCsgoItem.getVol()).isEqualTo(UPDATED_VOL);
         assertThat(testCsgoItem.getMp7()).isEqualTo(UPDATED_MP_7);
         assertThat(testCsgoItem.getAvg7()).isEqualTo(UPDATED_AVG_7);
@@ -2204,6 +2280,7 @@ public class CsgoItemResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].sp").value(hasItem(DEFAULT_SP.intValue())))
             .andExpect(jsonPath("$.[*].opm").value(hasItem(DEFAULT_OPM.booleanValue())))
+            .andExpect(jsonPath("$.[*].rank").value(hasItem(DEFAULT_RANK)))
             .andExpect(jsonPath("$.[*].vol").value(hasItem(DEFAULT_VOL)))
             .andExpect(jsonPath("$.[*].mp7").value(hasItem(DEFAULT_MP_7.intValue())))
             .andExpect(jsonPath("$.[*].avg7").value(hasItem(DEFAULT_AVG_7.intValue())))

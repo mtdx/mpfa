@@ -34,6 +34,8 @@ public class CsgoItemCriteria implements Serializable {
 
     private BooleanFilter opm;
 
+    private IntegerFilter rank;
+
     private IntegerFilter vol;
 
     private BigDecimalFilter mp7;
@@ -133,6 +135,14 @@ public class CsgoItemCriteria implements Serializable {
 
     public void setOpm(BooleanFilter opm) {
         this.opm = opm;
+    }
+
+    public IntegerFilter getRank() {
+        return rank;
+    }
+
+    public void setRank(IntegerFilter rank) {
+        this.rank = rank;
     }
 
     public IntegerFilter getVol() {
@@ -406,6 +416,7 @@ public class CsgoItemCriteria implements Serializable {
                 (name != null ? "name=" + name + ", " : "") +
                 (sp != null ? "sp=" + sp + ", " : "") +
                 (opm != null ? "opm=" + opm + ", " : "") +
+                (rank != null ? "rank=" + rank + ", " : "") +
                 (vol != null ? "vol=" + vol + ", " : "") +
                 (mp7 != null ? "mp7=" + mp7 + ", " : "") +
                 (avg7 != null ? "avg7=" + avg7 + ", " : "") +

@@ -21,6 +21,8 @@ public class CsgoItemDTO implements Serializable {
 
     private Boolean opm;
 
+    private Integer rank;
+
     private Integer vol;
 
     private BigDecimal mp7;
@@ -117,6 +119,14 @@ public class CsgoItemDTO implements Serializable {
 
     public void setOpm(Boolean opm) {
         this.opm = opm;
+    }
+
+    public Integer getRank() {
+        return rank;
+    }
+
+    public void setRank(Integer rank) {
+        this.rank = rank;
     }
 
     public Integer getVol() {
@@ -411,6 +421,7 @@ public class CsgoItemDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", sp='" + getSp() + "'" +
             ", opm='" + isOpm() + "'" +
+            ", rank='" + getRank() + "'" +
             ", vol='" + getVol() + "'" +
             ", mp7='" + getMp7() + "'" +
             ", avg7='" + getAvg7() + "'" +
