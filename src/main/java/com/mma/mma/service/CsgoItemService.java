@@ -93,12 +93,9 @@ public class CsgoItemService {
                 if (item.getCfp() == null || item.getDcx() == null) {
                     continue;
                 }
-                if (nameBlacklisted(item.getName())) {
-                    continue;
-                }
                 BigDecimal sp = item.getSp();
                 if (sp != null && sp.doubleValue() > 0) {
-                    if (sp.doubleValue() > 5 && (item.getDcx() < -25 || item.getDcx() > 25)) {
+                    if (sp.doubleValue() > 5 && (item.getDcx() < -30 || item.getDcx() > 30)) {
                         continue;
                     }
                     prices.put(item.getName(), sp.doubleValue());
@@ -165,11 +162,5 @@ public class CsgoItemService {
     public void refreshsearch() {
         log.debug("Refresh/Reindex CsgoItems elastic search {}");
         csgoItemSearchRepository.refresh();
-    }
-
-    private boolean nameBlacklisted(String marketName) {
-        String name = marketName.toLowerCase();
-        return name.contains("music") || name.contains("sticker") || name.contains("graffiti")
-            || (!name.contains("case hardened") && !name.contains("case key") && name.contains("case"));
     }
 }
