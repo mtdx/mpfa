@@ -95,7 +95,7 @@ public class CsgoItemService {
                 }
                 BigDecimal sp = item.getSp();
                 if (sp != null && sp.doubleValue() > 0) {
-                    if (sp.doubleValue() > 4 && (item.getDcx() < -30 || item.getDcx() > 30 || item.getDopx() > 50)) {
+                    if (sp.doubleValue() > 4 && (item.getDcx() > 25 || item.getDopx() > 50)) {
                         continue;
                     }
                     prices.put(item.getName(), sp.doubleValue());
@@ -120,13 +120,12 @@ public class CsgoItemService {
         HashMap<String, Double> prices = new HashMap<>();
         for (CsgoItem item : items) {
             try {
-                if (item.getCfp() == null || item.getDcx() == null
-                    || item.getDopx() == null || item.getDopx() < 25) {
+                if (item.getCfp() == null || item.getDcx() == null || item.getDopx() == null) {
                     continue;
                 }
                 BigDecimal sp = item.getSp();
                 if (sp != null && sp.doubleValue() > 0) {
-                    if (sp.doubleValue() > 4 && (item.getDcx() < -30 || item.getDcx() > 30)) {
+                    if (sp.doubleValue() > 4 && (item.getDcx() < -25 || item.getDopx() < 25)) {
                         continue;
                     }
                     prices.put(item.getName(), sp.doubleValue());
