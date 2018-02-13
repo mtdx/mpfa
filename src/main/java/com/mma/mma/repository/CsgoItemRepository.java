@@ -21,6 +21,9 @@ public interface CsgoItemRepository extends JpaRepository<CsgoItem, Long>, JpaSp
 //        "csgoItem.opm = false and " +
 //        "csgoItem.vol >= 50 and " +
 //        "csgoItem.vol30 >= 5")
-    @Query("select csgoItem from CsgoItem csgoItem")
+    @Query("select csgoItem from CsgoItem csgoItem where csgoItem.sp >= 0.50 ")
     List<CsgoItem> findAllForDeposit();
+
+    @Query("select csgoItem from CsgoItem csgoItem where csgoItem.rank >= 400000 and csgoItem.sp >= 5")
+    List<CsgoItem> findAllForPlaceholder();
 }

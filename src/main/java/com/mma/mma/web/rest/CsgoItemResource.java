@@ -177,4 +177,22 @@ public class CsgoItemResource {
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<>(items, headers, HttpStatus.OK);
     }
+
+    /**
+     * GET  /csgo-items-placeholder : get all the deposit csgoItems.
+     *
+     * @return the prices list with status 200 (OK) and 400 if missing api key
+     */
+    @GetMapping("/csgo-items-placeholder")
+    @Timed
+    public ResponseEntity<HashMap<String, Double>> getAllPlaceholderCsgoItems(@RequestParam String apiKey) {
+        log.debug("REST request to get All CsgoItems for placeholder: {}");
+        if (!apiKey.equals(NS_API_KEY)) {
+            log.error("REST request to get All CsgoItems for placeholder: {}");
+            return ResponseEntity.badRequest().body(null);
+        }
+        HashMap<String, Double> items = csgoItemService.findAllForPlaceholder();
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(items, headers, HttpStatus.OK);
+    }
 }

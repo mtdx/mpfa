@@ -90,18 +90,50 @@ public class CsgoItemService {
         HashMap<String, Double> prices = new HashMap<>();
         for (CsgoItem item : items) {
             try {
-                if (item.getCfp() == null || item.getDcx() == null) {
+                if (item.getCfp() == null || item.getDcx() == null
+                    || item.getDopx() == null || item.getDopx() < -5) {
                     continue;
                 }
                 BigDecimal sp = item.getSp();
                 if (sp != null && sp.doubleValue() > 0) {
-                    if (sp.doubleValue() > 5 && (item.getDcx() < -30 || item.getDcx() > 30)) {
+                    if (sp.doubleValue() > 4 && (item.getDcx() < -30 || item.getDcx() > 30)) {
                         continue;
                     }
                     prices.put(item.getName(), sp.doubleValue());
                 }
             } catch (Exception ex) {
                 log.error("Error adding item to deposit list {}", ex.getMessage());
+            }
+        }
+        return prices;
+    }
+
+
+    /**
+     * Get all the csgoItems for deposit list.
+     *
+     * @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public HashMap<String, Double> findAllForPlaceholder() {
+        log.debug("Request to get all CsgoItems for Placeholder");
+        List<CsgoItem> items = csgoItemRepository.findAllForPlaceholder();
+        HashMap<String, Double> prices = new HashMap<>();
+        for (CsgoItem item : items) {
+            try {
+                if (item.getCfp() == null || item.getDcx() == null
+                    || item.getDopx() == null || item.getDopx() < 25) {
+                    continue;
+                }
+                BigDecimal sp = item.getSp();
+                if (sp != null && sp.doubleValue() > 0) {
+                    if (sp.doubleValue() > 4 && (item.getDcx() < -30 || item.getDcx() > 30)) {
+                        continue;
+                    }
+                    prices.put(item.getName(), sp.doubleValue());
+                }
+            } catch (Exception ex) {
+                log.error("Error adding item to placeholder list {}", ex.getMessage());
             }
         }
         return prices;
