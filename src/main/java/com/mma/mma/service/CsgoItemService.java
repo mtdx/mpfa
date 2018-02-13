@@ -90,13 +90,12 @@ public class CsgoItemService {
         HashMap<String, Double> prices = new HashMap<>();
         for (CsgoItem item : items) {
             try {
-                if (item.getCfp() == null || item.getDcx() == null
-                    || item.getDopx() == null || item.getDopx() < -5) {
+                if (item.getCfp() == null || item.getDcx() == null || item.getDopx() == null) {
                     continue;
                 }
                 BigDecimal sp = item.getSp();
                 if (sp != null && sp.doubleValue() > 0) {
-                    if (sp.doubleValue() > 4 && (item.getDcx() < -30 || item.getDcx() > 30)) {
+                    if (sp.doubleValue() > 4 && (item.getDcx() < -30 || item.getDcx() > 30 || item.getDopx() > 30)) {
                         continue;
                     }
                     prices.put(item.getName(), sp.doubleValue());
