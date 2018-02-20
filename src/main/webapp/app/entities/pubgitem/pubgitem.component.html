@@ -29,7 +29,6 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="uns"><span>Uns</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="unsr"><span>Unsr</span> <span class="fa fa-sort"></span></th>
@@ -45,6 +44,8 @@
             <th jhiSortBy="s7d"><span>S 7 D</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="s30d"><span>S 30 D</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="s90d"><span>S 90 D</span> <span class="fa fa-sort"></span></th>
+
+
             <th jhiSortBy="nid"><span>Nid</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="uat"><span>Uat</span> <span class="fa fa-sort"></span></th>
             <th></th>
@@ -52,40 +53,35 @@
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let pubgitem of pubgitems ;trackBy: trackId">
-                <td><a [routerLink]="['../pubgitem', pubgitem.id ]">{{pubgitem.id}}</a></td>
-                <td>{{pubgitem.name}}</td>
-                <td>{{pubgitem.uns}}</td>
-                <td>{{pubgitem.unsr}}</td>
+                <td><a [routerLink]="['../pubgitem', pubgitem.id ]">{{pubgitem.name}}</a></td>
                 <td>{{pubgitem.rank}}</td>
-                <td>{{pubgitem.sp}}</td>
-                <td>{{pubgitem.meanp}}</td>
-                <td>{{pubgitem.maxp}}</td>
-                <td>{{pubgitem.avgp}}</td>
-                <td>{{pubgitem.minp}}</td>
-                <td>{{pubgitem.lp}}</td>
+                <td><span class="opm {{pubgitem.uns}}">{{pubgitem.sp}}</span></td>
+                <td>{{pubgitem.oplp | currency:'USD':true}}</td>
+                <td>{{pubgitem.dcx != null ? pubgitem.dcx + '%' : ''}}</td>
+                <td>{{pubgitem.dopx != null ? pubgitem.dopx + '%' : ''}}</td>
+                <td>{{pubgitem.opq}}</td>
                 <td>{{pubgitem.savgd}}</td>
-                <td>{{pubgitem.s24h}}</td>
-                <td>{{pubgitem.s7d}}</td>
                 <td>{{pubgitem.s30d}}</td>
-                <td>{{pubgitem.s90d}}</td>
-                <td>{{pubgitem.nid}}</td>
-                <td>{{pubgitem.uat | date:'medium'}}</td>
+                <td>{{pubgitem.iop | currency:'USD':true}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
+                        <a href="https://opskins.com/?app=578080_2&loc=shop_search&search_item={{pubgitem.name}}&sort=lh" target="_blank">
+                            <span class="fa fa-eye"></span>
+                        </a>
+                        <button hidden type="submit"
                                 [routerLink]="['../pubgitem', pubgitem.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline">View</span>
                         </button>
-                        <button type="submit"
+                        <button hidden type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'pubgitem/'+ pubgitem.id + '/edit'} }]"
                                 replaceUrl="true"
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button hidden type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'pubgitem/'+ pubgitem.id + '/delete'} }]"
                                 replaceUrl="true"
                                 class="btn btn-danger btn-sm">
