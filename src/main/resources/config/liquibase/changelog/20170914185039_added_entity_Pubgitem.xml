@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity Pubgitem.
+    -->
+    <changeSet id="20170914185039-1" author="jhipster">
+        <createTable tableName="pubg_item">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="uns" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="unsr" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="rank" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="sp" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="meanp" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="maxp" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="avgp" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="minp" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="lp" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="savgd" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="s_24_h" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="s_7_d" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="s_30_d" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="s_90_d" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="nid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="uat" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="pubg_item" columnName="uat" columnDataType="datetime"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

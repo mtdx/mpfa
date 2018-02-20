@@ -1,0 +1,118 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myPubgitemLabel">Create or edit a Pubgitem</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!pubgitem.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="pubgitem.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="pubgitem.name" required />
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_uns">Uns</label>
+            <input type="checkbox" class="form-control" name="uns" id="field_uns"
+                [(ngModel)]="pubgitem.uns"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_unsr">Unsr</label>
+            <input type="text" class="form-control" name="unsr" id="field_unsr"
+                [(ngModel)]="pubgitem.unsr"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_rank">Rank</label>
+            <input type="number" class="form-control" name="rank" id="field_rank"
+                [(ngModel)]="pubgitem.rank"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_sp">Sp</label>
+            <input type="number" class="form-control" name="sp" id="field_sp"
+                [(ngModel)]="pubgitem.sp"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_meanp">Meanp</label>
+            <input type="number" class="form-control" name="meanp" id="field_meanp"
+                [(ngModel)]="pubgitem.meanp"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_maxp">Maxp</label>
+            <input type="number" class="form-control" name="maxp" id="field_maxp"
+                [(ngModel)]="pubgitem.maxp"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_avgp">Avgp</label>
+            <input type="number" class="form-control" name="avgp" id="field_avgp"
+                [(ngModel)]="pubgitem.avgp"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_minp">Minp</label>
+            <input type="number" class="form-control" name="minp" id="field_minp"
+                [(ngModel)]="pubgitem.minp"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_lp">Lp</label>
+            <input type="number" class="form-control" name="lp" id="field_lp"
+                [(ngModel)]="pubgitem.lp"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_savgd">Savgd</label>
+            <input type="number" class="form-control" name="savgd" id="field_savgd"
+                [(ngModel)]="pubgitem.savgd"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_s24h">S 24 H</label>
+            <input type="number" class="form-control" name="s24h" id="field_s24h"
+                [(ngModel)]="pubgitem.s24h"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_s7d">S 7 D</label>
+            <input type="number" class="form-control" name="s7d" id="field_s7d"
+                [(ngModel)]="pubgitem.s7d"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_s30d">S 30 D</label>
+            <input type="number" class="form-control" name="s30d" id="field_s30d"
+                [(ngModel)]="pubgitem.s30d"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_s90d">S 90 D</label>
+            <input type="number" class="form-control" name="s90d" id="field_s90d"
+                [(ngModel)]="pubgitem.s90d"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_nid">Nid</label>
+            <input type="text" class="form-control" name="nid" id="field_nid"
+                [(ngModel)]="pubgitem.nid"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_uat">Uat</label>
+            <div class="d-flex">
+                <input id="field_uat" type="datetime-local" class="form-control" name="uat" [(ngModel)]="pubgitem.uat"
+                  />
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,89 @@
+
+<div *ngIf="pubgitem">
+    <h2><span>Pubgitem</span> {{pubgitem.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{pubgitem.name}}</span>
+        </dd>
+        <dt><span>Uns</span></dt>
+        <dd>
+            <span>{{pubgitem.uns}}</span>
+        </dd>
+        <dt><span>Unsr</span></dt>
+        <dd>
+            <span>{{pubgitem.unsr}}</span>
+        </dd>
+        <dt><span>Rank</span></dt>
+        <dd>
+            <span>{{pubgitem.rank}}</span>
+        </dd>
+        <dt><span>Sp</span></dt>
+        <dd>
+            <span>{{pubgitem.sp}}</span>
+        </dd>
+        <dt><span>Meanp</span></dt>
+        <dd>
+            <span>{{pubgitem.meanp}}</span>
+        </dd>
+        <dt><span>Maxp</span></dt>
+        <dd>
+            <span>{{pubgitem.maxp}}</span>
+        </dd>
+        <dt><span>Avgp</span></dt>
+        <dd>
+            <span>{{pubgitem.avgp}}</span>
+        </dd>
+        <dt><span>Minp</span></dt>
+        <dd>
+            <span>{{pubgitem.minp}}</span>
+        </dd>
+        <dt><span>Lp</span></dt>
+        <dd>
+            <span>{{pubgitem.lp}}</span>
+        </dd>
+        <dt><span>Savgd</span></dt>
+        <dd>
+            <span>{{pubgitem.savgd}}</span>
+        </dd>
+        <dt><span>S 24 H</span></dt>
+        <dd>
+            <span>{{pubgitem.s24h}}</span>
+        </dd>
+        <dt><span>S 7 D</span></dt>
+        <dd>
+            <span>{{pubgitem.s7d}}</span>
+        </dd>
+        <dt><span>S 30 D</span></dt>
+        <dd>
+            <span>{{pubgitem.s30d}}</span>
+        </dd>
+        <dt><span>S 90 D</span></dt>
+        <dd>
+            <span>{{pubgitem.s90d}}</span>
+        </dd>
+        <dt><span>Nid</span></dt>
+        <dd>
+            <span>{{pubgitem.nid}}</span>
+        </dd>
+        <dt><span>Uat</span></dt>
+        <dd>
+            <span>{{pubgitem.uat | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'pubgitem/'+ pubgitem.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

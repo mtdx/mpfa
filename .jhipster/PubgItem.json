@@ -1,0 +1,83 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "uns",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "unsr",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "rank",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "sp",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "meanp",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "maxp",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "avgp",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "minp",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "lp",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "savgd",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "s24h",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "s7d",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "s30d",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "s90d",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "nid",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "uat",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20170914185039",
+    "dto": "mapstruct",
+    "service": "serviceClass",
+    "entityTableName": "pubg_item",
+    "jpaMetamodelFiltering": true,
+    "pagination": "infinite-scroll"
+}
