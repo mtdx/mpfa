@@ -228,10 +228,10 @@ public class PubgitemDTO implements Serializable {
             ", minp='" + getMinp() + "'" +
             ", lp='" + getLp() + "'" +
             ", savgd='" + getSavgd() + "'" +
-            ", s24h='" + getS24h() + "'" +
-            ", s7d='" + getS7d() + "'" +
-            ", s30d='" + getS30d() + "'" +
-            ", s90d='" + getS90d() + "'" +
+            ", s24h='" + gets24h() + "'" +
+            ", s7d='" + gets7d() + "'" +
+            ", s30d='" + gets30d() + "'" +
+            ", s90d='" + gets90d() + "'" +
             ", nid='" + getNid() + "'" +
             ", uat='" + getUat() + "'" +
             "}";
