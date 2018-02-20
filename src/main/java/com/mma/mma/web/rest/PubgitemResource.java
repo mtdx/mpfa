@@ -55,18 +55,18 @@ public class PubgitemResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new pubgitemDTO, or with status 400 (Bad Request) if the pubgitem has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/pubgitems")
-    @Timed
-    public ResponseEntity<PubgitemDTO> createPubgitem(@Valid @RequestBody PubgitemDTO pubgitemDTO) throws URISyntaxException {
-        log.debug("REST request to save Pubgitem : {}", pubgitemDTO);
-        if (pubgitemDTO.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new pubgitem cannot already have an ID")).body(null);
-        }
-        PubgitemDTO result = pubgitemService.save(pubgitemDTO);
-        return ResponseEntity.created(new URI("/api/pubgitems/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
-    }
+//    @PostMapping("/pubgitems")
+//    @Timed
+//    public ResponseEntity<PubgitemDTO> createPubgitem(@Valid @RequestBody PubgitemDTO pubgitemDTO) throws URISyntaxException {
+//        log.debug("REST request to save Pubgitem : {}", pubgitemDTO);
+//        if (pubgitemDTO.getId() != null) {
+//            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new pubgitem cannot already have an ID")).body(null);
+//        }
+//        PubgitemDTO result = pubgitemService.save(pubgitemDTO);
+//        return ResponseEntity.created(new URI("/api/pubgitems/" + result.getId()))
+//            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+//            .body(result);
+//    }
 
     /**
      * PUT  /pubgitems : Updates an existing pubgitem.
@@ -77,18 +77,18 @@ public class PubgitemResource {
      * or with status 500 (Internal Server Error) if the pubgitemDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/pubgitems")
-    @Timed
-    public ResponseEntity<PubgitemDTO> updatePubgitem(@Valid @RequestBody PubgitemDTO pubgitemDTO) throws URISyntaxException {
-        log.debug("REST request to update Pubgitem : {}", pubgitemDTO);
-        if (pubgitemDTO.getId() == null) {
-            return createPubgitem(pubgitemDTO);
-        }
-        PubgitemDTO result = pubgitemService.save(pubgitemDTO);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, pubgitemDTO.getId().toString()))
-            .body(result);
-    }
+//    @PutMapping("/pubgitems")
+//    @Timed
+//    public ResponseEntity<PubgitemDTO> updatePubgitem(@Valid @RequestBody PubgitemDTO pubgitemDTO) throws URISyntaxException {
+//        log.debug("REST request to update Pubgitem : {}", pubgitemDTO);
+//        if (pubgitemDTO.getId() == null) {
+//            return createPubgitem(pubgitemDTO);
+//        }
+//        PubgitemDTO result = pubgitemService.save(pubgitemDTO);
+//        return ResponseEntity.ok()
+//            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, pubgitemDTO.getId().toString()))
+//            .body(result);
+//    }
 
     /**
      * GET  /pubgitems : get all the pubgitems.
@@ -126,13 +126,13 @@ public class PubgitemResource {
      * @param id the id of the pubgitemDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/pubgitems/{id}")
-    @Timed
-    public ResponseEntity<Void> deletePubgitem(@PathVariable Long id) {
-        log.debug("REST request to delete Pubgitem : {}", id);
-        pubgitemService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-    }
+//    @DeleteMapping("/pubgitems/{id}")
+//    @Timed
+//    public ResponseEntity<Void> deletePubgitem(@PathVariable Long id) {
+//        log.debug("REST request to delete Pubgitem : {}", id);
+//        pubgitemService.delete(id);
+//        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+//    }
 
     /**
      * SEARCH  /_search/pubgitems?query=:query : search for the pubgitem corresponding
