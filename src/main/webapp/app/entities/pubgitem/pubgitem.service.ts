@@ -48,6 +48,17 @@ export class PubgitemService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    filter(req?: any, filter?: string): Observable<ResponseWrapper> {
+        const options = createRequestOption(req);
+        let params = options.params.toString();
+        if (filter) {
+            params  += '&' + filter;
+            options.params = null;
+        }
+        return this.http.get(this.resourceUrl + '?' + params, options)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }
