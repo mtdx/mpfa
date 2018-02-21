@@ -26,10 +26,6 @@
             "fieldType": "Double"
         },
         {
-            "fieldName": "meanp",
-            "fieldType": "Double"
-        },
-        {
             "fieldName": "maxp",
             "fieldType": "Double"
         },
@@ -39,10 +35,6 @@
         },
         {
             "fieldName": "minp",
-            "fieldType": "Double"
-        },
-        {
-            "fieldName": "lp",
             "fieldType": "Double"
         },
         {
@@ -63,6 +55,30 @@
         },
         {
             "fieldName": "s90d",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "cfp",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "iop",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "dcx",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "dopx",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "oplp",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "opq",
             "fieldType": "Integer"
         },
         {
