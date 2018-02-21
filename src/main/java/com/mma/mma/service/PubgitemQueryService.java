@@ -97,9 +97,6 @@ public class PubgitemQueryService extends QueryService<Pubgitem> {
             if (criteria.getSp() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getSp(), Pubgitem_.sp));
             }
-            if (criteria.getMeanp() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getMeanp(), Pubgitem_.meanp));
-            }
             if (criteria.getMaxp() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getMaxp(), Pubgitem_.maxp));
             }
@@ -108,9 +105,6 @@ public class PubgitemQueryService extends QueryService<Pubgitem> {
             }
             if (criteria.getMinp() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getMinp(), Pubgitem_.minp));
-            }
-            if (criteria.getLp() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLp(), Pubgitem_.lp));
             }
             if (criteria.getSavgd() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getSavgd(), Pubgitem_.savgd));
@@ -126,6 +120,24 @@ public class PubgitemQueryService extends QueryService<Pubgitem> {
             }
             if (criteria.gets90d() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.gets90d(), Pubgitem_.s90d));
+            }
+            if (criteria.getCfp() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCfp(), Pubgitem_.cfp));
+            }
+            if (criteria.getIop() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getIop(), Pubgitem_.iop));
+            }
+            if (criteria.getDcx() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDcx(), Pubgitem_.dcx));
+            }
+            if (criteria.getDopx() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDopx(), Pubgitem_.dopx));
+            }
+            if (criteria.getOplp() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getOplp(), Pubgitem_.oplp));
+            }
+            if (criteria.getOpq() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getOpq(), Pubgitem_.opq));
             }
             if (criteria.getNid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getNid(), Pubgitem_.nid));

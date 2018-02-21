@@ -41,10 +41,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="meanp" type="double">
-                <constraints nullable="true" />
-            </column>
-
             <column name="maxp" type="double">
                 <constraints nullable="true" />
             </column>
@@ -54,10 +50,6 @@
             </column>
 
             <column name="minp" type="double">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="lp" type="double">
                 <constraints nullable="true" />
             </column>
 
@@ -78,6 +70,30 @@
             </column>
 
             <column name="s_90_d" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cfp" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="iop" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="dcx" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="dopx" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="oplp" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="opq" type="integer">
                 <constraints nullable="true" />
             </column>
 

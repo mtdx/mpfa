@@ -38,15 +38,11 @@ public class PubgitemCriteria implements Serializable {
 
     private DoubleFilter sp;
 
-    private DoubleFilter meanp;
-
     private DoubleFilter maxp;
 
     private DoubleFilter avgp;
 
     private DoubleFilter minp;
-
-    private DoubleFilter lp;
 
     private IntegerFilter savgd;
 
@@ -57,6 +53,18 @@ public class PubgitemCriteria implements Serializable {
     private IntegerFilter s30d;
 
     private IntegerFilter s90d;
+
+    private DoubleFilter cfp;
+
+    private DoubleFilter iop;
+
+    private DoubleFilter dcx;
+
+    private DoubleFilter dopx;
+
+    private DoubleFilter oplp;
+
+    private IntegerFilter opq;
 
     private StringFilter nid;
 
@@ -113,14 +121,6 @@ public class PubgitemCriteria implements Serializable {
         this.sp = sp;
     }
 
-    public DoubleFilter getMeanp() {
-        return meanp;
-    }
-
-    public void setMeanp(DoubleFilter meanp) {
-        this.meanp = meanp;
-    }
-
     public DoubleFilter getMaxp() {
         return maxp;
     }
@@ -143,14 +143,6 @@ public class PubgitemCriteria implements Serializable {
 
     public void setMinp(DoubleFilter minp) {
         this.minp = minp;
-    }
-
-    public DoubleFilter getLp() {
-        return lp;
-    }
-
-    public void setLp(DoubleFilter lp) {
-        this.lp = lp;
     }
 
     public IntegerFilter getSavgd() {
@@ -193,6 +185,54 @@ public class PubgitemCriteria implements Serializable {
         this.s90d = s90d;
     }
 
+    public DoubleFilter getCfp() {
+        return cfp;
+    }
+
+    public void setCfp(DoubleFilter cfp) {
+        this.cfp = cfp;
+    }
+
+    public DoubleFilter getIop() {
+        return iop;
+    }
+
+    public void setIop(DoubleFilter iop) {
+        this.iop = iop;
+    }
+
+    public DoubleFilter getDcx() {
+        return dcx;
+    }
+
+    public void setDcx(DoubleFilter dcx) {
+        this.dcx = dcx;
+    }
+
+    public DoubleFilter getDopx() {
+        return dopx;
+    }
+
+    public void setDopx(DoubleFilter dopx) {
+        this.dopx = dopx;
+    }
+
+    public DoubleFilter getOplp() {
+        return oplp;
+    }
+
+    public void setOplp(DoubleFilter oplp) {
+        this.oplp = oplp;
+    }
+
+    public IntegerFilter getOpq() {
+        return opq;
+    }
+
+    public void setOpq(IntegerFilter opq) {
+        this.opq = opq;
+    }
+
     public StringFilter getNid() {
         return nid;
     }
@@ -218,16 +258,20 @@ public class PubgitemCriteria implements Serializable {
                 (unsr != null ? "unsr=" + unsr + ", " : "") +
                 (rank != null ? "rank=" + rank + ", " : "") +
                 (sp != null ? "sp=" + sp + ", " : "") +
-                (meanp != null ? "meanp=" + meanp + ", " : "") +
                 (maxp != null ? "maxp=" + maxp + ", " : "") +
                 (avgp != null ? "avgp=" + avgp + ", " : "") +
                 (minp != null ? "minp=" + minp + ", " : "") +
-                (lp != null ? "lp=" + lp + ", " : "") +
                 (savgd != null ? "savgd=" + savgd + ", " : "") +
                 (s24h != null ? "s24h=" + s24h + ", " : "") +
                 (s7d != null ? "s7d=" + s7d + ", " : "") +
                 (s30d != null ? "s30d=" + s30d + ", " : "") +
                 (s90d != null ? "s90d=" + s90d + ", " : "") +
+                (cfp != null ? "cfp=" + cfp + ", " : "") +
+                (iop != null ? "iop=" + iop + ", " : "") +
+                (dcx != null ? "dcx=" + dcx + ", " : "") +
+                (dopx != null ? "dopx=" + dopx + ", " : "") +
+                (oplp != null ? "oplp=" + oplp + ", " : "") +
+                (opq != null ? "opq=" + opq + ", " : "") +
                 (nid != null ? "nid=" + nid + ", " : "") +
                 (uat != null ? "uat=" + uat + ", " : "") +
             "}";

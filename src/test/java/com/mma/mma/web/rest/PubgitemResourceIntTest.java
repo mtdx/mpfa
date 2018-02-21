@@ -60,9 +60,6 @@ public class PubgitemResourceIntTest {
     private static final Double DEFAULT_SP = 1D;
     private static final Double UPDATED_SP = 2D;
 
-    private static final Double DEFAULT_MEANP = 1D;
-    private static final Double UPDATED_MEANP = 2D;
-
     private static final Double DEFAULT_MAXP = 1D;
     private static final Double UPDATED_MAXP = 2D;
 
@@ -71,9 +68,6 @@ public class PubgitemResourceIntTest {
 
     private static final Double DEFAULT_MINP = 1D;
     private static final Double UPDATED_MINP = 2D;
-
-    private static final Double DEFAULT_LP = 1D;
-    private static final Double UPDATED_LP = 2D;
 
     private static final Integer DEFAULT_SAVGD = 1;
     private static final Integer UPDATED_SAVGD = 2;
@@ -89,6 +83,24 @@ public class PubgitemResourceIntTest {
 
     private static final Integer DEFAULT_S_90_D = 1;
     private static final Integer UPDATED_S_90_D = 2;
+
+    private static final Double DEFAULT_CFP = 1D;
+    private static final Double UPDATED_CFP = 2D;
+
+    private static final Double DEFAULT_IOP = 1D;
+    private static final Double UPDATED_IOP = 2D;
+
+    private static final Double DEFAULT_DCX = 1D;
+    private static final Double UPDATED_DCX = 2D;
+
+    private static final Double DEFAULT_DOPX = 1D;
+    private static final Double UPDATED_DOPX = 2D;
+
+    private static final Double DEFAULT_OPLP = 1D;
+    private static final Double UPDATED_OPLP = 2D;
+
+    private static final Integer DEFAULT_OPQ = 1;
+    private static final Integer UPDATED_OPQ = 2;
 
     private static final String DEFAULT_NID = "AAAAAAAAAA";
     private static final String UPDATED_NID = "BBBBBBBBBB";
@@ -150,16 +162,20 @@ public class PubgitemResourceIntTest {
             .unsr(DEFAULT_UNSR)
             .rank(DEFAULT_RANK)
             .sp(DEFAULT_SP)
-            .meanp(DEFAULT_MEANP)
             .maxp(DEFAULT_MAXP)
             .avgp(DEFAULT_AVGP)
             .minp(DEFAULT_MINP)
-            .lp(DEFAULT_LP)
             .savgd(DEFAULT_SAVGD)
             .s24h(DEFAULT_S_24_H)
             .s7d(DEFAULT_S_7_D)
             .s30d(DEFAULT_S_30_D)
             .s90d(DEFAULT_S_90_D)
+            .cfp(DEFAULT_CFP)
+            .iop(DEFAULT_IOP)
+            .dcx(DEFAULT_DCX)
+            .dopx(DEFAULT_DOPX)
+            .oplp(DEFAULT_OPLP)
+            .opq(DEFAULT_OPQ)
             .nid(DEFAULT_NID)
             .uat(DEFAULT_UAT);
         return pubgitem;
@@ -192,16 +208,20 @@ public class PubgitemResourceIntTest {
         assertThat(testPubgitem.getUnsr()).isEqualTo(DEFAULT_UNSR);
         assertThat(testPubgitem.getRank()).isEqualTo(DEFAULT_RANK);
         assertThat(testPubgitem.getSp()).isEqualTo(DEFAULT_SP);
-        assertThat(testPubgitem.getMeanp()).isEqualTo(DEFAULT_MEANP);
         assertThat(testPubgitem.getMaxp()).isEqualTo(DEFAULT_MAXP);
         assertThat(testPubgitem.getAvgp()).isEqualTo(DEFAULT_AVGP);
         assertThat(testPubgitem.getMinp()).isEqualTo(DEFAULT_MINP);
-        assertThat(testPubgitem.getLp()).isEqualTo(DEFAULT_LP);
         assertThat(testPubgitem.getSavgd()).isEqualTo(DEFAULT_SAVGD);
         assertThat(testPubgitem.gets24h()).isEqualTo(DEFAULT_S_24_H);
         assertThat(testPubgitem.gets7d()).isEqualTo(DEFAULT_S_7_D);
         assertThat(testPubgitem.gets30d()).isEqualTo(DEFAULT_S_30_D);
         assertThat(testPubgitem.gets90d()).isEqualTo(DEFAULT_S_90_D);
+        assertThat(testPubgitem.getCfp()).isEqualTo(DEFAULT_CFP);
+        assertThat(testPubgitem.getIop()).isEqualTo(DEFAULT_IOP);
+        assertThat(testPubgitem.getDcx()).isEqualTo(DEFAULT_DCX);
+        assertThat(testPubgitem.getDopx()).isEqualTo(DEFAULT_DOPX);
+        assertThat(testPubgitem.getOplp()).isEqualTo(DEFAULT_OPLP);
+        assertThat(testPubgitem.getOpq()).isEqualTo(DEFAULT_OPQ);
         assertThat(testPubgitem.getNid()).isEqualTo(DEFAULT_NID);
         assertThat(testPubgitem.getUat()).isEqualTo(DEFAULT_UAT);
 
@@ -265,16 +285,20 @@ public class PubgitemResourceIntTest {
             .andExpect(jsonPath("$.[*].unsr").value(hasItem(DEFAULT_UNSR.toString())))
             .andExpect(jsonPath("$.[*].rank").value(hasItem(DEFAULT_RANK)))
             .andExpect(jsonPath("$.[*].sp").value(hasItem(DEFAULT_SP.doubleValue())))
-            .andExpect(jsonPath("$.[*].meanp").value(hasItem(DEFAULT_MEANP.doubleValue())))
             .andExpect(jsonPath("$.[*].maxp").value(hasItem(DEFAULT_MAXP.doubleValue())))
             .andExpect(jsonPath("$.[*].avgp").value(hasItem(DEFAULT_AVGP.doubleValue())))
             .andExpect(jsonPath("$.[*].minp").value(hasItem(DEFAULT_MINP.doubleValue())))
-            .andExpect(jsonPath("$.[*].lp").value(hasItem(DEFAULT_LP.doubleValue())))
             .andExpect(jsonPath("$.[*].savgd").value(hasItem(DEFAULT_SAVGD)))
             .andExpect(jsonPath("$.[*].s24h").value(hasItem(DEFAULT_S_24_H)))
             .andExpect(jsonPath("$.[*].s7d").value(hasItem(DEFAULT_S_7_D)))
             .andExpect(jsonPath("$.[*].s30d").value(hasItem(DEFAULT_S_30_D)))
             .andExpect(jsonPath("$.[*].s90d").value(hasItem(DEFAULT_S_90_D)))
+            .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.doubleValue())))
+            .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.doubleValue())))
+            .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.doubleValue())))
+            .andExpect(jsonPath("$.[*].dopx").value(hasItem(DEFAULT_DOPX.doubleValue())))
+            .andExpect(jsonPath("$.[*].oplp").value(hasItem(DEFAULT_OPLP.doubleValue())))
+            .andExpect(jsonPath("$.[*].opq").value(hasItem(DEFAULT_OPQ)))
             .andExpect(jsonPath("$.[*].nid").value(hasItem(DEFAULT_NID.toString())))
             .andExpect(jsonPath("$.[*].uat").value(hasItem(DEFAULT_UAT.toString())));
     }
@@ -295,16 +319,20 @@ public class PubgitemResourceIntTest {
             .andExpect(jsonPath("$.unsr").value(DEFAULT_UNSR.toString()))
             .andExpect(jsonPath("$.rank").value(DEFAULT_RANK))
             .andExpect(jsonPath("$.sp").value(DEFAULT_SP.doubleValue()))
-            .andExpect(jsonPath("$.meanp").value(DEFAULT_MEANP.doubleValue()))
             .andExpect(jsonPath("$.maxp").value(DEFAULT_MAXP.doubleValue()))
             .andExpect(jsonPath("$.avgp").value(DEFAULT_AVGP.doubleValue()))
             .andExpect(jsonPath("$.minp").value(DEFAULT_MINP.doubleValue()))
-            .andExpect(jsonPath("$.lp").value(DEFAULT_LP.doubleValue()))
             .andExpect(jsonPath("$.savgd").value(DEFAULT_SAVGD))
             .andExpect(jsonPath("$.s24h").value(DEFAULT_S_24_H))
             .andExpect(jsonPath("$.s7d").value(DEFAULT_S_7_D))
             .andExpect(jsonPath("$.s30d").value(DEFAULT_S_30_D))
             .andExpect(jsonPath("$.s90d").value(DEFAULT_S_90_D))
+            .andExpect(jsonPath("$.cfp").value(DEFAULT_CFP.doubleValue()))
+            .andExpect(jsonPath("$.iop").value(DEFAULT_IOP.doubleValue()))
+            .andExpect(jsonPath("$.dcx").value(DEFAULT_DCX.doubleValue()))
+            .andExpect(jsonPath("$.dopx").value(DEFAULT_DOPX.doubleValue()))
+            .andExpect(jsonPath("$.oplp").value(DEFAULT_OPLP.doubleValue()))
+            .andExpect(jsonPath("$.opq").value(DEFAULT_OPQ))
             .andExpect(jsonPath("$.nid").value(DEFAULT_NID.toString()))
             .andExpect(jsonPath("$.uat").value(DEFAULT_UAT.toString()));
     }
@@ -533,45 +561,6 @@ public class PubgitemResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllPubgitemsByMeanpIsEqualToSomething() throws Exception {
-        // Initialize the database
-        pubgitemRepository.saveAndFlush(pubgitem);
-
-        // Get all the pubgitemList where meanp equals to DEFAULT_MEANP
-        defaultPubgitemShouldBeFound("meanp.equals=" + DEFAULT_MEANP);
-
-        // Get all the pubgitemList where meanp equals to UPDATED_MEANP
-        defaultPubgitemShouldNotBeFound("meanp.equals=" + UPDATED_MEANP);
-    }
-
-    @Test
-    @Transactional
-    public void getAllPubgitemsByMeanpIsInShouldWork() throws Exception {
-        // Initialize the database
-        pubgitemRepository.saveAndFlush(pubgitem);
-
-        // Get all the pubgitemList where meanp in DEFAULT_MEANP or UPDATED_MEANP
-        defaultPubgitemShouldBeFound("meanp.in=" + DEFAULT_MEANP + "," + UPDATED_MEANP);
-
-        // Get all the pubgitemList where meanp equals to UPDATED_MEANP
-        defaultPubgitemShouldNotBeFound("meanp.in=" + UPDATED_MEANP);
-    }
-
-    @Test
-    @Transactional
-    public void getAllPubgitemsByMeanpIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        pubgitemRepository.saveAndFlush(pubgitem);
-
-        // Get all the pubgitemList where meanp is not null
-        defaultPubgitemShouldBeFound("meanp.specified=true");
-
-        // Get all the pubgitemList where meanp is null
-        defaultPubgitemShouldNotBeFound("meanp.specified=false");
-    }
-
-    @Test
-    @Transactional
     public void getAllPubgitemsByMaxpIsEqualToSomething() throws Exception {
         // Initialize the database
         pubgitemRepository.saveAndFlush(pubgitem);
@@ -685,45 +674,6 @@ public class PubgitemResourceIntTest {
 
         // Get all the pubgitemList where minp is null
         defaultPubgitemShouldNotBeFound("minp.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllPubgitemsByLpIsEqualToSomething() throws Exception {
-        // Initialize the database
-        pubgitemRepository.saveAndFlush(pubgitem);
-
-        // Get all the pubgitemList where lp equals to DEFAULT_LP
-        defaultPubgitemShouldBeFound("lp.equals=" + DEFAULT_LP);
-
-        // Get all the pubgitemList where lp equals to UPDATED_LP
-        defaultPubgitemShouldNotBeFound("lp.equals=" + UPDATED_LP);
-    }
-
-    @Test
-    @Transactional
-    public void getAllPubgitemsByLpIsInShouldWork() throws Exception {
-        // Initialize the database
-        pubgitemRepository.saveAndFlush(pubgitem);
-
-        // Get all the pubgitemList where lp in DEFAULT_LP or UPDATED_LP
-        defaultPubgitemShouldBeFound("lp.in=" + DEFAULT_LP + "," + UPDATED_LP);
-
-        // Get all the pubgitemList where lp equals to UPDATED_LP
-        defaultPubgitemShouldNotBeFound("lp.in=" + UPDATED_LP);
-    }
-
-    @Test
-    @Transactional
-    public void getAllPubgitemsByLpIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        pubgitemRepository.saveAndFlush(pubgitem);
-
-        // Get all the pubgitemList where lp is not null
-        defaultPubgitemShouldBeFound("lp.specified=true");
-
-        // Get all the pubgitemList where lp is null
-        defaultPubgitemShouldNotBeFound("lp.specified=false");
     }
 
     @Test
@@ -1058,6 +1008,267 @@ public class PubgitemResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllPubgitemsByCfpIsEqualToSomething() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where cfp equals to DEFAULT_CFP
+        defaultPubgitemShouldBeFound("cfp.equals=" + DEFAULT_CFP);
+
+        // Get all the pubgitemList where cfp equals to UPDATED_CFP
+        defaultPubgitemShouldNotBeFound("cfp.equals=" + UPDATED_CFP);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByCfpIsInShouldWork() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where cfp in DEFAULT_CFP or UPDATED_CFP
+        defaultPubgitemShouldBeFound("cfp.in=" + DEFAULT_CFP + "," + UPDATED_CFP);
+
+        // Get all the pubgitemList where cfp equals to UPDATED_CFP
+        defaultPubgitemShouldNotBeFound("cfp.in=" + UPDATED_CFP);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByCfpIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where cfp is not null
+        defaultPubgitemShouldBeFound("cfp.specified=true");
+
+        // Get all the pubgitemList where cfp is null
+        defaultPubgitemShouldNotBeFound("cfp.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByIopIsEqualToSomething() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where iop equals to DEFAULT_IOP
+        defaultPubgitemShouldBeFound("iop.equals=" + DEFAULT_IOP);
+
+        // Get all the pubgitemList where iop equals to UPDATED_IOP
+        defaultPubgitemShouldNotBeFound("iop.equals=" + UPDATED_IOP);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByIopIsInShouldWork() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where iop in DEFAULT_IOP or UPDATED_IOP
+        defaultPubgitemShouldBeFound("iop.in=" + DEFAULT_IOP + "," + UPDATED_IOP);
+
+        // Get all the pubgitemList where iop equals to UPDATED_IOP
+        defaultPubgitemShouldNotBeFound("iop.in=" + UPDATED_IOP);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByIopIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where iop is not null
+        defaultPubgitemShouldBeFound("iop.specified=true");
+
+        // Get all the pubgitemList where iop is null
+        defaultPubgitemShouldNotBeFound("iop.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByDcxIsEqualToSomething() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where dcx equals to DEFAULT_DCX
+        defaultPubgitemShouldBeFound("dcx.equals=" + DEFAULT_DCX);
+
+        // Get all the pubgitemList where dcx equals to UPDATED_DCX
+        defaultPubgitemShouldNotBeFound("dcx.equals=" + UPDATED_DCX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByDcxIsInShouldWork() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where dcx in DEFAULT_DCX or UPDATED_DCX
+        defaultPubgitemShouldBeFound("dcx.in=" + DEFAULT_DCX + "," + UPDATED_DCX);
+
+        // Get all the pubgitemList where dcx equals to UPDATED_DCX
+        defaultPubgitemShouldNotBeFound("dcx.in=" + UPDATED_DCX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByDcxIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where dcx is not null
+        defaultPubgitemShouldBeFound("dcx.specified=true");
+
+        // Get all the pubgitemList where dcx is null
+        defaultPubgitemShouldNotBeFound("dcx.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByDopxIsEqualToSomething() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where dopx equals to DEFAULT_DOPX
+        defaultPubgitemShouldBeFound("dopx.equals=" + DEFAULT_DOPX);
+
+        // Get all the pubgitemList where dopx equals to UPDATED_DOPX
+        defaultPubgitemShouldNotBeFound("dopx.equals=" + UPDATED_DOPX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByDopxIsInShouldWork() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where dopx in DEFAULT_DOPX or UPDATED_DOPX
+        defaultPubgitemShouldBeFound("dopx.in=" + DEFAULT_DOPX + "," + UPDATED_DOPX);
+
+        // Get all the pubgitemList where dopx equals to UPDATED_DOPX
+        defaultPubgitemShouldNotBeFound("dopx.in=" + UPDATED_DOPX);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByDopxIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where dopx is not null
+        defaultPubgitemShouldBeFound("dopx.specified=true");
+
+        // Get all the pubgitemList where dopx is null
+        defaultPubgitemShouldNotBeFound("dopx.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByOplpIsEqualToSomething() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where oplp equals to DEFAULT_OPLP
+        defaultPubgitemShouldBeFound("oplp.equals=" + DEFAULT_OPLP);
+
+        // Get all the pubgitemList where oplp equals to UPDATED_OPLP
+        defaultPubgitemShouldNotBeFound("oplp.equals=" + UPDATED_OPLP);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByOplpIsInShouldWork() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where oplp in DEFAULT_OPLP or UPDATED_OPLP
+        defaultPubgitemShouldBeFound("oplp.in=" + DEFAULT_OPLP + "," + UPDATED_OPLP);
+
+        // Get all the pubgitemList where oplp equals to UPDATED_OPLP
+        defaultPubgitemShouldNotBeFound("oplp.in=" + UPDATED_OPLP);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByOplpIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where oplp is not null
+        defaultPubgitemShouldBeFound("oplp.specified=true");
+
+        // Get all the pubgitemList where oplp is null
+        defaultPubgitemShouldNotBeFound("oplp.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByOpqIsEqualToSomething() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where opq equals to DEFAULT_OPQ
+        defaultPubgitemShouldBeFound("opq.equals=" + DEFAULT_OPQ);
+
+        // Get all the pubgitemList where opq equals to UPDATED_OPQ
+        defaultPubgitemShouldNotBeFound("opq.equals=" + UPDATED_OPQ);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByOpqIsInShouldWork() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where opq in DEFAULT_OPQ or UPDATED_OPQ
+        defaultPubgitemShouldBeFound("opq.in=" + DEFAULT_OPQ + "," + UPDATED_OPQ);
+
+        // Get all the pubgitemList where opq equals to UPDATED_OPQ
+        defaultPubgitemShouldNotBeFound("opq.in=" + UPDATED_OPQ);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByOpqIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where opq is not null
+        defaultPubgitemShouldBeFound("opq.specified=true");
+
+        // Get all the pubgitemList where opq is null
+        defaultPubgitemShouldNotBeFound("opq.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByOpqIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where opq greater than or equals to DEFAULT_OPQ
+        defaultPubgitemShouldBeFound("opq.greaterOrEqualThan=" + DEFAULT_OPQ);
+
+        // Get all the pubgitemList where opq greater than or equals to UPDATED_OPQ
+        defaultPubgitemShouldNotBeFound("opq.greaterOrEqualThan=" + UPDATED_OPQ);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPubgitemsByOpqIsLessThanSomething() throws Exception {
+        // Initialize the database
+        pubgitemRepository.saveAndFlush(pubgitem);
+
+        // Get all the pubgitemList where opq less than or equals to DEFAULT_OPQ
+        defaultPubgitemShouldNotBeFound("opq.lessThan=" + DEFAULT_OPQ);
+
+        // Get all the pubgitemList where opq less than or equals to UPDATED_OPQ
+        defaultPubgitemShouldBeFound("opq.lessThan=" + UPDATED_OPQ);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllPubgitemsByNidIsEqualToSomething() throws Exception {
         // Initialize the database
         pubgitemRepository.saveAndFlush(pubgitem);
@@ -1147,16 +1358,20 @@ public class PubgitemResourceIntTest {
             .andExpect(jsonPath("$.[*].unsr").value(hasItem(DEFAULT_UNSR.toString())))
             .andExpect(jsonPath("$.[*].rank").value(hasItem(DEFAULT_RANK)))
             .andExpect(jsonPath("$.[*].sp").value(hasItem(DEFAULT_SP.doubleValue())))
-            .andExpect(jsonPath("$.[*].meanp").value(hasItem(DEFAULT_MEANP.doubleValue())))
             .andExpect(jsonPath("$.[*].maxp").value(hasItem(DEFAULT_MAXP.doubleValue())))
             .andExpect(jsonPath("$.[*].avgp").value(hasItem(DEFAULT_AVGP.doubleValue())))
             .andExpect(jsonPath("$.[*].minp").value(hasItem(DEFAULT_MINP.doubleValue())))
-            .andExpect(jsonPath("$.[*].lp").value(hasItem(DEFAULT_LP.doubleValue())))
             .andExpect(jsonPath("$.[*].savgd").value(hasItem(DEFAULT_SAVGD)))
             .andExpect(jsonPath("$.[*].s24h").value(hasItem(DEFAULT_S_24_H)))
             .andExpect(jsonPath("$.[*].s7d").value(hasItem(DEFAULT_S_7_D)))
             .andExpect(jsonPath("$.[*].s30d").value(hasItem(DEFAULT_S_30_D)))
             .andExpect(jsonPath("$.[*].s90d").value(hasItem(DEFAULT_S_90_D)))
+            .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.doubleValue())))
+            .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.doubleValue())))
+            .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.doubleValue())))
+            .andExpect(jsonPath("$.[*].dopx").value(hasItem(DEFAULT_DOPX.doubleValue())))
+            .andExpect(jsonPath("$.[*].oplp").value(hasItem(DEFAULT_OPLP.doubleValue())))
+            .andExpect(jsonPath("$.[*].opq").value(hasItem(DEFAULT_OPQ)))
             .andExpect(jsonPath("$.[*].nid").value(hasItem(DEFAULT_NID.toString())))
             .andExpect(jsonPath("$.[*].uat").value(hasItem(DEFAULT_UAT.toString())));
     }
@@ -1197,16 +1412,20 @@ public class PubgitemResourceIntTest {
             .unsr(UPDATED_UNSR)
             .rank(UPDATED_RANK)
             .sp(UPDATED_SP)
-            .meanp(UPDATED_MEANP)
             .maxp(UPDATED_MAXP)
             .avgp(UPDATED_AVGP)
             .minp(UPDATED_MINP)
-            .lp(UPDATED_LP)
             .savgd(UPDATED_SAVGD)
             .s24h(UPDATED_S_24_H)
             .s7d(UPDATED_S_7_D)
             .s30d(UPDATED_S_30_D)
             .s90d(UPDATED_S_90_D)
+            .cfp(UPDATED_CFP)
+            .iop(UPDATED_IOP)
+            .dcx(UPDATED_DCX)
+            .dopx(UPDATED_DOPX)
+            .oplp(UPDATED_OPLP)
+            .opq(UPDATED_OPQ)
             .nid(UPDATED_NID)
             .uat(UPDATED_UAT);
         PubgitemDTO pubgitemDTO = pubgitemMapper.toDto(updatedPubgitem);
@@ -1225,16 +1444,20 @@ public class PubgitemResourceIntTest {
         assertThat(testPubgitem.getUnsr()).isEqualTo(UPDATED_UNSR);
         assertThat(testPubgitem.getRank()).isEqualTo(UPDATED_RANK);
         assertThat(testPubgitem.getSp()).isEqualTo(UPDATED_SP);
-        assertThat(testPubgitem.getMeanp()).isEqualTo(UPDATED_MEANP);
         assertThat(testPubgitem.getMaxp()).isEqualTo(UPDATED_MAXP);
         assertThat(testPubgitem.getAvgp()).isEqualTo(UPDATED_AVGP);
         assertThat(testPubgitem.getMinp()).isEqualTo(UPDATED_MINP);
-        assertThat(testPubgitem.getLp()).isEqualTo(UPDATED_LP);
         assertThat(testPubgitem.getSavgd()).isEqualTo(UPDATED_SAVGD);
         assertThat(testPubgitem.gets24h()).isEqualTo(UPDATED_S_24_H);
         assertThat(testPubgitem.gets7d()).isEqualTo(UPDATED_S_7_D);
         assertThat(testPubgitem.gets30d()).isEqualTo(UPDATED_S_30_D);
         assertThat(testPubgitem.gets90d()).isEqualTo(UPDATED_S_90_D);
+        assertThat(testPubgitem.getCfp()).isEqualTo(UPDATED_CFP);
+        assertThat(testPubgitem.getIop()).isEqualTo(UPDATED_IOP);
+        assertThat(testPubgitem.getDcx()).isEqualTo(UPDATED_DCX);
+        assertThat(testPubgitem.getDopx()).isEqualTo(UPDATED_DOPX);
+        assertThat(testPubgitem.getOplp()).isEqualTo(UPDATED_OPLP);
+        assertThat(testPubgitem.getOpq()).isEqualTo(UPDATED_OPQ);
         assertThat(testPubgitem.getNid()).isEqualTo(UPDATED_NID);
         assertThat(testPubgitem.getUat()).isEqualTo(UPDATED_UAT);
 
@@ -1301,16 +1524,20 @@ public class PubgitemResourceIntTest {
             .andExpect(jsonPath("$.[*].unsr").value(hasItem(DEFAULT_UNSR.toString())))
             .andExpect(jsonPath("$.[*].rank").value(hasItem(DEFAULT_RANK)))
             .andExpect(jsonPath("$.[*].sp").value(hasItem(DEFAULT_SP.doubleValue())))
-            .andExpect(jsonPath("$.[*].meanp").value(hasItem(DEFAULT_MEANP.doubleValue())))
             .andExpect(jsonPath("$.[*].maxp").value(hasItem(DEFAULT_MAXP.doubleValue())))
             .andExpect(jsonPath("$.[*].avgp").value(hasItem(DEFAULT_AVGP.doubleValue())))
             .andExpect(jsonPath("$.[*].minp").value(hasItem(DEFAULT_MINP.doubleValue())))
-            .andExpect(jsonPath("$.[*].lp").value(hasItem(DEFAULT_LP.doubleValue())))
             .andExpect(jsonPath("$.[*].savgd").value(hasItem(DEFAULT_SAVGD)))
             .andExpect(jsonPath("$.[*].s24h").value(hasItem(DEFAULT_S_24_H)))
             .andExpect(jsonPath("$.[*].s7d").value(hasItem(DEFAULT_S_7_D)))
             .andExpect(jsonPath("$.[*].s30d").value(hasItem(DEFAULT_S_30_D)))
             .andExpect(jsonPath("$.[*].s90d").value(hasItem(DEFAULT_S_90_D)))
+            .andExpect(jsonPath("$.[*].cfp").value(hasItem(DEFAULT_CFP.doubleValue())))
+            .andExpect(jsonPath("$.[*].iop").value(hasItem(DEFAULT_IOP.doubleValue())))
+            .andExpect(jsonPath("$.[*].dcx").value(hasItem(DEFAULT_DCX.doubleValue())))
+            .andExpect(jsonPath("$.[*].dopx").value(hasItem(DEFAULT_DOPX.doubleValue())))
+            .andExpect(jsonPath("$.[*].oplp").value(hasItem(DEFAULT_OPLP.doubleValue())))
+            .andExpect(jsonPath("$.[*].opq").value(hasItem(DEFAULT_OPQ)))
             .andExpect(jsonPath("$.[*].nid").value(hasItem(DEFAULT_NID.toString())))
             .andExpect(jsonPath("$.[*].uat").value(hasItem(DEFAULT_UAT.toString())));
     }

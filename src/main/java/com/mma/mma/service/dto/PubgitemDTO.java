@@ -24,15 +24,11 @@ public class PubgitemDTO implements Serializable {
 
     private Double sp;
 
-    private Double meanp;
-
     private Double maxp;
 
     private Double avgp;
 
     private Double minp;
-
-    private Double lp;
 
     private Integer savgd;
 
@@ -43,6 +39,18 @@ public class PubgitemDTO implements Serializable {
     private Integer s30d;
 
     private Integer s90d;
+
+    private Double cfp;
+
+    private Double iop;
+
+    private Double dcx;
+
+    private Double dopx;
+
+    private Double oplp;
+
+    private Integer opq;
 
     private String nid;
 
@@ -96,14 +104,6 @@ public class PubgitemDTO implements Serializable {
         this.sp = sp;
     }
 
-    public Double getMeanp() {
-        return meanp;
-    }
-
-    public void setMeanp(Double meanp) {
-        this.meanp = meanp;
-    }
-
     public Double getMaxp() {
         return maxp;
     }
@@ -126,14 +126,6 @@ public class PubgitemDTO implements Serializable {
 
     public void setMinp(Double minp) {
         this.minp = minp;
-    }
-
-    public Double getLp() {
-        return lp;
-    }
-
-    public void setLp(Double lp) {
-        this.lp = lp;
     }
 
     public Integer getSavgd() {
@@ -174,6 +166,54 @@ public class PubgitemDTO implements Serializable {
 
     public void sets90d(Integer s90d) {
         this.s90d = s90d;
+    }
+
+    public Double getCfp() {
+        return cfp;
+    }
+
+    public void setCfp(Double cfp) {
+        this.cfp = cfp;
+    }
+
+    public Double getIop() {
+        return iop;
+    }
+
+    public void setIop(Double iop) {
+        this.iop = iop;
+    }
+
+    public Double getDcx() {
+        return dcx;
+    }
+
+    public void setDcx(Double dcx) {
+        this.dcx = dcx;
+    }
+
+    public Double getDopx() {
+        return dopx;
+    }
+
+    public void setDopx(Double dopx) {
+        this.dopx = dopx;
+    }
+
+    public Double getOplp() {
+        return oplp;
+    }
+
+    public void setOplp(Double oplp) {
+        this.oplp = oplp;
+    }
+
+    public Integer getOpq() {
+        return opq;
+    }
+
+    public void setOpq(Integer opq) {
+        this.opq = opq;
     }
 
     public String getNid() {
@@ -222,16 +262,20 @@ public class PubgitemDTO implements Serializable {
             ", unsr='" + getUnsr() + "'" +
             ", rank='" + getRank() + "'" +
             ", sp='" + getSp() + "'" +
-            ", meanp='" + getMeanp() + "'" +
             ", maxp='" + getMaxp() + "'" +
             ", avgp='" + getAvgp() + "'" +
             ", minp='" + getMinp() + "'" +
-            ", lp='" + getLp() + "'" +
             ", savgd='" + getSavgd() + "'" +
             ", s24h='" + gets24h() + "'" +
             ", s7d='" + gets7d() + "'" +
             ", s30d='" + gets30d() + "'" +
             ", s90d='" + gets90d() + "'" +
+            ", cfp='" + getCfp() + "'" +
+            ", iop='" + getIop() + "'" +
+            ", dcx='" + getDcx() + "'" +
+            ", dopx='" + getDopx() + "'" +
+            ", oplp='" + getOplp() + "'" +
+            ", opq='" + getOpq() + "'" +
             ", nid='" + getNid() + "'" +
             ", uat='" + getUat() + "'" +
             "}";

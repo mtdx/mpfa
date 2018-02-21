@@ -42,9 +42,6 @@ public class Pubgitem implements Serializable {
     @Column(name = "sp")
     private Double sp;
 
-    @Column(name = "meanp")
-    private Double meanp;
-
     @Column(name = "maxp")
     private Double maxp;
 
@@ -53,9 +50,6 @@ public class Pubgitem implements Serializable {
 
     @Column(name = "minp")
     private Double minp;
-
-    @Column(name = "lp")
-    private Double lp;
 
     @Column(name = "savgd")
     private Integer savgd;
@@ -71,6 +65,24 @@ public class Pubgitem implements Serializable {
 
     @Column(name = "s_90_d")
     private Integer s90d;
+
+    @Column(name = "cfp")
+    private Double cfp;
+
+    @Column(name = "iop")
+    private Double iop;
+
+    @Column(name = "dcx")
+    private Double dcx;
+
+    @Column(name = "dopx")
+    private Double dopx;
+
+    @Column(name = "oplp")
+    private Double oplp;
+
+    @Column(name = "opq")
+    private Integer opq;
 
     @Column(name = "nid")
     private String nid;
@@ -152,19 +164,6 @@ public class Pubgitem implements Serializable {
         this.sp = sp;
     }
 
-    public Double getMeanp() {
-        return meanp;
-    }
-
-    public Pubgitem meanp(Double meanp) {
-        this.meanp = meanp;
-        return this;
-    }
-
-    public void setMeanp(Double meanp) {
-        this.meanp = meanp;
-    }
-
     public Double getMaxp() {
         return maxp;
     }
@@ -202,19 +201,6 @@ public class Pubgitem implements Serializable {
 
     public void setMinp(Double minp) {
         this.minp = minp;
-    }
-
-    public Double getLp() {
-        return lp;
-    }
-
-    public Pubgitem lp(Double lp) {
-        this.lp = lp;
-        return this;
-    }
-
-    public void setLp(Double lp) {
-        this.lp = lp;
     }
 
     public Integer getSavgd() {
@@ -282,6 +268,84 @@ public class Pubgitem implements Serializable {
         this.s90d = s90d;
     }
 
+    public Double getCfp() {
+        return cfp;
+    }
+
+    public Pubgitem cfp(Double cfp) {
+        this.cfp = cfp;
+        return this;
+    }
+
+    public void setCfp(Double cfp) {
+        this.cfp = cfp;
+    }
+
+    public Double getIop() {
+        return iop;
+    }
+
+    public Pubgitem iop(Double iop) {
+        this.iop = iop;
+        return this;
+    }
+
+    public void setIop(Double iop) {
+        this.iop = iop;
+    }
+
+    public Double getDcx() {
+        return dcx;
+    }
+
+    public Pubgitem dcx(Double dcx) {
+        this.dcx = dcx;
+        return this;
+    }
+
+    public void setDcx(Double dcx) {
+        this.dcx = dcx;
+    }
+
+    public Double getDopx() {
+        return dopx;
+    }
+
+    public Pubgitem dopx(Double dopx) {
+        this.dopx = dopx;
+        return this;
+    }
+
+    public void setDopx(Double dopx) {
+        this.dopx = dopx;
+    }
+
+    public Double getOplp() {
+        return oplp;
+    }
+
+    public Pubgitem oplp(Double oplp) {
+        this.oplp = oplp;
+        return this;
+    }
+
+    public void setOplp(Double oplp) {
+        this.oplp = oplp;
+    }
+
+    public Integer getOpq() {
+        return opq;
+    }
+
+    public Pubgitem opq(Integer opq) {
+        this.opq = opq;
+        return this;
+    }
+
+    public void setOpq(Integer opq) {
+        this.opq = opq;
+    }
+
     public String getNid() {
         return nid;
     }
@@ -338,16 +402,20 @@ public class Pubgitem implements Serializable {
             ", unsr='" + getUnsr() + "'" +
             ", rank='" + getRank() + "'" +
             ", sp='" + getSp() + "'" +
-            ", meanp='" + getMeanp() + "'" +
             ", maxp='" + getMaxp() + "'" +
             ", avgp='" + getAvgp() + "'" +
             ", minp='" + getMinp() + "'" +
-            ", lp='" + getLp() + "'" +
             ", savgd='" + getSavgd() + "'" +
             ", s24h='" + gets24h() + "'" +
             ", s7d='" + gets7d() + "'" +
             ", s30d='" + gets30d() + "'" +
             ", s90d='" + gets90d() + "'" +
+            ", cfp='" + getCfp() + "'" +
+            ", iop='" + getIop() + "'" +
+            ", dcx='" + getDcx() + "'" +
+            ", dopx='" + getDopx() + "'" +
+            ", oplp='" + getOplp() + "'" +
+            ", opq='" + getOpq() + "'" +
             ", nid='" + getNid() + "'" +
             ", uat='" + getUat() + "'" +
             "}";
