@@ -3,92 +3,97 @@
     <h2><span>Pubgitem</span> {{pubgitem.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <dt><span>Name</span></dt>
-        <dd>
-            <span>{{pubgitem.name}}</span>
-        </dd>
-        <dt><span>Uns</span></dt>
-        <dd>
-            <span>{{pubgitem.uns}}</span>
-        </dd>
-        <dt><span>Unsr</span></dt>
-        <dd>
-            <span>{{pubgitem.unsr}}</span>
-        </dd>
-        <dt><span>Rank</span></dt>
-        <dd>
-            <span>{{pubgitem.rank}}</span>
-        </dd>
-        <dt><span>Sp</span></dt>
-        <dd>
-            <span>{{pubgitem.sp}}</span>
-        </dd>
-        <dt><span>Maxp</span></dt>
-        <dd>
-            <span>{{pubgitem.maxp}}</span>
-        </dd>
-        <dt><span>Avgp</span></dt>
-        <dd>
-            <span>{{pubgitem.avgp}}</span>
-        </dd>
-        <dt><span>Minp</span></dt>
-        <dd>
-            <span>{{pubgitem.minp}}</span>
-        </dd>
-        <dt><span>Savgd</span></dt>
-        <dd>
-            <span>{{pubgitem.savgd}}</span>
-        </dd>
-        <dt><span>S 24 H</span></dt>
-        <dd>
-            <span>{{pubgitem.s24h}}</span>
-        </dd>
-        <dt><span>S 7 D</span></dt>
-        <dd>
-            <span>{{pubgitem.s7d}}</span>
-        </dd>
-        <dt><span>S 30 D</span></dt>
-        <dd>
-            <span>{{pubgitem.s30d}}</span>
-        </dd>
-        <dt><span>S 90 D</span></dt>
-        <dd>
-            <span>{{pubgitem.s90d}}</span>
-        </dd>
-        <dt><span>Cfp</span></dt>
-        <dd>
-            <span>{{pubgitem.cfp}}</span>
-        </dd>
-        <dt><span>Iop</span></dt>
-        <dd>
-            <span>{{pubgitem.iop}}</span>
-        </dd>
-        <dt><span>Dcx</span></dt>
-        <dd>
-            <span>{{pubgitem.dcx}}</span>
-        </dd>
-        <dt><span>Dopx</span></dt>
-        <dd>
-            <span>{{pubgitem.dopx}}</span>
-        </dd>
-        <dt><span>Oplp</span></dt>
-        <dd>
-            <span>{{pubgitem.oplp}}</span>
-        </dd>
-        <dt><span>Opq</span></dt>
-        <dd>
-            <span>{{pubgitem.opq}}</span>
-        </dd>
-        <dt><span>Nid</span></dt>
-        <dd>
-            <span>{{pubgitem.nid}}</span>
-        </dd>
-        <dt><span>Uat</span></dt>
-        <dd>
-            <span>{{pubgitem.uat | date:'medium'}}</span>
-        </dd>
-    </dl>
+
+    <div class="row">
+        <div class="row col-6">
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name <mark>(Market Hash Name)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.name}}</kbd>
+                </dd>
+                <dt><span>Safe Price <mark>(Sp)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.sp | currency:'USD':true}}</kbd>
+                </dd>
+                <dt><span>Unstable <mark>(uns)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.uns}}</kbd>
+                </dd>
+                <dt><span>Unstable Reason <mark>(unsr)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.unsr}}</kbd>
+                </dd>
+                <dt><span>Max Price <mark>(maxp)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.maxp}}</kbd>
+                </dd>
+                <dt><span>Avg Price <mark>(avgp)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.avgp}}</kbd>
+                </dd>
+                <dt><span>Min Price <mark>(minp)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.minp}}</kbd>
+                </dd>
+                <dt><span>Sold Avg Daily<mark>(savgd)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.savgd}}</kbd>
+                </dd>
+                <dt><span>Sold Last 24 Hours<mark>(s24h)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.s24h}}</kbd>
+                </dd>
+                <dt><span>Sold Last 7 Days<mark>(s7d)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.s7d}}</kbd>
+                </dd>
+                <dt><span>Sold Last 30 Days<mark>(s30d)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.s30d}}</kbd>
+                </dd>
+                <dt><span>Sold Last 90 Days<mark>(s90d)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.s90d}}</kbd>
+                </dd>
+            </dl>
+        </div>
+        <div class="row col-6">
+            <dl class="row-md jh-entity-details">
+                <dt><span>Dapubg.com Price<mark>(Cfp)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.cfp | currency:'USD':true}}</kbd>
+                </dd>
+                <dt><span>SteamAPI.IO Price<mark>(Iop)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.iop | currency:'USD':true}}</kbd>
+                </dd>
+                <dt><span>CSGOFast XYZ price difference <mark>(Dcx)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.dcx}}%</kbd>
+                </dd>
+                <dt><span>OPSkins lowest price<mark>(Oplp)</mark></span></dt>
+                <dd>
+                    <kbd><span>{{pubgItem.oplp | currency:'USD':true}}</span></kbd>
+                </dd>
+                <dt><span>Safe Price Opskins price difference <mark>(Dopx)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.dopx}}%</kbd>
+                </dd>
+                <dt><span>OPSkins Quantity<mark>(Opq)</mark></span></dt>
+                <dd>
+                    <kbd><span>{{pubgItem.dopx}}</span></kbd>
+                </dd>
+                <dt><span>Rank <mark>(sp x s30d x opq)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.rank}}</kbd>
+                </dd>
+                <dt><span>Updated At <mark>(uat)</mark></span></dt>
+                <dd>
+                    <kbd>{{pubgItem.uat | date:'medium'}}</kbd>
+                </dd>
+            </dl>
+        </div>
+    </div>
 
     <button type="submit"
             (click)="previousState()"
