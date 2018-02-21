@@ -30,24 +30,17 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="uns"><span>Uns</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="unsr"><span>Unsr</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="rank"><span>Rank</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="sp"><span>Sp</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="meanp"><span>Meanp</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="maxp"><span>Maxp</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="cfp"><span>Cfp</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="avgp"><span>Avgp</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="minp"><span>Minp</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="lp"><span>Lp</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="savgd"><span>Savgd</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="s24h"><span>S 24 H</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="s7d"><span>S 7 D</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="s30d"><span>S 30 D</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="s90d"><span>S 90 D</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="oplp"><span>Oplp</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dcx"><span>Dcx</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dopx"><span>Dopx</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="opq"><span>Opq</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="s30d"><span>S30d</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="iop"><span>Iop</span> <span class="fa fa-sort"></span></th>
 
-
-            <th jhiSortBy="nid"><span>Nid</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="uat"><span>Uat</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -55,12 +48,13 @@
             <tr *ngFor="let pubgitem of pubgitems ;trackBy: trackId">
                 <td><a [routerLink]="['../pubgitem', pubgitem.id ]">{{pubgitem.name}}</a></td>
                 <td>{{pubgitem.rank}}</td>
-                <td><span class="opm {{pubgitem.uns}}">{{pubgitem.sp}}</span></td>
+                <td><span class="opm {{pubgitem.uns}}">{{pubgitem.sp | currency:'USD':true}}</span></td>
+                <td>{{pubgitem.cfp | currency:'USD':true}}</td>
+                <td>{{pubgitem.avgp | currency:'USD':true}}</td>
                 <td>{{pubgitem.oplp | currency:'USD':true}}</td>
                 <td>{{pubgitem.dcx != null ? pubgitem.dcx + '%' : ''}}</td>
                 <td>{{pubgitem.dopx != null ? pubgitem.dopx + '%' : ''}}</td>
                 <td>{{pubgitem.opq}}</td>
-                <td>{{pubgitem.savgd}}</td>
                 <td>{{pubgitem.s30d}}</td>
                 <td>{{pubgitem.iop | currency:'USD':true}}</td>
                 <td class="text-right">
