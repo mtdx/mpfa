@@ -9,16 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.*;
 
 @Service
@@ -27,6 +23,12 @@ public class PubgSteamapisService {
 
     @Value("${SA_API_KEY}")
     private String SA_API_KEY;
+
+    @Value("${IO_API_KEY}")
+    private String IO_API_KEY;
+
+    @Value("${OP_API_KEY}")
+    private String OP_API_KEY;
 
     private final Logger log = LoggerFactory.getLogger(PubgSteamapisService.class);
 
@@ -74,16 +76,16 @@ public class PubgSteamapisService {
         HashMap<String, Pubgitem> existingItems = existingItems();
         SaDTO saresp = respEntity.getBody();
 
-        if (saresp.getItems().length == 0) {
+        if (saresp.getData() == null || saresp.getData().size() == 0) {
             log.error("Failed to fetch api.steamapis.com fata {}");
             return;
         }
 
         Pubgitem item;
-        SaItem[] saitems = saresp.getItems();
+        List<SaItem> saitems = saresp.getData();
         Map<String, Object> cfPriceData = cfPriceData(restTemplate, headers);
-        Map<String, String> ioPriceData = csgoXyzService.ioPriceData(restTemplate, headers);
-        OpskinsDTO opPriceData = csgoXyzService.opPriceData(restTemplate, headers);
+        Map<String, String> ioPriceData = ioPriceData(restTemplate, headers);
+        OpskinsDTO opPriceData = opPriceData(restTemplate, headers);
 
         for (SaItem saItem : saitems) {
             if (existingItems.containsKey(saItem.getMarket_hash_name())) {
@@ -120,6 +122,34 @@ public class PubgSteamapisService {
             log.error("Failed to fetch CF data", ex.getMessage());
         }
         return cfresp;
+    }
+
+    private Map<String, String> ioPriceData(RestTemplate restTemplate, HttpHeaders headers) {
+        final String IO_API_URL = "https://api.steamapi.io/market/prices/578080?key=" + IO_API_KEY;
+        HttpEntity<String> entityIO = new HttpEntity<>("parameters", headers);
+        ResponseEntity<Map> respEntityIO;
+        Map<String, String> ioresp = new HashMap<>();
+        try {
+            respEntityIO = restTemplate.exchange(IO_API_URL, HttpMethod.GET, entityIO, Map.class);
+            ioresp = respEntityIO.getBody();
+        } catch (Exception ex) {
+            log.error("Failed to fetch CF data", ex.getMessage());
+        }
+        return ioresp;
+    }
+
+    private OpskinsDTO opPriceData(RestTemplate restTemplate, HttpHeaders headers) {
+        final String OP_API_URL = "https://api.opskins.com/IPricing/GetAllLowestListPrices/v1/?appid=578080&key=" + OP_API_KEY;
+        HttpEntity<String> entityOP = new HttpEntity<>("parameters", headers);
+        ResponseEntity<OpskinsDTO> respEntityOP;
+        OpskinsDTO opresp = null;
+        try {
+            respEntityOP = restTemplate.exchange(OP_API_URL, HttpMethod.GET, entityOP, OpskinsDTO.class);
+            opresp = respEntityOP.getBody();
+        } catch (Exception ex) {
+            log.error("Failed to fetch OPSkins data", ex.getMessage());
+        }
+        return opresp;
     }
 
 }

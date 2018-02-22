@@ -78,74 +78,74 @@ public class PubgitemQueryService extends QueryService<Pubgitem> {
      */
     private Specifications<Pubgitem> createSpecification(PubgitemCriteria criteria) {
         Specifications<Pubgitem> specification = Specifications.where(null);
-        if (criteria != null) {
-            if (criteria.getId() != null) {
-                specification = specification.and(buildSpecification(criteria.getId(), Pubgitem_.id));
-            }
-            if (criteria.getName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getName(), Pubgitem_.name));
-            }
-            if (criteria.getUns() != null) {
-                specification = specification.and(buildSpecification(criteria.getUns(), Pubgitem_.uns));
-            }
-            if (criteria.getUnsr() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getUnsr(), Pubgitem_.unsr));
-            }
-            if (criteria.getRank() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getRank(), Pubgitem_.rank));
-            }
-            if (criteria.getSp() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getSp(), Pubgitem_.sp));
-            }
-            if (criteria.getMaxp() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getMaxp(), Pubgitem_.maxp));
-            }
-            if (criteria.getAvgp() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getAvgp(), Pubgitem_.avgp));
-            }
-            if (criteria.getMinp() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getMinp(), Pubgitem_.minp));
-            }
-            if (criteria.getSavgd() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getSavgd(), Pubgitem_.savgd));
-            }
-            if (criteria.gets24h() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.gets24h(), Pubgitem_.s24h));
-            }
-            if (criteria.gets7d() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.gets7d(), Pubgitem_.s7d));
-            }
-            if (criteria.gets30d() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.gets30d(), Pubgitem_.s30d));
-            }
-            if (criteria.gets90d() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.gets90d(), Pubgitem_.s90d));
-            }
-            if (criteria.getCfp() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getCfp(), Pubgitem_.cfp));
-            }
-            if (criteria.getIop() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getIop(), Pubgitem_.iop));
-            }
-            if (criteria.getDcx() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getDcx(), Pubgitem_.dcx));
-            }
-            if (criteria.getDopx() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getDopx(), Pubgitem_.dopx));
-            }
-            if (criteria.getOplp() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getOplp(), Pubgitem_.oplp));
-            }
-            if (criteria.getOpq() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getOpq(), Pubgitem_.opq));
-            }
-            if (criteria.getNid() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getNid(), Pubgitem_.nid));
-            }
-            if (criteria.getUat() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getUat(), Pubgitem_.uat));
-            }
-        }
+//        if (criteria != null) {
+//            if (criteria.getId() != null) {
+//                specification = specification.and(buildSpecification(criteria.getId(), Pubgitem_.id));
+//            }
+//            if (criteria.getName() != null) {
+//                specification = specification.and(buildStringSpecification(criteria.getName(), Pubgitem_.name));
+//            }
+//            if (criteria.getUns() != null) {
+//                specification = specification.and(buildSpecification(criteria.getUns(), Pubgitem_.uns));
+//            }
+//            if (criteria.getUnsr() != null) {
+//                specification = specification.and(buildStringSpecification(criteria.getUnsr(), Pubgitem_.unsr));
+//            }
+//            if (criteria.getRank() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getRank(), Pubgitem_.rank));
+//            }
+//            if (criteria.getSp() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getSp(), Pubgitem_.sp));
+//            }
+//            if (criteria.getMaxp() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getMaxp(), Pubgitem_.maxp));
+//            }
+//            if (criteria.getAvgp() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getAvgp(), Pubgitem_.avgp));
+//            }
+//            if (criteria.getMinp() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getMinp(), Pubgitem_.minp));
+//            }
+//            if (criteria.getSavgd() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getSavgd(), Pubgitem_.savgd));
+//            }
+//            if (criteria.gets24h() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.gets24h(), Pubgitem_.s24h));
+//            }
+//            if (criteria.gets7d() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.gets7d(), Pubgitem_.s7d));
+//            }
+//            if (criteria.gets30d() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.gets30d(), Pubgitem_.s30d));
+//            }
+//            if (criteria.gets90d() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.gets90d(), Pubgitem_.s90d));
+//            }
+//            if (criteria.getCfp() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getCfp(), Pubgitem_.cfp));
+//            }
+//            if (criteria.getIop() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getIop(), Pubgitem_.iop));
+//            }
+//            if (criteria.getDcx() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getDcx(), Pubgitem_.dcx));
+//            }
+//            if (criteria.getDopx() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getDopx(), Pubgitem_.dopx));
+//            }
+//            if (criteria.getOplp() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getOplp(), Pubgitem_.oplp));
+//            }
+//            if (criteria.getOpq() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getOpq(), Pubgitem_.opq));
+//            }
+//            if (criteria.getNid() != null) {
+//                specification = specification.and(buildStringSpecification(criteria.getNid(), Pubgitem_.nid));
+//            }
+//            if (criteria.getUat() != null) {
+//                specification = specification.and(buildRangeSpecification(criteria.getUat(), Pubgitem_.uat));
+//            }
+//        }
         return specification;
     }
 
