@@ -281,7 +281,7 @@ public class CsgoXyzService {
         item.setAdded(newitem.getFirst_seen());
     }
 
-    public Map<String, Object> cfPriceData(RestTemplate restTemplate, HttpHeaders headers) {
+    private Map<String, Object> cfPriceData(RestTemplate restTemplate, HttpHeaders headers) {
         final String CF_API_URL = "https://api.csgofast.com/price/all";
         HttpEntity<String> entityCF = new HttpEntity<>("parameters", headers);
         ResponseEntity<Map> respEntityCF;
@@ -296,7 +296,7 @@ public class CsgoXyzService {
     }
 
 
-    public Map<String, String> ioPriceData(RestTemplate restTemplate, HttpHeaders headers) {
+    private Map<String, String> ioPriceData(RestTemplate restTemplate, HttpHeaders headers) {
         final String IO_API_URL = "https://api.steamapi.io/market/prices/730?key=" + IO_API_KEY;
         HttpEntity<String> entityIO = new HttpEntity<>("parameters", headers);
         ResponseEntity<Map> respEntityIO;
@@ -310,7 +310,7 @@ public class CsgoXyzService {
         return ioresp;
     }
 
-    public OpskinsDTO opPriceData(RestTemplate restTemplate, HttpHeaders headers) {
+    private OpskinsDTO opPriceData(RestTemplate restTemplate, HttpHeaders headers) {
         final String OP_API_URL = "https://api.opskins.com/IPricing/GetAllLowestListPrices/v1/?appid=730&key=" + OP_API_KEY;
         HttpEntity<String> entityOP = new HttpEntity<>("parameters", headers);
         ResponseEntity<OpskinsDTO> respEntityOP;
