@@ -4,6 +4,7 @@ package com.mma.mma.service.respdto;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.List;
 
 ;
 
@@ -14,7 +15,7 @@ public class SaDTO implements Serializable {
 
     private String appID;
 
-    private SaItem[] items;
+    private List<SaItem> items;
 
     private Integer __v;
 
@@ -28,11 +29,11 @@ public class SaDTO implements Serializable {
         this.appID = appID;
     }
 
-    public SaItem[] getItems() {
+    public List<SaItem> getItems() {
         return items;
     }
 
-    public void setItems(SaItem[] items) {
+    public void setItems(List<SaItem> items) {
         this.items = items;
     }
 
