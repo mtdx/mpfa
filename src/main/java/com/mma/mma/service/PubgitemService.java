@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.List;
+
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -62,6 +64,18 @@ public class PubgitemService {
         log.debug("Request to get all Pubgitems");
         return pubgitemRepository.findAll(pageable)
             .map(pubgitemMapper::toDto);
+    }
+
+
+    /**
+     *  Get all the pubgitems.
+     *
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public List<Pubgitem> findAll() {
+        log.debug("Request to get all Pubgitems");
+        return pubgitemRepository.findAll();
     }
 
     /**
