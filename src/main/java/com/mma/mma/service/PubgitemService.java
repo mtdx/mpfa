@@ -115,4 +115,13 @@ public class PubgitemService {
         Page<Pubgitem> result = pubgitemSearchRepository.search(queryStringQuery(query), pageable);
         return result.map(pubgitemMapper::toDto);
     }
+
+    /**
+     * Refresh/Reindex elastic search
+     */
+    @Transactional(readOnly = true)
+    public void refreshsearch() {
+        log.debug("Refresh/Reindex PubgItems elastic search {}");
+        pubgitemSearchRepository.refresh();
+    }
 }

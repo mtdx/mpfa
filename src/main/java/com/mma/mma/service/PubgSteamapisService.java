@@ -51,7 +51,7 @@ public class PubgSteamapisService {
      * </p>
      */
     @Async
-    @Scheduled(cron = "0 */1 * * * *") // 10 TODO
+    @Scheduled(cron = "0 */10 * * * *") // 10
     public void updateItems() {
         log.debug("Run scheduled api.steamapis.com  update items {}");
 
@@ -88,15 +88,143 @@ public class PubgSteamapisService {
         OpskinsDTO opPriceData = opPriceData(restTemplate, headers);
 
         for (SaItem saItem : saitems) {
-            if (existingItems.containsKey(saItem.getMarket_hash_name())) {
-                item = existingItems.get(saItem.getMarket_hash_name());
+            String markethashname = saItem.getMarket_hash_name();
+
+            if (existingItems.containsKey(markethashname)) {
+                item = existingItems.get(markethashname);
             } else {
                 item = new Pubgitem();
                 item.setName(saItem.getMarket_hash_name());
             }
+            try {
+                Double ioPrice = null;
+                Double cfPrice = null;
+                Double opPrice = null;
+                Integer opQty = null;
+                item.setCfp(null);
+                SaItem newItem = findSaItem(saitems, markethashname);
+                if (newItem == null) {
+                    return;
+                }
+                if (cfPriceData.containsKey(markethashname)) {
+                    try {
+                        cfPrice = Double.valueOf(cfPriceData.get(markethashname).toString());
+                    } catch (Exception ex) {
+                        log.error("Failed to cast to Double cf price {}", ex.getMessage());
+                        cfPrice = null;
+                    }
+                }
+                if (ioPriceData.containsKey(markethashname)) {
+                    try {
+                        ioPrice = Double.valueOf(ioPriceData.get(markethashname));
+                    } catch (Exception ex) {
+                        log.error("Failed to cast to Double io price {}", ex.getMessage());
+                        ioPrice = null;
+                    }
+                }
+                if (opPriceData != null && opPriceData.getStatus() == 1
+                    && opPriceData.getResponse().containsKey(markethashname)) {
+                    try {
+                        opPrice = (double) opPriceData.getResponse().get(markethashname).getPrice() / 100;
+                        opQty = opPriceData.getResponse().get(markethashname).getQuantity();
+                    } catch (Exception ex) {
+                        log.error("Failed to cast to Double op price {}", ex.getMessage());
+                        opPrice = null;
+                        opQty = null;
+                    }
+                }
+                mapNewItemData(item, newItem, cfPrice, ioPrice, opPrice, opQty);
+                pubgItemService.save(pubgitemMapper.toDto(item));
+            } catch (Exception ex) {
+                log.error("Failed to save/map csgo.steamlytics.xyz new item {}", ex.getMessage());
+                log.error("{}", markethashname, saitems.size());
+            }
         }
+        pubgItemService.refreshsearch();
     }
 
+    private void mapNewItemData(Pubgitem item, SaItem newitem, Double cfPrice, Double ioPrice, Double opPrice, Integer opQty) {
+
+        if (newitem.getPrices() != null) {
+            item.setSp(newitem.getPrices().getSafe());
+            item.setUns(newitem.getPrices().getUnstable());
+            item.setUnsr(String.valueOf(newitem.getPrices().getUnstable_reason()));
+            item.setMaxp(newitem.getPrices().getMax());
+            item.setAvgp(newitem.getPrices().getAvg());
+            item.setMinp(newitem.getPrices().getMin());
+            item.setSavgd(newitem.getPrices().getSold().get("avg_daily_volume"));
+            item.sets24h(newitem.getPrices().getSold().get("last_24h"));
+            item.sets7d(newitem.getPrices().getSold().get("last_7d"));
+            item.sets30d(newitem.getPrices().getSold().get("last_30d"));
+            item.sets90d(newitem.getPrices().getSold().get("last_90d"));
+            item.setNid(newitem.getNameID());
+        }
+
+        if (cfPrice != null && cfPrice > 0) {
+            item.setCfp(cfPrice);
+        }
+        if (ioPrice != null && ioPrice > 0) {
+            item.setIop(ioPrice);
+        }
+        try {
+            if (cfPrice != null && cfPrice > 0) {
+                Double sp =  null;
+                if (newitem.getPrices().getSafe() != null) {
+                    sp = newitem.getPrices().getSafe();
+                }
+                if (sp != null && sp > 0) {
+                    long diff = Math.round((sp - cfPrice) / sp * 100);
+                    item.setDcx((double) diff);
+                }
+            }
+        } catch (Exception ex) {
+            log.error("Failed to calc diff {}", ex.getMessage());
+        }
+        try {
+            if (opPrice != null && opPrice > 0) {
+                Double sp =  null;
+                if (newitem.getPrices().getSafe() != null) {
+                    sp = newitem.getPrices().getSafe();
+                }
+                if (sp != null && sp > 0) {
+                    long diff = Math.round((sp - opPrice) / sp * 100);
+                    item.setDopx((double) diff);
+                }
+            }
+        } catch (Exception ex) {
+            log.error("Failed to calc dopx diff {}", ex.getMessage());
+        }
+
+        try {
+            Double sp =  null;
+            Integer vol30 = null;
+            Integer opq = null;
+            if (newitem.getPrices().getSafe() != null && newitem.getPrices().getSafe() > 0) {
+                sp = newitem.getPrices().getSafe();
+            }
+            if (newitem.getPrices().getSold() != null && newitem.getPrices().getSold().get("last_30d") > 0) {
+                vol30 = newitem.getPrices().getSold().get("last_30d");
+            }
+            if (opQty != null && opQty > 0) {
+                opq = opQty;
+            }
+            if (sp != null && vol30 != null && opq != null) {
+                int rank = (int)(sp * vol30 * opq);
+                item.setRank(rank);
+            }
+        } catch (Exception ex) {
+            log.error("Failed to calc rank {}", ex.getMessage());
+        }
+
+        if (opPrice != null && opPrice > 0) {
+            item.setOplp(opPrice);
+        }
+        if (opQty != null && opQty > 0) {
+            item.setOpq(opQty);
+        }
+
+        item.setUat(newitem.getUpdated_at());
+    }
     private RestTemplate restTemplate() {
         return csgoXyzService.restTemplate();
     }
@@ -152,4 +280,14 @@ public class PubgSteamapisService {
         return opresp;
     }
 
+    private SaItem findSaItem(List<SaItem> items, String name) {
+        SaItem item = null;
+        for(SaItem i : items) {
+            if (i.getMarket_hash_name().equals(name)) {
+                item = i;
+                break;
+            }
+        }
+        return  item;
+    }
 }

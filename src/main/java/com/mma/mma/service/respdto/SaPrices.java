@@ -11,6 +11,10 @@ public class SaPrices implements Serializable {
 
     private HashMap<String, Double> safe_ts;
 
+    private Object unstable_reason;
+
+    private Boolean unstable;
+
     private Double safe;
 
     private Double mean;
@@ -85,5 +89,21 @@ public class SaPrices implements Serializable {
 
     public void setLatest(Double latest) {
         this.latest = latest;
+    }
+
+    public Object getUnstable_reason() {
+        return unstable_reason;
+    }
+
+    public void setUnstable_reason(Object unstable_reason) {
+        this.unstable_reason = unstable_reason;
+    }
+
+    public Boolean getUnstable() {
+        return unstable;
+    }
+
+    public void setUnstable(Boolean unstable) {
+        this.unstable = unstable;
     }
 }
