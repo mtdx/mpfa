@@ -105,6 +105,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/profile-info").permitAll()
             .antMatchers("/api/csgo-deposit-items").permitAll()
             .antMatchers("/api/csgo-items-placeholder").permitAll()
+            .antMatchers("/api/pubg-deposit-items").permitAll()
+            .antMatchers("/api/pubg-items-placeholder").permitAll()
             .antMatchers("/api/**").authenticated()
             .antMatchers("/websocket/tracker").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/websocket/**").permitAll()

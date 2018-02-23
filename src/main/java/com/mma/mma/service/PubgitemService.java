@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -123,5 +124,64 @@ public class PubgitemService {
     public void refreshsearch() {
         log.debug("Refresh/Reindex PubgItems elastic search {}");
         pubgitemSearchRepository.refresh();
+    }
+
+    /**
+     * Get all the csgoItems for deposit list.
+     *
+     * @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public HashMap<String, Double> findAllForDeposit() {
+        log.debug("Request to get all CsgoItems for deposit");
+        List<Pubgitem> items = pubgitemRepository.findAllForDeposit();
+        HashMap<String, Double> prices = new HashMap<>();
+        for (Pubgitem item : items) {
+            try {
+                if (item.getCfp() == null || item.getDcx() == null || item.getDopx() == null) {
+                    continue;
+                }
+                Double sp = item.getSp();
+                if (sp != null && sp > 0) {
+                    if (sp > 2 && (item.getDcx() > 30 || item.getDopx() > 50)) {
+                        continue;
+                    }
+                    prices.put(item.getName(), sp);
+                }
+            } catch (Exception ex) {
+                log.error("Error adding item to deposit list {}", ex.getMessage());
+            }
+        }
+        return prices;
+    }
+
+
+    /**
+     * Get all the csgoItems for deposit list.
+     *
+     * @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public HashMap<String, Double> findAllForPlaceholder() {
+        log.debug("Request to get all CsgoItems for Placeholder");
+        List<Pubgitem> items = pubgitemRepository.findAllForPlaceholder();
+        HashMap<String, Double> prices = new HashMap<>();
+        for (Pubgitem item : items) {
+            try {
+                if (item.getCfp() == null || item.getDcx() == null || item.getDopx() == null) {
+                    continue;
+                }
+                Double sp = item.getSp();
+                if (sp != null && sp > 0) {
+                    if (sp > 2 && (item.getDcx() < -30 || item.getDopx() < 0)) {
+                        continue;
+                    }
+                    prices.put(item.getName(), sp);
+                }
+            } catch (Exception ex) {
+                log.error("Error adding item to placeholder list {}", ex.getMessage());
+            }
+        }
+        return prices;
     }
 }

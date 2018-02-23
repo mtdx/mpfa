@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
@@ -42,6 +44,9 @@ public class PubgitemResource {
     private final PubgitemService pubgitemService;
 
     private final PubgitemQueryService pubgitemQueryService;
+
+    @Value("${NS_API_KEY}")
+    private String NS_API_KEY;
 
     public PubgitemResource(PubgitemService pubgitemService, PubgitemQueryService pubgitemQueryService) {
         this.pubgitemService = pubgitemService;
@@ -151,4 +156,39 @@ public class PubgitemResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    /**
+     * GET  /pubg-items : get all the deposit csgoItems.
+     *
+     * @return the prices list with status 200 (OK) and 400 if missing api key
+     */
+    @GetMapping("/pubg-deposit-items")
+    @Timed
+    public ResponseEntity<HashMap<String, Double>> getAllDepositCsgoItems(@RequestParam String apiKey) {
+        log.debug("REST request to get All Pubg for deposit: {}");
+        if (!apiKey.equals(NS_API_KEY)) {
+            log.error("REST request to get All Pubg for deposit: {}");
+            return ResponseEntity.badRequest().body(null);
+        }
+        HashMap<String, Double> items = pubgitemService.findAllForDeposit();
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(items, headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /pubg-items-placeholder : get all the deposit csgoItems.
+     *
+     * @return the prices list with status 200 (OK) and 400 if missing api key
+     */
+    @GetMapping("/pubg-items-placeholder")
+    @Timed
+    public ResponseEntity<HashMap<String, Double>> getAllPlaceholderCsgoItems(@RequestParam String apiKey) {
+        log.debug("REST request to get All Pubg for placeholder: {}");
+        if (!apiKey.equals(NS_API_KEY)) {
+            log.error("REST request to get All Pubg for placeholder: {}");
+            return ResponseEntity.badRequest().body(null);
+        }
+        HashMap<String, Double> items = pubgitemService.findAllForPlaceholder();
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(items, headers, HttpStatus.OK);
+    }
 }
