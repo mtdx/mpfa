@@ -143,7 +143,7 @@ public class PubgitemService {
                 }
                 Double sp = item.getSp();
                 if (sp != null && sp > 0) {
-                    if (sp > 1 && (item.getDcx() > 30 || item.getDopx() > 50)) {
+                    if (sp > 2 && (item.getDcx() > 30 || item.getDopx() > 50)) {
                         continue;
                     }
                     prices.put(item.getName(), sp);
@@ -173,7 +173,7 @@ public class PubgitemService {
                 }
                 Double sp = item.getSp();
                 if (sp != null && sp > 0) {
-                    if (sp > 1 && (item.getDcx() < -30 || item.getDopx() < 25)) {
+                    if (sp > 2 && (item.getDcx() < -30 || item.getDopx() < 0)) {
                         continue;
                     }
                     prices.put(item.getName(), sp);
