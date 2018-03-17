@@ -127,7 +127,7 @@ public class PubgitemService {
     }
 
     /**
-     * Get all the csgoItems for deposit list.
+     * Get all the pubg for deposit list.
      *
      * @return the list of entities
      */
@@ -157,7 +157,7 @@ public class PubgitemService {
 
 
     /**
-     * Get all the csgoItems for deposit list.
+     * Get all the pubg for deposit list.
      *
      * @return the list of entities
      */
@@ -173,7 +173,7 @@ public class PubgitemService {
                 }
                 Double sp = item.getSp();
                 if (sp != null && sp > 0) {
-                    if (item.getDcx() <= -30 || item.getDopx() <= 0) {
+                    if (item.getDcx() < -30 || item.getDopx() < 0) {
                         continue;
                     }
                     prices.put(item.getName(), sp);

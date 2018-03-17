@@ -95,7 +95,7 @@ public class CsgoItemService {
                 }
                 BigDecimal sp = item.getSp();
                 if (sp != null && sp.doubleValue() > 0) {
-                    if (sp.doubleValue() > 2 && (item.getDcx() > 30 || item.getDopx() > 50)) {
+                    if (item.getDcx() >= 30 || item.getDopx() >= 50) {
                         continue;
                     }
                     prices.put(item.getName(), sp.doubleValue());
@@ -128,7 +128,7 @@ public class CsgoItemService {
                 }
                 BigDecimal sp = item.getSp();
                 if (sp != null && sp.doubleValue() > 0) {
-                    if (sp.doubleValue() > 2 && (item.getDcx() < -30 || item.getDopx() < 25)) {
+                    if (item.getDcx() < -30 || item.getDopx() < 25) {
                         continue;
                     }
                     prices.put(item.getName(), sp.doubleValue());
